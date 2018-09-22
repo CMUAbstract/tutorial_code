@@ -28,3 +28,9 @@
 [submodule "tools/alpaca"]
 	path = tools/alpaca
 	url = https://github.com/CMUAbstract/alpaca-oopsla.git
+[submodule "ext/libapds"]
+	path = ext/libapds
+	url = https://github.com/CMUAbstract/libapds
+[submodule "ext/libcapybara"]
+	path = ext/libcapybara
+	url = https://github.com/CMUAbstract/libcapybara
