@@ -7,6 +7,7 @@
 #include <libmsp/clock.h>
 #include <libmsp/watchdog.h>
 #include <libmsp/gpio.h>
+
 #ifdef ALPACA
 #include <libalpaca/alpaca.h>
 #endif
@@ -30,9 +31,9 @@ void task_init();
 void task_compute();
 void task_finish();
 
-TASK(0, task_init);
-TASK(1, task_compute);
-TASK(2, task_finish);
+TASK(task_init);
+TASK(task_compute);
+TASK(task_finish);
 
 ENTRY_TASK(task_init);
 INIT_FUNC(init);
@@ -55,13 +56,7 @@ void task_finish() {
 
 #else
 
-volatile int a = 6;
 int main() {
-        init_hw();
-        PRINTF("\r\n STARTING");
-        PRINTF("\r\nHEY %u %u %u", a, a++, ++a);
-        volatile int b = a * 6;
-        PRINTF("\r\n %u %u", a, b);
         return 0;
 }
 
