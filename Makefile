@@ -1,19 +1,19 @@
 TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
-export BOARD = launchpad
+export BOARD = capybara
 export BOARD_MAJOR = 2
 export BOARD_MINOR = 0
-export DEVICE = msp430fr5994
+export DEVICE = msp430fr5949
 
 EXEC = tutorial
 
 OBJECTS = main.o
 
-DEPS += libmspbuiltins:gcc libio:gcc libmsp:gcc libfixed:gcc libmat:gcc \
-        libmspware:gcc libfxl:gcc libmspuartlink:gcc libapds:gcc libcapybara:gcc
+DEPS += libmspbuiltins:gcc libio:gcc libfixed:gcc libmat:gcc libmspuartlink:gcc \
+        libapds:gcc libfxl:gcc libcapybara:gcc libmspware:gcc libmsp:gcc
 
-export MAIN_CLOCK_FREQ = 16000000
+export MAIN_CLOCK_FREQ = 8000000
 
 export CLOCK_FREQ_ACLK = 32768
 export CLOCK_FREQ_SMCLK = $(MAIN_CLOCK_FREQ)
@@ -21,6 +21,9 @@ export CLOCK_FREQ_MCLK = $(MAIN_CLOCK_FREQ)
 
 export LIBMSP_CLOCK_SOURCE = DCO
 export LIBMSP_DCO_FREQ = $(MAIN_CLOCK_FREQ)
+export LIBMSP_SLEEP_TIMER = B.0.0
+export LIBMSP_SLEEP_TIMER_CLK = ACLK
+export LIBMSP_SLEEP_TIMER_DIV = 8*1
 
 export LIBMSPUARTLINK_UART_IDX = 1
 export LIBMSPUARTLINK_PIN_TX = 2.5
@@ -96,12 +99,14 @@ endif # BOARD_MAJOR
 export LIBCAPYBARA_PRECHG_HANDLING = IMP
 export LIBCAPYBARA_FXL_OFF = 0
 
+export RADIO_CAPTURE = 0
+
 export VOLTAGE = 2400
 
 CONSOLE ?= 1
 
 ifneq ($(CONSOLE),)
-export VERBOSE = 1
+export VERBOSE = 2
 export LIBMSP_SLEEP = 1
 export LIBIO_BACKEND = hwuart
 export LIBMSP_UART_IDX = 0
