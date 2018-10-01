@@ -1,16 +1,15 @@
+TOOLS_REL_ROOT = tools
 TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
+
+APPS = test
 
 export BOARD = capybara
 export BOARD_MAJOR = 2
 export BOARD_MINOR = 0
 export DEVICE = msp430fr5949
 
-EXEC = tutorial
-
-OBJECTS = main.o
-
-DEPS += libmspbuiltins:gcc libio:gcc libfixed:gcc libmat:gcc libmspuartlink:gcc \
+SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmat:gcc libmspuartlink:gcc \
         libapds:gcc libfxl:gcc libcapybara:gcc libmspware:gcc libmsp:gcc
 
 export MAIN_CLOCK_FREQ = 8000000
