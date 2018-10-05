@@ -2,7 +2,7 @@ TOOLS_REL_ROOT = tools
 TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
-APPS = test
+APPS = part1 part2 test
 
 export BOARD = capybara
 export BOARD_MAJOR = 2
