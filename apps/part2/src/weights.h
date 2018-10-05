@@ -3,7 +3,7 @@
 #include <libfixed/fixed.h>
 #include <libmsp/mem.h>
 
-__nv fixed weights[4 * 513] = {F_LIT(3.34527182642),     F_LIT(-2.12246015031),
+__nv fixed weight[4 * 513] = {F_LIT(3.34527182642),     F_LIT(-2.12246015031),
                      F_LIT(-0.693676323525),   F_LIT(2.1082551744),
                      F_LIT(2.38525220461),     F_LIT(-1.6892083851),
                      F_LIT(1.09141564896),     F_LIT(-0.339735673808),

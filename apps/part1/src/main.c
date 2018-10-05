@@ -28,7 +28,7 @@ __nv mat_t mat_inputs = {
 __nv mat_t mat_weights = {
   .dims = {ROWS, COLS},
   .len_dims = 2,
-  .data = weights
+  .data = weight
 };
 
 __nv mat_t mat_result = {
