@@ -57,6 +57,8 @@ TASK(task_finish);
 ENTRY_TASK(task_init);
 INIT_FUNC(init);
 
+GLOBAL_SB(uint16_t, row_idx);
+
 static void init_hw() {
     msp_watchdog_disable();
     msp_gpio_unlock();
@@ -73,14 +75,14 @@ void init() {
 }
 
 void task_init() {
+	GV(row_idx) = 0;
 	TRANSITION_TO(task_compute);
 }
 
-__nv uint16_t row_idx = 0;
 void task_compute() {
   uint16_t rows = MAT_GET_DIM(weight_ptr, 0);
-	if(row_idx < rows) {
-		row_idx++;
+	if(GV(row_idx) < rows) {
+		GV(row_idx)++;
 		TRANSITION_TO(task_dot_product);
 	}
 	TRANSITION_TO(task_finish);
@@ -90,10 +92,10 @@ void task_dot_product() {
 	uint16_t cols = MAT_GET_DIM(weight_ptr, 1);
 	fixed w = 0;
 	for(uint16_t i = 0; i < cols; i++) {
-		fixed tmp = F_MUL(MAT_GET(input_ptr, i, 0), MAT_GET(weight_ptr, row_idx, i));
+		fixed tmp = F_MUL(MAT_GET(input_ptr, i, 0), MAT_GET(weight_ptr, GV(row_idx), i));
 		w = F_ADD(w, tmp);
 	}
-	MAT_SET(result_ptr, w, row_idx, 0);
+	MAT_SET(result_ptr, w, GV(row_idx), 0);
 	TRANSITION_TO(task_compute);
 }
 
