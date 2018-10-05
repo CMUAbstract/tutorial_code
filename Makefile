@@ -10,7 +10,7 @@ export BOARD_MINOR = 0
 export DEVICE = msp430fr5949
 
 SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmat:gcc libmspuartlink:gcc \
-        libapds:gcc libfxl:gcc libcapybara:gcc libmspware:gcc libmsp:gcc
+        libapds:gcc libfxl:gcc libcapybara:gcc libmspware:gcc libmsp:gcc \
 
 export MAIN_CLOCK_FREQ = 8000000
 
@@ -112,6 +112,7 @@ export LIBMSP_UART_IDX = 0
 export LIBMSP_UART_PIN_TX = 2.0
 export LIBMSP_UART_BAUDRATE = 115200
 export LIBMSP_UART_CLOCK = SMCLK
+export LIBMAT_CONSOLE = 1
 override CFLAGS += -DCONSOLE=1
 endif
 

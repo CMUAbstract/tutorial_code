@@ -70,10 +70,11 @@ static void init_hw() {
 
 int main() {
     init_hw();
+		PRINTF("Starting...\r\n");
     matmul(result_ptr, weight_ptr, input_ptr);
 #ifdef CONSOLE
     MAT_RESHAPE(result_ptr, 0, ROWS, DCOLS);
-    MAT_DUMP(result, 0);
+    MAT_DUMP(result_ptr, 0);
 #endif
     return 0;
 }

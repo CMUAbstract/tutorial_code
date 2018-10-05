@@ -75,6 +75,7 @@ void init() {
 }
 
 void task_init() {
+	PRINTF("\r\n Starting...");
 	GV(row_idx) = 0;
 	TRANSITION_TO(task_compute);
 }
@@ -102,7 +103,7 @@ void task_dot_product() {
 void task_finish() {
 #ifdef CONSOLE
     MAT_RESHAPE(result_ptr, 0, ROWS, DCOLS);
-    MAT_DUMP(result, 0);
+    MAT_DUMP(result_ptr, 0);
 #endif
 		exit(0);
 }
