@@ -23,18 +23,21 @@ __nv fixed buf[ROWS * DCOLS];
 
 __nv mat_t mat_inputs = {
   .dims = {COLS, DCOLS},
+	.strides = {DCOLS, 1},
   .len_dims = 2,
   .data = sample
 };
 
 __nv mat_t mat_weights = {
   .dims = {ROWS, COLS},
+	.strides = {COLS, 1},
   .len_dims = 2,
   .data = weight
 };
 
 __nv mat_t mat_result = {
   .dims = {ROWS, DCOLS},
+	.strides = {DCOLS, 1},
   .len_dims = 2,
   .data = buf
 };
@@ -83,7 +86,6 @@ void task_init() {
 void task_compute() {
   uint16_t rows = MAT_GET_DIM(weight_ptr, 0);
 	if(GV(row_idx) < rows) {
-		GV(row_idx)++;
 		TRANSITION_TO(task_dot_product);
 	}
 	TRANSITION_TO(task_finish);
@@ -97,6 +99,7 @@ void task_dot_product() {
 		w = F_ADD(w, tmp);
 	}
 	MAT_SET(result_ptr, w, GV(row_idx), 0);
+	GV(row_idx)++;
 	TRANSITION_TO(task_compute);
 }
 

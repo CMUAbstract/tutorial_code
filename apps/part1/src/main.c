@@ -21,18 +21,21 @@ __nv fixed buf[ROWS * DCOLS];
 
 __nv mat_t mat_inputs = {
   .dims = {COLS, DCOLS},
+	.strides = {DCOLS, 1},
   .len_dims = 2,
   .data = sample
 };
 
 __nv mat_t mat_weights = {
   .dims = {ROWS, COLS},
+	.strides = {COLS, 1},
   .len_dims = 2,
   .data = weight
 };
 
 __nv mat_t mat_result = {
   .dims = {ROWS, DCOLS},
+	.strides = {DCOLS, 1},
   .len_dims = 2,
   .data = buf
 };
