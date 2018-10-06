@@ -1,23 +1,11 @@
 #include <msp430.h>
 
-#include <libio/console.h>
 #include <libmspbuiltins/builtins.h>
-#include <libmsp/mem.h>
-#include <libmsp/periph.h>
 #include <libmsp/clock.h>
 #include <libmsp/watchdog.h>
 #include <libmsp/gpio.h>
-#include <libmsp/sleep.h>
-#include <libcapybara/capybara.h>
-#include <libcapybara/power.h>
 #include <libcapybara/reconfig.h>
-#include <libcapybara/capybara.h>
 #include <libcapybara/board.h>
-#include <libmspuartlink/uartlink.h>
-#include <libmspware/driverlib.h>
-#include <libapds/proximity.h>
-#include <libapds/pins.h>
-#include <libfxl/fxl6408.h>
 #include <libradio/radio.h>
 
 #ifdef ALPACA
