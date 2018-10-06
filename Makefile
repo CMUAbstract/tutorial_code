@@ -11,7 +11,7 @@ EXEC = tutorial
 OBJECTS = main.o
 
 DEPS += libmspbuiltins:gcc libio:gcc libfixed:gcc libmat:gcc libmspuartlink:gcc \
-        libapds:gcc libfxl:gcc libcapybara:gcc libmspware:gcc libmsp:gcc
+        libapds:gcc libfxl:gcc libcapybara:gcc libmspware:gcc libmsp:gcc libradio:gcc
 
 export MAIN_CLOCK_FREQ = 8000000
 

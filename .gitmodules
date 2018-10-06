@@ -34,3 +34,6 @@
 [submodule "ext/libcapybara"]
 	path = ext/libcapybara
 	url = https://github.com/CMUAbstract/libcapybara
+[submodule "ext/libradio"]
+	path = ext/libradio
+	url = https://github.com/CMUAbstract/libradio.git
