@@ -8,13 +8,7 @@
 #include <libcapybara/board.h>
 #include <libapds/gesture.h>
 #include <libio/console.h>
-
-#ifdef ALPACA
 #include <libalpaca/alpaca.h>
-#endif
-
-
-#ifdef ALPACA
 
 #define zero 0
 #define one 1
@@ -79,14 +73,3 @@ void task_gesture()
   }
   TRANSITION_TO(task_init);
 }
-
-#else
-int main() {
-    capybara_init();
-    while(1) {
-        PRINTF("Starting no alpaca\r\n");
-    }
-    return 0;
-}
-
-#endif

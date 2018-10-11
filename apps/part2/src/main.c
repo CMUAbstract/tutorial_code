@@ -13,6 +13,7 @@
 #include <libcapybara/reconfig.h>
 #include <libcapybara/board.h>
 #include <libapds/gesture.h>
+#include <libradio/radio.h>
 
 #include "weights.h"
 
@@ -39,6 +40,7 @@ void task_dot_product();
 void task_sample();
 void task_gesture();
 void task_send();
+void task_delay();
 void task_finish();
 
 TASK(task_init);
@@ -47,13 +49,14 @@ TASK(task_dot_product);
 TASK(task_sample);
 TASK(task_gesture);
 TASK(task_send);
+TASK(task_delay);
 TASK(task_finish);
 
 ENTRY_TASK(task_init);
 INIT_FUNC(init);
 
-GLOBAL_SB(fixed[ROWS * DCOLS], result);
-GLOBAL_SB(fixed[COLS], sample);
+GLOBAL_SB(fixed, result, ROWS * DCOLS);
+GLOBAL_SB(fixed, sample, COLS);
 GLOBAL_SB(uint16_t, row_idx);
 
 void init() {
@@ -91,28 +94,53 @@ void task_compute() {
 	if(GV(row_idx) < ROWS) {
 		TRANSITION_TO(task_dot_product);
 	}
-	TRANSITION_TO(task_finish);
+#ifdef CONSOLE
+	for(uint16_t i = 0; i < ROWS; i++) {
+		PRINTF("\r\n %i ", GV(result, i));
+	}
+#endif
+	TRANSITION_TO(task_send);
 }
 
 void task_dot_product() {
 	fixed w = 0;
 	for(uint16_t i = 0; i < COLS; i++) {
-		fixed tmp = F_MUL(GV(sample)[i], GV(weights)[COLS * GV(row_idx) + i]);
+		fixed tmp = F_MUL(GV(sample, i), weights[COLS * GV(row_idx) + i]);
 		w = F_ADD(w, tmp);
 	}
-	GV(result)[GV(row_idx)] = w;
+	uint16_t row = GV(row_idx);
+	GV(result, row) = w;
 	GV(row_idx)++;
 	TRANSITION_TO(task_compute);
 }
 
 void task_send() {
+	// Reconfigure bank
+  capybara_transition(3);
+	// Send header. Our header is 0xAA1234
+  radio_buff[0] = 0xAA;
+  radio_buff[1] = 0x12;
+  radio_buff[2] = 0x34;
+  // Send data. I'll just send 0x01
+	for(int i = 3; i < LIBRADIO_BUFF_LEN && i - 5 < ROWS; i++) {
+      radio_buff[i] = GV(result, i - 3);
+  }
+  // Send it!
+	radio_send();
+	TRANSITION_TO(task_delay);
+}
 
+void task_delay() {
+	for (unsigned i = 0; i < 100; ++i) {
+		__delay_cycles(4000);
+  }
+	TRANSITION_TO(task_init);
 }
 
 void task_finish() {
 #ifdef CONSOLE
 	for(uint16_t i = 0; i < ROWS; i++) {
-		PRINTF("\r\n %i ", GV(result)[i]);
+		PRINTF("\r\n %i ", GV(result, i));
 	}
 #endif
 		exit(0);

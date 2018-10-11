@@ -34,7 +34,7 @@ ENTRY_TASK(task_init);
 INIT_FUNC(init);
 
 GLOBAL_SB(uint16_t, row_idx);
-GLOBAL_SB(fixed[ROWS * DCOLS], result);
+GLOBAL_SB(fixed, result, ROWS * DCOLS);
 
 static void init_hw() {
     msp_watchdog_disable();
@@ -70,7 +70,8 @@ void task_dot_product() {
 		fixed tmp = F_MUL(sample[i], weights[GV(row_idx) * COLS + i]);
 		w = F_ADD(w, tmp);
 	}
-	GV(result)[GV(row_idx)] = w;
+	uint16_t row = GV(row_idx);
+	GV(result, row) = w;
 	GV(row_idx)++;
 	TRANSITION_TO(task_compute);
 }
@@ -78,7 +79,7 @@ void task_dot_product() {
 void task_finish() {
 #ifdef CONSOLE
 	for(uint16_t i = 0; i < ROWS; i++) {
-			PRINTF("\r\n %i ", GV(result)[i]);
+			PRINTF("\r\n %i ", GV(result, i));
 	}
 #endif
 		exit(0);

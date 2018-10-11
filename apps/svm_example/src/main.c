@@ -26,7 +26,6 @@ void matmul() {
         fixed tmp = F_MUL(sample[j * DCOLS + k], weights[i * COLS + j]);
         w = F_ADD(w, tmp);
       }
-      MAT_SET(result, w, i, k);
 			result[i * DCOLS + k] = w;
     }
   }

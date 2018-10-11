@@ -10,7 +10,7 @@ export BOARD_MINOR = 0
 export DEVICE = msp430fr5949
 
 SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmspuartlink:gcc \
-        libapds:gcc libfxl:gcc libcapybara:gcc libmspware:gcc libmsp:gcc \
+        libapds:gcc libcapybara:gcc libfxl:gcc libmspware:gcc libmsp:gcc \
         libradio:gcc
 
 export MAIN_CLOCK_FREQ = 8000000
