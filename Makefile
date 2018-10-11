@@ -9,7 +9,7 @@ export BOARD_MAJOR = 2
 export BOARD_MINOR = 0
 export DEVICE = msp430fr5949
 
-SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmat:gcc libmspuartlink:gcc \
+SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmspuartlink:gcc \
         libapds:gcc libfxl:gcc libcapybara:gcc libmspware:gcc libmsp:gcc \
         libradio:gcc
 
