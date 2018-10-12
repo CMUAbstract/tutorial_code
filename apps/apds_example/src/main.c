@@ -34,12 +34,12 @@ TASK(task_gesture);
 ENTRY_TASK(task_init);
 INIT_FUNC(init);
 
-void init()
-{ capybara_init();
+void init(){
+	capybara_init();
 }
 
-void task_init()
-{ capybara_transition(3);
+void task_init() {
+	capybara_transition(3);
   apds_settle();
   TRANSITION_TO(task_sample);
 }
