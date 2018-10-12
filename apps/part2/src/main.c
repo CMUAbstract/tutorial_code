@@ -92,6 +92,9 @@ __nv uint8_t ** raw_sample;
 void task_gesture() {
 	capybara_transition(2);
 	uint16_t sample_idx = 0;
+	PRINTF("Starting gesture\r\n");
+  apds_init();
+	WAIT_APDS_DELAY;
 	sample_idx = apds_get_raw_gesture(&raw_sample);
 	if(!sample_idx) {
 		PRINTF("no gesture captured\r\n");
