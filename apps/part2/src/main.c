@@ -88,35 +88,28 @@ void task_sample() {
   TRANSITION_TO(task_sample);
 }
 
-__nv uint8_t raw_sample[4][32 * 10];
+__nv uint8_t ** raw_sample;
 void task_gesture() {
 	capybara_transition(2);
-	gesture_data_t gesture_data;
-	uint8_t num_samples;
 	uint16_t sample_idx = 0;
-	for(uint8_t i = 0; i < 10; i++) {
-		apds_get_raw_gesture(&gesture_data, &num_samples);
-		for(uint8_t j = 0; j < gesture_data.index; j++) {
-			raw_sample[0][GV(sample_idx) + j] = gesture_data.u_data[j];
-			raw_sample[1][GV(sample_idx) + j] = gesture_data.d_data[j];
-			raw_sample[2][GV(sample_idx) + j] = gesture_data.l_data[j];
-			raw_sample[3][GV(sample_idx) + j] = gesture_data.r_data[j];
-		}
-		GV(sample_idx) += gesture_data.index;
-		resetGestureFields(&gesture_data);
+	sample_idx = apds_get_raw_gesture(&raw_sample);
+	if(!sample_idx) {
+		PRINTF("no gesture captured\r\n");
+		TRANSITION_TO(task_sample);
 	}
+
 	TRANSITION_TO(task_preprocess);
 }
 
 void task_preprocess() {
 	capybara_transition(3);
 	for(uint16_t i = 0, j = GV(sample_idx) - 1; j >= 0 && i < 512; i += 4, j--) {
-		GV(sample, i) = F_DIV((fixed)raw_sample[0][j] << 5, F_LIT(256));
-		GV(sample, i + 1) = F_DIV((fixed)raw_sample[1][j] << 5, F_LIT(256));
-		GV(sample, i + 2) = F_DIV((fixed)raw_sample[2][j] << 5, F_LIT(256));
-		GV(sample, i + 3) = F_DIV((fixed)raw_sample[3][j] << 5, F_LIT(256));
+		GV(sample, i) = F_DIV((fixed)raw_sample[0][j] << F_N, F_LIT(256));
+		GV(sample, i + 1) = F_DIV((fixed)raw_sample[1][j] << F_N, F_LIT(256));
+		GV(sample, i + 2) = F_DIV((fixed)raw_sample[2][j] << F_N, F_LIT(256));
+		GV(sample, i + 3) = F_DIV((fixed)raw_sample[3][j] << F_N, F_LIT(256));
 	}
-	GV(sample, 512) = 32;
+	GV(sample, 512) = F_LIT(1);
 	TRANSITION_TO(task_compute);
 }
 

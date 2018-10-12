@@ -4,6 +4,7 @@
 #include <libmsp/clock.h>
 #include <libmsp/watchdog.h>
 #include <libmsp/gpio.h>
+#include <libio/console.h>
 #include <libcapybara/reconfig.h>
 #include <libcapybara/board.h>
 #include <libradio/radio.h>
@@ -50,11 +51,13 @@ void task_send() {
     radio_buff[0] = 0xAA;
     radio_buff[1] = 0x12;
     radio_buff[2] = 0x34;
+		PRINTF("Sending\r\n");
     // Send data. I'll just send 0x01
     for(int i = 3; i < LIBRADIO_BUFF_LEN; i++) {
         radio_buff[i] = 0x01;
     }
     // Send it!
     radio_send();
+		PRINTF("Sent\r\n");
     TRANSITION_TO(task_delay);
 }
