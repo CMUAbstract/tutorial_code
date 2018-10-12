@@ -15,11 +15,19 @@
 #define two 2
 #define three 3
 
-capybara_task_cfg_t pwr_configs[4] = {
-  CFG_ROW(zero, CONFIGD, LOWP2,LOWP2),
-  CFG_ROW(one, PREBURST, LOWP2,MEDHIGHP),
-  CFG_ROW(two, BURST, MEDHIGHP, MEDHIGHP),
-  CFG_ROW(three, CONFIGD, MEDP,MEDP),
+// Capybara power config table Format:
+// CFG_ROW(<task number>, <mode type>, <operating mode>, <preburst/burst mode>)
+// task number- will be used during capybara_transition calls to invoke a
+//    specific row from the power table
+// mode type- choose from: CONFIGD, PREBURST, BURST
+// operating mode- choose from LOW, MEDLOW, MED, MEDHIGH, HIGH
+// preburst/burst mode- choose from LOW, MEDLOW, MED, MEDHIGH, HIGH
+
+
+capybara_task_cfg_t pwr_configs[3] = {
+  CFG_ROW(0, CONFIGD, MED, NA),
+  CFG_ROW(1, PREBURST, LOW, MEDHIGH),
+  CFG_ROW(2, BURST, NA, MEDHIGHP),
 };
 
 void init();
@@ -39,7 +47,8 @@ void init(){
 }
 
 void task_init() {
-	capybara_transition(3);
+	// Call capybara_transtion(<task number>) at the beginning of each task
+  capybara_transition(0);
   apds_settle();
   TRANSITION_TO(task_sample);
 }
