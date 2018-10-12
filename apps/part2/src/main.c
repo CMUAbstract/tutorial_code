@@ -112,9 +112,9 @@ void task_preprocess() {
 	capybara_transition(3);
 	for(uint16_t i = 0, j = GV(sample_idx) - 1; j >= 0 && i < 512; i += 4, j--) {
 		GV(sample, i) = F_DIV((fixed)raw_sample[0][j] << 5, F_LIT(256));
-		GV(sample, i) = F_DIV((fixed)raw_sample[1][j] << 5, F_LIT(256));
-		GV(sample, i) = F_DIV((fixed)raw_sample[2][j] << 5, F_LIT(256));
-		GV(sample, i) = F_DIV((fixed)raw_sample[3][j] << 5, F_LIT(256));
+		GV(sample, i + 1) = F_DIV((fixed)raw_sample[1][j] << 5, F_LIT(256));
+		GV(sample, i + 2) = F_DIV((fixed)raw_sample[2][j] << 5, F_LIT(256));
+		GV(sample, i + 3) = F_DIV((fixed)raw_sample[3][j] << 5, F_LIT(256));
 	}
 	GV(sample, 512) = 32;
 	TRANSITION_TO(task_compute);
