@@ -7,23 +7,7 @@
 #include <libcapybara/reconfig.h>
 #include <libcapybara/board.h>
 #include <libradio/radio.h>
-
-#ifdef ALPACA
 #include <libalpaca/alpaca.h>
-#endif
-
-static void init_hw() {
-    msp_watchdog_disable();
-    msp_gpio_unlock();
-    msp_clock_setup();
-#ifdef CONSOLE
-#warning console
-    INIT_CONSOLE();
-#endif
-    __enable_interrupt();
-}
-
-#ifdef ALPACA
 
 #define zero 0
 #define one 1
@@ -74,14 +58,3 @@ void task_send() {
     radio_send();
     TRANSITION_TO(task_delay);
 }
-
-#else
-int main() {
-    init_hw();
-    while(1) {
-        PRINTF("Starting no alpaca\r\n");
-    }
-    return 0;
-}
-
-#endif
