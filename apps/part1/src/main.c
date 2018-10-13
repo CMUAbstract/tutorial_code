@@ -26,7 +26,7 @@ TASK(task_init);
 ENTRY_TASK(task_init);
 INIT_FUNC(init);
 
-_nv fixed result[ROWS * DCOLS];
+__nv fixed result[ROWS * DCOLS];
 
 static void init_hw() {
     msp_watchdog_disable();
