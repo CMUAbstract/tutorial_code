@@ -31,9 +31,6 @@ capybara_task_cfg_t pwr_configs[3] = {
 };
 
 void init();
-void task_init();
-void task_sample();
-void task_gesture();
 
 TASK(task_init);
 TASK(task_sample);
