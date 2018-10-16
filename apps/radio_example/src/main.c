@@ -24,8 +24,6 @@ capybara_task_cfg_t pwr_configs[4] = {
 };
 
 void init();
-void task_delay();
-void task_send();
 
 TASK(task_delay);
 TASK(task_send);

@@ -57,10 +57,10 @@ TASK(task_finish);
 ENTRY_TASK(task_init);
 INIT_FUNC(init);
 
-GLOBAL_SB(fixed, result, ROWS * DCOLS);
-GLOBAL_SB(fixed, sample, COLS);
-GLOBAL_SB(uint16_t, row_idx);
-GLOBAL_SB(uint16_t, sample_idx);
+TASK_SHARED(fixed, result, ROWS * DCOLS);
+TASK_SHARED(fixed, sample, COLS);
+TASK_SHARED(uint16_t, row_idx);
+TASK_SHARED(uint16_t, sample_idx);
 
 void init() {
 	capybara_init();
@@ -68,7 +68,7 @@ void init() {
 
 void task_init() {
 	PRINTF("\r\n Starting...");
-	GV(row_idx) = 0;
+	TS(row_idx) = 0;
 	capybara_transition(3);
   apds_settle();
 	TRANSITION_TO(task_sample);
@@ -106,24 +106,24 @@ void task_gesture() {
 
 void task_preprocess() {
 	capybara_transition(3);
-	for(uint16_t i = 0, j = GV(sample_idx) - 1; j >= 0 && i < 512; i += 4, j--) {
-		GV(sample, i) = F_DIV((fixed)raw_sample[0][j] << F_N, F_LIT(256));
-		GV(sample, i + 1) = F_DIV((fixed)raw_sample[1][j] << F_N, F_LIT(256));
-		GV(sample, i + 2) = F_DIV((fixed)raw_sample[2][j] << F_N, F_LIT(256));
-		GV(sample, i + 3) = F_DIV((fixed)raw_sample[3][j] << F_N, F_LIT(256));
+	for(uint16_t i = 0, j = TS(sample_idx) - 1; j >= 0 && i < 512; i += 4, j--) {
+		TS(sample, i) = F_DIV((fixed)raw_sample[0][j] << F_N, F_LIT(256));
+		TS(sample, i + 1) = F_DIV((fixed)raw_sample[1][j] << F_N, F_LIT(256));
+		TS(sample, i + 2) = F_DIV((fixed)raw_sample[2][j] << F_N, F_LIT(256));
+		TS(sample, i + 3) = F_DIV((fixed)raw_sample[3][j] << F_N, F_LIT(256));
 	}
-	GV(sample, 512) = F_LIT(1);
+	TS(sample, 512) = F_LIT(1);
 	TRANSITION_TO(task_compute);
 }
 
 void task_compute() {
 	capybara_transition(3);
-	if(GV(row_idx) < ROWS) {
+	if(TS(row_idx) < ROWS) {
 		TRANSITION_TO(task_dot_product);
 	}
 #ifdef CONSOLE
 	for(uint16_t i = 0; i < ROWS; i++) {
-		PRINTF("\r\n %i ", GV(result, i));
+		PRINTF("\r\n %i ", TS(result, i));
 	}
 #endif
 	TRANSITION_TO(task_send);
@@ -132,12 +132,12 @@ void task_compute() {
 void task_dot_product() {
 	fixed w = 0;
 	for(uint16_t i = 0; i < COLS; i++) {
-		fixed tmp = F_MUL(GV(sample, i), weights[COLS * GV(row_idx) + i]);
+		fixed tmp = F_MUL(TS(sample, i), weights[COLS * TS(row_idx) + i]);
 		w = F_ADD(w, tmp);
 	}
-	uint16_t row = GV(row_idx);
-	GV(result, row) = w;
-	GV(row_idx)++;
+	uint16_t row = TS(row_idx);
+	TS(result, row) = w;
+	TS(row_idx)++;
 	TRANSITION_TO(task_compute);
 }
 
@@ -150,7 +150,7 @@ void task_send() {
   radio_buff[2] = 0x34;
   // Send data. I'll just send 0x01
 	for(int i = 3; i < LIBRADIO_BUFF_LEN && i - 5 < ROWS; i++) {
-      radio_buff[i] = GV(result, i - 3);
+      radio_buff[i] = TS(result, i - 3);
   }
   // Send it!
 	radio_send();
@@ -167,7 +167,7 @@ void task_delay() {
 void task_finish() {
 #ifdef CONSOLE
 	for(uint16_t i = 0; i < ROWS; i++) {
-		PRINTF("\r\n %i ", GV(result, i));
+		PRINTF("\r\n %i ", TS(result, i));
 	}
 #endif
 		exit(0);
