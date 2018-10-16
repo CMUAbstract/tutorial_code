@@ -55,12 +55,12 @@ void task_init() {
 
 void task_sample() {
   capybara_transition(1);
-  int16_t proxVal = 0;
+  int16_t light = 0;
   enable_photoresistor();
-  proxVal = read_photoresistor();
-  if((proxVal < ALERT_THRESH) && proxVal > LOW_OUTPUT){
+  light = read_photoresistor();
+  if((light < CLOSE_OBJECT) && light > LOW_OUTPUT){
     disable_photoresistor();
-    PRINTF("Got value %u\r\n",proxVal);
+    PRINTF("Got value %u\r\n",light);
     TRANSITION_TO(task_gesture);
   }
   WAIT_PHOTORESISTOR_DELAY;
