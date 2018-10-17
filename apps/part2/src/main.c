@@ -15,160 +15,99 @@
 #include <libapds/gesture.h>
 #include <libradio/radio.h>
 
-#include "weights.h"
 
-#define ROWS 4
-#define COLS 513
-#define DCOLS 1
 
-#define zero 0
-#define one 1
-#define two 2
-#define three 3
-
+// Capybara power config table Format:
+// CFG_ROW(<task number>, <mode type>, <operating mode>, <preburst/burst mode>)
+// task number- will be used during capybara_transition calls to invoke a
+//    specific row from the power table
+// mode type- choose from: CONFIGD, PREBURST, BURST
+// operating mode- choose from LOW, MEDLOW, MED, MEDHIGH, HIGH
+// preburst/burst mode- choose from LOW, MEDLOW, MED, MEDHIGH, HIGH
 capybara_task_cfg_t pwr_configs[4] = {
-	CFG_ROW(zero, CONFIGD, LOWP2,LOWP2),
-	CFG_ROW(one, PREBURST, LOWP2,MEDHIGHP),
-	CFG_ROW(two, BURST, MEDHIGHP, MEDHIGHP),
-	CFG_ROW(three, CONFIGD, MEDP,MEDP),
 };
 
 void init();
-void task_init();
-void task_compute();
-void task_preprocess();
-void task_dot_product();
 void task_sample();
 void task_gesture();
 void task_send();
 void task_delay();
-void task_finish();
+
 
 TASK(task_init);
-TASK(task_preprocess);
-TASK(task_compute);
-TASK(task_dot_product);
 TASK(task_sample);
 TASK(task_gesture);
 TASK(task_send);
 TASK(task_delay);
-TASK(task_finish);
 
 ENTRY_TASK(task_init);
 INIT_FUNC(init);
 
-TASK_SHARED(fixed, result, ROWS * DCOLS);
-TASK_SHARED(fixed, sample, COLS);
-TASK_SHARED(uint16_t, row_idx);
-TASK_SHARED(uint16_t, sample_idx);
+TASK_SHARED(gest_dir, gesture);
 
 void init() {
 	capybara_init();
 }
 
+// Requires a MEDHIGH energy mode
 void task_init() {
-	PRINTF("\r\n Starting...");
-	TS(row_idx) = 0;
-	capybara_transition(3);
-  apds_settle();
+	apds_settle();
 	TRANSITION_TO(task_sample);
 }
 
+// Requires a LOW energy mode
 void task_sample() {
-  capybara_transition(1);
-  int16_t proxVal = 0;
-  enable_photoresistor();
-  proxVal = read_photoresistor();
-  if((proxVal < ALERT_THRESH) && proxVal > LOW_OUTPUT){
+  int16_t light = 0;
+	enable_photoresistor();
+  light = read_photoresistor();
+  if((light < CLOSE_OBJECT) && light > LOW_OUTPUT){
     disable_photoresistor();
-    PRINTF("Got value %u\r\n",proxVal);
+    PRINTF("Got value %u\r\n",light);
     TRANSITION_TO(task_gesture);
   }
   WAIT_PHOTORESISTOR_DELAY;
   TRANSITION_TO(task_sample);
 }
 
-__nv uint8_t ** raw_sample;
+// Requires a HIGH energy mode
 void task_gesture() {
-	capybara_transition(2);
-	uint16_t sample_idx = 0;
-	PRINTF("Starting gesture\r\n");
+  LOG("tsk apds\r\n");
   apds_init();
-	WAIT_APDS_DELAY;
-	sample_idx = apds_get_raw_gesture(&raw_sample);
-	if(!sample_idx) {
-		PRINTF("no gesture captured\r\n");
-		TRANSITION_TO(task_sample);
-	}
-
-	TRANSITION_TO(task_preprocess);
+  WAIT_APDS_DELAY;
+  TS(gesture) = apds_get_gesture();
+  if(TS(gesture) < DIR_NONE) {
+    PRINTF("No gesture %i\r\n",TS(gesture));
+		TRANSITION_TO(task_delay);
+  }
+  else {
+    PRINTF("Got gesture code %u\r\n",TS(gesture));
+		TRANSITION_TO(task_send);
+  }
 }
 
-void task_preprocess() {
-	capybara_transition(3);
-	for(uint16_t i = 0, j = TS(sample_idx) - 1; j >= 0 && i < 512; i += 4, j--) {
-		TS(sample, i) = F_DIV((fixed)raw_sample[0][j] << F_N, F_LIT(256));
-		TS(sample, i + 1) = F_DIV((fixed)raw_sample[1][j] << F_N, F_LIT(256));
-		TS(sample, i + 2) = F_DIV((fixed)raw_sample[2][j] << F_N, F_LIT(256));
-		TS(sample, i + 3) = F_DIV((fixed)raw_sample[3][j] << F_N, F_LIT(256));
-	}
-	TS(sample, 512) = F_LIT(1);
-	TRANSITION_TO(task_compute);
-}
-
-void task_compute() {
-	capybara_transition(3);
-	if(TS(row_idx) < ROWS) {
-		TRANSITION_TO(task_dot_product);
-	}
-#ifdef CONSOLE
-	for(uint16_t i = 0; i < ROWS; i++) {
-		PRINTF("\r\n %i ", TS(result, i));
-	}
-#endif
-	TRANSITION_TO(task_send);
-}
-
-void task_dot_product() {
-	fixed w = 0;
-	for(uint16_t i = 0; i < COLS; i++) {
-		fixed tmp = F_MUL(TS(sample, i), weights[COLS * TS(row_idx) + i]);
-		w = F_ADD(w, tmp);
-	}
-	uint16_t row = TS(row_idx);
-	TS(result, row) = w;
-	TS(row_idx)++;
-	TRANSITION_TO(task_compute);
-}
-
+// Requires a MEDHIGH energy mode
 void task_send() {
-	// Reconfigure bank
-  capybara_transition(3);
 	// Send header. Our header is 0xAA1234
   radio_buff[0] = 0xAA;
   radio_buff[1] = 0x12;
   radio_buff[2] = 0x34;
-  // Send data. I'll just send 0x01
-	for(int i = 3; i < LIBRADIO_BUFF_LEN && i - 5 < ROWS; i++) {
-      radio_buff[i] = TS(result, i - 3);
+  // Send data. We'll just repeat the gesture code
+	for(int i = 3; i < LIBRADIO_BUFF_LEN; i++) {
+      radio_buff[i] = TS(gesture);
   }
   // Send it!
 	radio_send();
 	TRANSITION_TO(task_delay);
 }
 
+// This task is just included so the loop is stable on continuous power
+// No need to add a capybara annotation
 void task_delay() {
+#ifdef LIBCAPYBARA_CONT_POWER
 	for (unsigned i = 0; i < 100; ++i) {
 		__delay_cycles(4000);
   }
+#endif
 	TRANSITION_TO(task_init);
 }
 
-void task_finish() {
-#ifdef CONSOLE
-	for(uint16_t i = 0; i < ROWS; i++) {
-		PRINTF("\r\n %i ", TS(result, i));
-	}
-#endif
-		exit(0);
-}

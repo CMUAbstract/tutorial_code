@@ -10,11 +10,6 @@
 #include <libio/console.h>
 #include <libalpaca/alpaca.h>
 
-#define zero 0
-#define one 1
-#define two 2
-#define three 3
-
 // Capybara power config table Format:
 // CFG_ROW(<task number>, <mode type>, <operating mode>, <preburst/burst mode>)
 // task number- will be used during capybara_transition calls to invoke a
