@@ -2,7 +2,7 @@ TOOLS_REL_ROOT = tools
 TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
-APPS = part1 part2 svm_example radio_example apds_example pacarana_test
+APPS = radio_example apds_example pacarana_test gyro_example
 
 export BOARD = capybara
 export BOARD_MAJOR = 2

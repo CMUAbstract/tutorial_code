@@ -40,3 +40,6 @@
 [submodule "tools/pacarana/LLVM"]
 	path = tools/pacarana/LLVM
 	url = git@github.com:CMUAbstract/pacarana-pass.git
+[submodule "ext/liblsm"]
+	path = ext/liblsm
+	url = git@github.com:CMUAbstract/liblsm.git

@@ -8,3 +8,6 @@ alpaca:
 
 TODO: redirect pacarana subdirectory to tools/pacarana/Pacarana instead of
 ext/libpacarana
+
+To run tasks pass:
+opt -load path/to/tasks.so -tasks path/to/app/tutorial.a.bc -o temp.out

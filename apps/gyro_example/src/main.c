@@ -9,7 +9,7 @@
 #include <libcapybara/board.h>
 #include <libradio/radio.h>
 #include <libalpaca/alpaca.h>
-
+#include <liblsm/gyro.h>
 #include <libpacarana/pacarana.h>
 
 
