@@ -27,6 +27,28 @@
 capybara_task_cfg_t pwr_configs[4] = {
 };
 
+void __attribute__((interrupt(PORT3_VECTOR))) Port_3_ISR(void) {
+  P3IFG &= ~BIT5;
+  _numEvents++;
+  if(_global_l1.state){
+    _numEvents_missed++;
+    return;
+  }
+  //P1OUT |= BIT5;
+  //P1DIR |= BIT5;
+  //P1OUT &= ~BIT5;
+  uint32_t next_seed = GV(insert_seed);
+  next_seed += 0xF;
+  if(next_seed > 255) {
+    next_seed = _numBoots & 0xF;
+  }
+  GV(insert_seed) = next_seed;
+  GV(seed) = next_seed;
+}
+
+__attribute__((section("__interrupt_vector_port3"),aligned(2)))
+void(*__vector_port3)(void) = Port_3_ISR;
+
 void init();
 void task_sample();
 void task_gesture();

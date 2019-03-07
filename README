@@ -1,0 +1,10 @@
+Mods to libraries are as follows:
+
+maker:
+-change Makefile.env to get rid of paths to llvm, we have it installed natively.
+
+alpaca:
+-Removed a couple of flags in Makefile so it works with new version of llvm
+
+TODO: redirect pacarana subdirectory to tools/pacarana/Pacarana instead of
+ext/libpacarana

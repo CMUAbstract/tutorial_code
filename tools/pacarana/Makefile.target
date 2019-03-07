@@ -1,0 +1,23 @@
+# This is the Makefile for using the Alpaca toolchain to build an app.
+
+LOCAL_CFLAGS += -DALPACA -DPACARANA
+
+PACARANA_ROOT ?= $(TOOL_ROOT)/pacarana
+PACARANA_LIB = $(PACARANA_ROOT)/LLVM/tasks.so
+
+#%.alpaca.bc : %.bc
+#	$(OPT) -load $(ALPACA_LIB) \
+#	  -alpaca \
+#	  -o $@ $<
+
+LINK_OBJECTS = $(OBJECTS:.o=.alpaca.bc)
+
+override DEPS += libalpaca libpacarana
+override SHARED_DEPS += libalpaca libpacarana
+
+DEP_ROOT_libalpaca = $(ALPACA_ROOT)/AlpacaRuntime
+
+override CFLAGS += $(LOCAL_CFLAGS) \
+
+override TOOLCHAIN = clang
+include $(MAKER_ROOT)/Makefile.clang

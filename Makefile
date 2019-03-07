@@ -2,7 +2,7 @@ TOOLS_REL_ROOT = tools
 TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
-APPS = part1 part2 svm_example radio_example apds_example
+APPS = part1 part2 svm_example radio_example apds_example pacarana_test
 
 export BOARD = capybara
 export BOARD_MAJOR = 2
@@ -116,6 +116,16 @@ export LIBMSP_UART_CLOCK = SMCLK
 export LIBMAT_CONSOLE = 1
 override CFLAGS += -DCONSOLE=1
 endif
+
+
+PACARANA ?= 1
+
+ifneq ($(PACARANA),)
+override CFLAGS += -DPACARANA
+include tools/pacarana/Makefile
+endif
+
+SHARED_DEPS += libpacarana:gcc \
 
 export CFLAGS
 include tools/maker/Makefile

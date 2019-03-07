@@ -34,3 +34,9 @@
 [submodule "ext/libradio"]
 	path = ext/libradio
 	url = https://github.com/CMUAbstract/libradio.git
+[submodule "tools/pacarana/Pacarana/libpacarana"]
+	path = tools/pacarana/Pacarana/libpacarana
+	url = git@github.com:CMUAbstract/libpacarana.git
+[submodule "tools/pacarana/LLVM"]
+	path = tools/pacarana/LLVM
+	url = git@github.com:CMUAbstract/pacarana-pass.git
