@@ -11,6 +11,7 @@
 #include <libalpaca/alpaca.h>
 #include <liblsm/gyro.h>
 #include <libpacarana/pacarana.h>
+#include <libapds/proximity.h>
 
 
 #define zero 0
@@ -19,8 +20,11 @@
 #define three 3
 #define four 4
 
-
+#ifdef PACARANA
 REGISTER(radio);
+REGISTER(gyro);
+REGISTER(photores);
+#endif
 
 capybara_task_cfg_t pwr_configs[4] = {
   CFG_ROW(zero, CONFIGD, LOWP2,LOWP2),
@@ -31,24 +35,85 @@ capybara_task_cfg_t pwr_configs[4] = {
 
 void init();
 
+TASK(task_init);
 TASK(task_delay);
 TASK(task_send);
-TASK(task_branch);
+TASK(task_filter);
 
-ENTRY_TASK(task_send);
+ENTRY_TASK(task_init);
 INIT_FUNC(init);
 
 void init() {
-    capybara_init();
+  capybara_init();
+  fxl_set(BIT_SENSE_SW);
+  __delay_cycles(160000);
+  lsm_reset();
 }
 
 __nv int test;
+__nv uint8_t num_samps;
+__nv uint16_t samples[24];
+
+void task_init() {
+  enable_photoresistor();
+#ifdef PACARANA
+  STATE_CHANGE(photores, 0x1);
+#endif
+  uint16_t proxVal = read_photoresistor();
+  if (proxVal < ALERT_THRESH && proxVal > 10) {
+    // We may have detected an object, set high sampling freq
+    gyro_init_data_rate(0x60);
+    STATE_CHANGE(gyro, 0x2);
+    for( int i = 0; i < 8; i++) {
+      read_raw_accel(samples + 3*i + 0,samples + 3*i + 1, samples + 3*i + 2);
+    }
+    num_samps = 8;
+  }
+  else {
+    // No oject, go with low sampling freq
+    gyro_init_data_rate(0x30);
+    STATE_CHANGE(gyro, 0x1);
+    // Only nab a couple samples
+    for( int i = 0; i < 4; i++) {
+      read_raw_accel(samples + 3*i + 0,samples + 3*i + 1, samples + 3*i + 2);
+    }
+    num_samps = 4;
+  }
+  disable_photoresistor();
+#ifdef PACARANA
+  STATE_CHANGE(photores, 0x0);
+#endif
+  // Move our bunch of samples to task filter
+  TRANSITION_TO(task_filter)
+}
+
+
+void task_filter() {
+  // We purposely let the  gyro continue on in whatever mode because we want the
+  // model to warn us about this
+  float avg[3];
+  double sum;
+  for (int j = 0; j < 3; j++) {
+    sum = 0;
+    for (int i = 0; i < num_samps; i++) {
+      sum += samples[i*3 + j];
+    }
+    avg[j] = sum / num_samps;
+  }
+  // If anomaly condition detected
+  if (avg[0] > (avg[1] + avg[2])) {
+    TRANSITION_TO(task_send);
+  }
+  else {
+    TRANSITION_TO(task_delay);
+  }
+}
 
 void task_delay() {
   for (unsigned i = 0; i < 100; ++i) {
       __delay_cycles(4000);
   }
-  TRANSITION_TO(task_send);
+  TRANSITION_TO(task_init);
 }
 
 void task_send() {
@@ -68,19 +133,7 @@ void task_send() {
   radio_send();
   PRINTF("Sent\r\n");
   test = 3 + test;
-  TRANSITION_TO(task_branch);
-}
-
-
-void task_branch() {
-  test = test + 5;
-  if(test > 10) {
-    STATE_CHANGE(radio,0x1);
-  }
-  else {
-    STATE_CHANGE(radio,0x2);
-  }
-  PRINTF("Power mode changed!\r\n");
   TRANSITION_TO(task_delay);
 }
+
 
