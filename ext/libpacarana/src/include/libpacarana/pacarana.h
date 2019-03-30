@@ -68,5 +68,6 @@
   typedef uint32_t device ## _states; \
   device ## _states __attribute__((annotate("periph_var"))) device ## _status;
 
+void __pacarana_to_alpaca_transition(void *);
 
 #endif
