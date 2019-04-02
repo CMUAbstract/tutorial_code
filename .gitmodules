@@ -43,3 +43,6 @@
 [submodule "ext/liblsm"]
 	path = ext/liblsm
 	url = git@github.com:CMUAbstract/liblsm.git
+[submodule "ext/libfxdmath"]
+	path = ext/libfxdmath
+	url = git@github.com:CMUAbstract/libfxdmath.git

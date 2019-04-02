@@ -55,8 +55,8 @@ pacarana_cfg_t inits[2] = {
 
 void init();
 
-TASK(task_init);
-TASK(task_filter);
+TASK(task_init,0);
+TASK(task_filter,1);
 
 ENTRY_TASK(task_init);
 INIT_FUNC(init);

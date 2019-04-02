@@ -11,7 +11,7 @@ export DEVICE = msp430fr5949
 
 SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmspuartlink:gcc \
         libapds:gcc libcapybara:gcc libfxl:gcc libmspware:gcc libmsp:gcc \
-        libradio:gcc
+        libradio:gcc libfxdmath:gcc
 
 export MAIN_CLOCK_FREQ = 8000000
 
@@ -103,7 +103,7 @@ export RADIO_CAPTURE = 0
 
 export VOLTAGE = 2400
 
-CONSOLE ?= 1
+CONSOLE ?= 0
 
 ifneq ($(CONSOLE),)
 export VERBOSE = 2
@@ -114,7 +114,7 @@ export LIBMSP_UART_PIN_TX = 2.0
 export LIBMSP_UART_BAUDRATE = 115200
 export LIBMSP_UART_CLOCK = SMCLK
 export LIBMAT_CONSOLE = 1
-override CFLAGS += -DCONSOLE=1
+override CFLAGS += -DCONSOLE=0
 endif
 
 

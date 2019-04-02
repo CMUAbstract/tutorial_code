@@ -14,10 +14,11 @@ if [ "$2" != "alpaca" ]; then
 fi
 
 echo "Start depclean"
-make -s apps/$1/bld/$2/depclean
+#make -s apps/$1/bld/$2/depclean
 echo "Start dep build"
-make -s apps/$1/bld/$2/dep CONSOLE=2 LIBCAPYBARA_CONT_POWER=0
+#make -s apps/$1/bld/$2/dep VERBOSE=1 LIBCAPYBARA_CONT_POWER=1
 echo "Start build all"
-make -s apps/$1/bld/$2/all CONSOLE=2 LIBCAPYBARA_CONT_POWER=0
+make -s apps/$1/bld/$2/all VERBOSE=1 LIBCAPYBARA_CONT_POWER=1
 echo "programming MSP430"
 mspdebug -v 2400 -d /dev/ttyACM0 tilib "prog apps/$1/bld/$2/tutorial.out"
+screen -L /dev/ttyUSB0 115200
