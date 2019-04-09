@@ -101,9 +101,6 @@ void disable() {
   return;
 }
 
-#define TEST_VDDSENSE
-//#define EXPLORE
-//#define TEST_FIFO_OFF
 #define FIFO_BYTES 48
 
 void enable() {
@@ -160,8 +157,6 @@ void __attribute__((interrupt(0))) Port_1_ISR(void)
 __attribute__((section("__interrupt_vector_port1"),aligned(2)))
 void (*__vector_port1)(void) = Port_1_ISR;
 
-__nv uint16_t reboots = 0;
-
 void init() {
   capybara_init();
   fxl_set(BIT_SENSE_SW);
@@ -192,44 +187,12 @@ void init() {
   read_tap_src();
   enable();
 #else
-  #ifdef EXPLORE
-  switch (reboots) {
-    case 0:
-      __delay_cycles(179040);
-      break;
-    case 1:
-      __delay_cycles(190000);
-      __delay_cycles(120000);
-      break;
-    case 2: 
-      __delay_cycles(190000);
-      __delay_cycles(140000);
-      break;
-    case 3: 
-    // This config gets us to 2.21V
-      __delay_cycles(190000);
-      __delay_cycles(160000);
-      break;
-    case 4:
-      __delay_cycles(190000);
-      __delay_cycles(180000);
-      reboots = 0;
-      break;
-    default:
-      break; 
-  }
-  reboots++;
-  #else
-      __delay_cycles(190000);
-      __delay_cycles(160000);
-  //__delay_cycles(179040);
+  __delay_cycles(179040);
   #endif
-#endif
   P1OUT |= BIT0;
   P1DIR |= BIT0;
   P1OUT &= ~BIT0; 
   val_rindex = 0;
-  printf("Here!");
   TRANSITION_TO(task_val_compare);
   //printf("init\r\n");
 }
@@ -269,7 +232,9 @@ void task_val_compare() {
   if(rindex + 1 == BUFF_LEN) {
     val_rindex=0;
   }
-  val_rindex=rindex + 1;
+  else {
+    val_rindex=rindex + 1;
+  }
  // printf("done task val compare\r\n");
   disable();TRANSITION_TO(task_calc_sqrs);
 }

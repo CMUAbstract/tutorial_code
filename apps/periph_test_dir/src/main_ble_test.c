@@ -96,71 +96,18 @@ __nv capybara_task_cfg_t pwr_configs[3] = {
 };
 
 void disable() {
-  P1IE &= ~BIT4; //disable interrupt bit
-  P1IE &= ~BIT5;
   return;
 }
 
-#define TEST_VDDSENSE
-//#define EXPLORE
-//#define TEST_FIFO_OFF
 #define FIFO_BYTES 48
 
 void enable() {
-#ifndef VDD_SENSE
-  P1IE |= BIT4; //enable interrupt bit
-  P1IE |= BIT5;
-#endif
   return;
 }
 
 
 __nv uint8_t array[3][FIFO_BYTES];
 __nv uint8_t array1[3][FIFO_BYTES];
-
-void __attribute__((interrupt(0))) Port_1_ISR(void)
-{   //Need to clear whatever interrupt flag fired to get us here!
-  // Clear LSM_INT1 on processor side
-  disable();
-#ifndef TEST_VDDSENSE
-  P1OUT |= BIT2;
-  P1DIR |= BIT2;
-  P1OUT &= ~BIT2;
-  //printf("Here now\r\n");
-  if(P1IFG & BIT4) {
-    P1IFG &= ~BIT4;
-    uint8_t fifolvl = read_fifo_lvl();
-    read_tap_src();
-    //printf("Here1\r\n");
-  }
-  // Clear LSM_INT2, note, we'll leave INT1 as our higher priority and handle
-  // that first, but then we can fall into this statement
-#ifndef TEST_FIFO_OFF
-  if(P1IFG & BIT5) {
-    P1IFG &= ~BIT5;
-    uint8_t fifolvl = read_fifo_lvl();
-    if(fifolvl < FIFO_THR - 1) {
-      // reset fifo and return without registering a bottom half
-      //printf("Here2\r\n");
-      fifo_reset();
-      return;
-    }
-    dump_fifo(array, FIFO_THR);
-    dump_fifo_high(array1,FIFO_THR);
-    fifo_reset();
-    //printf("Here3\r\n");
-  }
-  P1IE |= BIT5;
-#endif
-  //printf("enable\r\n");
-  P1IE |= BIT4; //enable interrupt bit
-#endif
-  return;
-}
-__attribute__((section("__interrupt_vector_port1"),aligned(2)))
-void (*__vector_port1)(void) = Port_1_ISR;
-
-__nv uint16_t reboots = 0;
 
 void init() {
   capybara_init();
@@ -169,67 +116,20 @@ void init() {
   P1OUT |= BIT0;
   P1DIR |= BIT0;
   P1OUT &= ~BIT0; 
-  #ifndef TEST_VDDSENSE
-  P1OUT |= BIT4;
-  P1DIR &= ~BIT4;
-  P1REN &= ~BIT4;
-
-  P1IES &= ~BIT4; // Set IFG on rising edge (low --> high)
-  P1IFG &= ~BIT4; // Clear flag bit
-
-  // Setup extra interrupt from LSM connected to AUX5
-  P1OUT |= BIT5;	// Set P3.5 as  pull up
-  P1DIR &= ~BIT5; // Set P3.5 as input
-  P1REN &= ~BIT5; // disable input pull up/down
-
-  P1IES &= ~BIT5; // Set IFG on rising edge (low --> high)
-  P1IFG &= ~BIT5; // Clear flag bit
-
-  __delay_cycles(160000);
-  lsm_reset();
-  // Change to different init mode
-  gyro_init_fifo_tap();
-  read_tap_src();
-  enable();
-#else
-  #ifdef EXPLORE
-  switch (reboots) {
-    case 0:
-      __delay_cycles(179040);
-      break;
-    case 1:
-      __delay_cycles(190000);
-      __delay_cycles(120000);
-      break;
-    case 2: 
-      __delay_cycles(190000);
-      __delay_cycles(140000);
-      break;
-    case 3: 
-    // This config gets us to 2.21V
-      __delay_cycles(190000);
-      __delay_cycles(160000);
-      break;
-    case 4:
-      __delay_cycles(190000);
-      __delay_cycles(180000);
-      reboots = 0;
-      break;
-    default:
-      break; 
+  radio_on();
+  __delay_cycles(48000);
+  uartlink_open_tx();
+#ifdef SEND_MODE
+  for (int i = 0; i < LIBRADIO_BUFF_LEN; i++) {
+    radio_buff[i] = 0x01;
   }
-  reboots++;
-  #else
-      __delay_cycles(190000);
-      __delay_cycles(160000);
-  //__delay_cycles(179040);
-  #endif
+  uartlink_send(radio_buff, LIBRADIO_BUFF_LEN);
+  uartlink_close();
 #endif
   P1OUT |= BIT0;
   P1DIR |= BIT0;
   P1OUT &= ~BIT0; 
   val_rindex = 0;
-  printf("Here!");
   TRANSITION_TO(task_val_compare);
   //printf("init\r\n");
 }
@@ -254,14 +154,6 @@ void task_val_compare() {
   temp3 = count;
   LOG("wait w:%u r:%u\r\n",temp1, temp2);
   count=temp3 + 1;
-#ifdef TEST_TAP
-  if(need_cal) {
-    need_cal=0;
-    PRINTF("got TAP!\r\n");
-    //PRINTF("test_val = %u\r\n",test_val);
-    disable();TRANSITION_TO(task_cal_avgs);
-  }
-#endif
 
   uint8_t rindex = val_rindex;
   // We do not wait for more data because we're running the tasks independent of
@@ -269,7 +161,9 @@ void task_val_compare() {
   if(rindex + 1 == BUFF_LEN) {
     val_rindex=0;
   }
-  val_rindex=rindex + 1;
+  else {
+    val_rindex=rindex + 1;
+  }
  // printf("done task val compare\r\n");
   disable();TRANSITION_TO(task_calc_sqrs);
 }

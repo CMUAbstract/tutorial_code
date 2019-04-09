@@ -36,14 +36,10 @@ typedef struct xl_val_ {
   uint16_t z;
 } xl_val;
 
-static const uint16_t DATA_SRC[60] = {
-#include "extra_data.h"
-};
-
-// NV variables that will be handled by coati
 static const xl_val val_buffer[BUFF_LEN] =  { 
   #include "extra_data2.h"
   };
+
 __nv uint8_t val_rindex = 0;
 __nv uint8_t val_windex;
 __nv uint32_t buffered_squares[3];
@@ -96,21 +92,12 @@ __nv capybara_task_cfg_t pwr_configs[3] = {
 };
 
 void disable() {
-  P1IE &= ~BIT4; //disable interrupt bit
-  P1IE &= ~BIT5;
   return;
 }
 
-#define TEST_VDDSENSE
-//#define EXPLORE
-//#define TEST_FIFO_OFF
 #define FIFO_BYTES 48
 
 void enable() {
-#ifndef VDD_SENSE
-  P1IE |= BIT4; //enable interrupt bit
-  P1IE |= BIT5;
-#endif
   return;
 }
 
@@ -160,7 +147,14 @@ void __attribute__((interrupt(0))) Port_1_ISR(void)
 __attribute__((section("__interrupt_vector_port1"),aligned(2)))
 void (*__vector_port1)(void) = Port_1_ISR;
 
-__nv uint16_t reboots = 0;
+#ifdef HIGH_PERF
+#define HIGH_PERF_MODE 1
+#define DATA_RATE 0x70
+#else
+#define HIGH_PERF_MODE 0
+#define DATA_RATE 0x30
+#endif
+
 
 void init() {
   capybara_init();
@@ -169,67 +163,15 @@ void init() {
   P1OUT |= BIT0;
   P1DIR |= BIT0;
   P1OUT &= ~BIT0; 
-  #ifndef TEST_VDDSENSE
-  P1OUT |= BIT4;
-  P1DIR &= ~BIT4;
-  P1REN &= ~BIT4;
-
-  P1IES &= ~BIT4; // Set IFG on rising edge (low --> high)
-  P1IFG &= ~BIT4; // Clear flag bit
-
-  // Setup extra interrupt from LSM connected to AUX5
-  P1OUT |= BIT5;	// Set P3.5 as  pull up
-  P1DIR &= ~BIT5; // Set P3.5 as input
-  P1REN &= ~BIT5; // disable input pull up/down
-
-  P1IES &= ~BIT5; // Set IFG on rising edge (low --> high)
-  P1IFG &= ~BIT5; // Clear flag bit
-
   __delay_cycles(160000);
   lsm_reset();
   // Change to different init mode
-  gyro_init_fifo_tap();
+  gyro_init_data_rate_hm(0x30,HIGH_PERF_MODE);
   read_tap_src();
-  enable();
-#else
-  #ifdef EXPLORE
-  switch (reboots) {
-    case 0:
-      __delay_cycles(179040);
-      break;
-    case 1:
-      __delay_cycles(190000);
-      __delay_cycles(120000);
-      break;
-    case 2: 
-      __delay_cycles(190000);
-      __delay_cycles(140000);
-      break;
-    case 3: 
-    // This config gets us to 2.21V
-      __delay_cycles(190000);
-      __delay_cycles(160000);
-      break;
-    case 4:
-      __delay_cycles(190000);
-      __delay_cycles(180000);
-      reboots = 0;
-      break;
-    default:
-      break; 
-  }
-  reboots++;
-  #else
-      __delay_cycles(190000);
-      __delay_cycles(160000);
-  //__delay_cycles(179040);
-  #endif
-#endif
   P1OUT |= BIT0;
   P1DIR |= BIT0;
   P1OUT &= ~BIT0; 
   val_rindex = 0;
-  printf("Here!");
   TRANSITION_TO(task_val_compare);
   //printf("init\r\n");
 }
@@ -269,7 +211,9 @@ void task_val_compare() {
   if(rindex + 1 == BUFF_LEN) {
     val_rindex=0;
   }
-  val_rindex=rindex + 1;
+  else {
+    val_rindex=rindex + 1;
+  }
  // printf("done task val compare\r\n");
   disable();TRANSITION_TO(task_calc_sqrs);
 }

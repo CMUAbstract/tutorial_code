@@ -1,4 +1,5 @@
-OBJECTS = main_periph_test.o
+TEST ?= periph_ex
+OBJECTS = main_$(TEST).o
 EXEC = tutorial
 
 DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc \

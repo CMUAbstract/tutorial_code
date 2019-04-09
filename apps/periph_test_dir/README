@@ -1,0 +1,10 @@
+Here's a list of the delays used to burn the voltage on init for the peripherals
+disbaled version down to the starting levels for different peripheral setttings.
+
+TODO: figure out how to do get an apples-to-apples comparison here.
+
+gyro_init_fifo_tap (XL at 833Hz, tap sense enabled): voltage drops to ~2.253V,
+                                                                ~207200 cycles
+gyro_init_datarate_hm(0x70,1): voltage drops to ~2.21V, ~350000 cycles
+
+
