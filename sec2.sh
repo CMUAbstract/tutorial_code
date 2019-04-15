@@ -27,21 +27,29 @@ elif [ $1 -eq 2 ]; then
   C_FILE=gyro_init_datarate
   C_FLAGS=-DHIGH_PERF
 elif [ $1 -eq 3 ]; then
-  echo  "Testing with IMU in high performance mode"
+  echo  "Testing with IMU in low performance mode"
   C_FILE=gyro_init_datarate
+  C_FLAGS=
+elif [ $1 -eq 4 ]; then
+  echo  "Testing with radio in send mode"
+  C_FILE=ble_test
+  C_FLAGS=-DSEND_MOD
+elif [ $1 -eq 5 ]; then
+  echo  "Testing with radio not sending"
+  C_FILE=ble_test
   C_FLAGS=
 else
   echo "Undefined test number!"
   exit
 fi
 
-#echo "Start depclean"
-#make -s apps/periph_test_dir/bld/alpaca/depclean
-#echo "Start dep build"
-#make -s apps/periph_test_dir/bld/alpaca/dep VERBOSE=1 LIBCAPYBARA_CONT_POWER=1 \
-#  TEST=$C_FILE
-#echo "Start build all"
-make -s apps/periph_test_dir/bld/alpaca/all VERBOSE=1 LIBCAPYBARA_CONT_POWER=1 \
+echo "Start depclean"
+make -s apps/periph_test_dir/bld/alpaca/depclean
+echo "Start dep build"
+make -s apps/periph_test_dir/bld/alpaca/dep VERBOSE=1 LIBCAPYBARA_CONT_POWER=0 \
+  TEST=$C_FILE
+echo "Start build all"
+make -s apps/periph_test_dir/bld/alpaca/all VERBOSE=1 LIBCAPYBARA_CONT_POWER=0 \
   TEST=$C_FILE CFLAGS=$C_FLAGS
 echo "programming MSP430"
 mspdebug -v 2400 -d /dev/ttyACM0 tilib "prog apps/periph_test_dir/bld/alpaca/tutorial.out"
