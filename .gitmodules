@@ -46,3 +46,6 @@
 [submodule "ext/libfxdmath"]
 	path = ext/libfxdmath
 	url = git@github.com:CMUAbstract/libfxdmath.git
+[submodule "ext/libhmc"]
+	path = ext/libhmc
+	url = git@github.com:CMUAbstract/libhmc.git

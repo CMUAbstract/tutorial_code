@@ -17,10 +17,13 @@ if [ $4 -z ]; then
 echo "Start depclean"
 make -s apps/$1/bld/$2/depclean
 echo "Start dep build"
-make -s apps/$1/bld/$2/dep VERBOSE=1 LIBCAPYBARA_CONT_POWER=1 TEST=$3
+make -s apps/$1/bld/$2/dep VERBOSE=1 LIBCAPYBARA_CONT_POWER=0 TEST=$3 \
+CFLAGS="-DRADIO_LP -DCHKPTLEN=1024"
 fi
 echo "Start build all"
-make -s apps/$1/bld/$2/all VERBOSE=1 LIBCAPYBARA_CONT_POWER=1 TEST=$3
+make -s apps/$1/bld/$2/all VERBOSE=1 LIBCAPYBARA_CONT_POWER=0 TEST=$3 \
+CFLAGS="-DRADIO_LP -DCHKPTLEN=1024"
+#make -s apps/$1/bld/$2/all CFLAGS=-DAPDS_HP VERBOSE=1 LIBCAPYBARA_CONT_POWER=0 TEST=$3
 echo "programming MSP430"
 mspdebug -v 2400 -d /dev/ttyACM0 tilib "prog apps/$1/bld/$2/tutorial.out"
 screen -L /dev/ttyUSB0 115200

@@ -2,7 +2,7 @@ TOOLS_REL_ROOT = tools
 TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
-APPS = pacarana_test gyro_example periph_test_dir
+APPS = pacarana_test gyro_example periph_test_dir checkpt_test
 
 export BOARD = capybara
 export BOARD_MAJOR = 2
@@ -118,7 +118,7 @@ override CFLAGS += -DCONSOLE=0
 endif
 
 
-PACARANA ?= 1
+PACARANA ?=
 
 ifneq ($(PACARANA),)
 override CFLAGS += -DPACARANA

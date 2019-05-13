@@ -10,38 +10,18 @@
 
 set -e
 if [ $# -lt 1 ]; then
-	echo "Need to enter one argument: test number"
-	exit
+	echo "Don't forget to enter defs"
 fi
+  
+C_FILE=periph_test_blank
 
-if [ $1 -eq 0 ]; then
-  echo  "Testing with all peripheral disabled"
-  C_FILE=periph_test
-  C_FLAGS=-DTEST_VDDSENSE
-elif [ $1 -eq 1 ]; then
-  echo  "Testing with gyro in init_fifo_tap"
-  C_FILE=periph_test
-  C_FLAGS=
-elif [ $1 -eq 2 ]; then
-  echo  "Testing with IMU in high performance mode"
-  C_FILE=gyro_init_datarate
-  C_FLAGS=-DHIGH_PERF
-elif [ $1 -eq 3 ]; then
-  echo  "Testing with IMU in low performance mode"
-  C_FILE=gyro_init_datarate
-  C_FLAGS=
-elif [ $1 -eq 4 ]; then
-  echo  "Testing with radio in send mode"
-  C_FILE=ble_test
-  C_FLAGS=-DSEND_MOD
-elif [ $1 -eq 5 ]; then
-  echo  "Testing with radio not sending"
-  C_FILE=ble_test
-  C_FLAGS=
-else
-  echo "Undefined test number!"
-  exit
-fi
+def_str=""
+for def in "$@"
+  do
+    def_str="$def_str-D$def "
+done
+C_FLAGS=$def_str
+echo $C_FLAGS
 
 echo "Start depclean"
 make -s apps/periph_test_dir/bld/alpaca/depclean
@@ -50,7 +30,7 @@ make -s apps/periph_test_dir/bld/alpaca/dep VERBOSE=1 LIBCAPYBARA_CONT_POWER=0 \
   TEST=$C_FILE
 echo "Start build all"
 make -s apps/periph_test_dir/bld/alpaca/all VERBOSE=1 LIBCAPYBARA_CONT_POWER=0 \
-  TEST=$C_FILE CFLAGS=$C_FLAGS
+  TEST=$C_FILE CFLAGS="$C_FLAGS"
 echo "programming MSP430"
 mspdebug -v 2400 -d /dev/ttyACM0 tilib "prog apps/periph_test_dir/bld/alpaca/tutorial.out"
 screen -L /dev/ttyUSB0 115200
