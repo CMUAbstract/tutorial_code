@@ -1,5 +1,8 @@
 #ifndef _PACARANA_H_
 #define _PACARANA_H_
+#include <libmsp/mem.h>
+#include <stdint.h>
+#include <msp430.h>
 
 /*
   @brief Used to change the state of a device
@@ -69,5 +72,18 @@
   device ## _states __attribute__((annotate("periph_var"))) device ## _status;
 
 void __pacarana_to_alpaca_transition(void *);
+
+#ifndef CHKPTLEN
+#define CHKPTLEN 256
+#else
+#pragma warning("setting checkpoint to different value")
+#endif
+
+extern  uint8_t nv_buff[CHKPTLEN];
+extern volatile uint8_t vol_buff[CHKPTLEN];
+extern __nv uint16_t  regs[16];
+void checkpoint_test();
+void set_vol_bufff();
+
 
 #endif

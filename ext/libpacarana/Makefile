@@ -2,7 +2,7 @@ LIB = libpacarana
 
 OBJECTS = pacarana.o\
 
-DEPS += libalpaca
+DEPS += libalpaca libmsp
 
 override SRC_ROOT = ../../src
 
