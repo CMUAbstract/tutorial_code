@@ -13,7 +13,7 @@
 #include <libpacarana/pacarana.h>
 #include <libapds/proximity.h>
 #include <libfxdmath/fxdmath.h>
-
+#include <libpacarana/pacarana.h>
 
 #define BUFF_LEN 20
 #define WARNING_LVL 200
@@ -29,6 +29,8 @@
 #define ABOVE 1
 #define BELOW 2
 
+REGISTER(gyro);
+REGISTER(test);
 
 typedef struct xl_val_ {
   uint16_t x;
@@ -100,19 +102,31 @@ __nv capybara_task_cfg_t pwr_configs[3] = {
   CFG_ROW(2, PREBURST, LOWP, BACKP),
 };
 
-void disable() {
+void DISABLE(Port_1_ISR) {
   P1IE &= ~BIT4; //disable interrupt bit
   P1IE &= ~BIT5;
   return;
 }
 
-void enable() {
+void ENABLE(Port_1_ISR) {
   P1IE |= BIT4; //enable interrupt bit
   P1IE |= BIT5;
   return;
 }
 
-#define TEST_VDDSENSE
+void DISABLE(Port_2_ISR) {
+  P2IE &= ~BIT4; //disable interrupt bit
+  P2IE &= ~BIT5;
+  return;
+}
+
+void ENABLE(Port_2_ISR) {
+  P2IE |= BIT4; //enable interrupt bit
+  P2IE |= BIT5;
+  return;
+}
+
+//#define TEST_VDDSENSE
 //#define TEST_FIFO_OFF
 #define FIFO_BYTES 48
 
@@ -120,18 +134,22 @@ __nv uint8_t array[3][FIFO_BYTES];
 __nv uint8_t array1[3][FIFO_BYTES];
 
 #ifndef TEST_VDDSENSE
-void __attribute__((interrupt(0))) Port_1_ISR(void)
+//void __attribute__((interrupt(0))) Port_1_ISR(void)
+void DRIVER Port_1_ISR(void)
 {   //Need to clear whatever interrupt flag fired to get us here!
   // Clear LSM_INT1 on processor side
-  disable();
+  DISABLE(Port_1_ISR);
   P1OUT |= BIT2;
   P1DIR |= BIT2;
   P1OUT &= ~BIT2;
   //printf("Here now\r\n");
   if(P1IFG & BIT4) {
     P1IFG &= ~BIT4;
+    STATE_CHANGE(gyro,0x10);
+    ENABLE(Port_1_ISR);
     uint8_t fifolvl = read_fifo_lvl();
     read_tap_src();
+    STATE_CHANGE(gyro,0x00);
     //printf("Here1\r\n");
   }
   // Clear LSM_INT2, note, we'll leave INT1 as our higher priority and handle
@@ -140,15 +158,18 @@ void __attribute__((interrupt(0))) Port_1_ISR(void)
   if(P1IFG & BIT5) {
     P1IFG &= ~BIT5;
     uint8_t fifolvl = read_fifo_lvl();
+    STATE_CHANGE(gyro,0x01);
     if(fifolvl < FIFO_THR - 1) {
       // reset fifo and return without registering a bottom half
       //printf("Here2\r\n");
       fifo_reset();
+      STATE_CHANGE(gyro,0x00);
       return;
     }
     dump_fifo(array, FIFO_THR);
     dump_fifo_high(array1,FIFO_THR);
     fifo_reset();
+    STATE_CHANGE(gyro,0x00);
     //printf("Here3\r\n");
   }
   P1IE |= BIT5;
@@ -160,6 +181,14 @@ void __attribute__((interrupt(0))) Port_1_ISR(void)
 __attribute__((section("__interrupt_vector_port1"),aligned(2)))
 void (*__vector_port1)(void) = Port_1_ISR;
 #endif
+
+void DRIVER Port_2_ISR(void) {
+  STATE_CHANGE(test,0x05);
+  if (P2IFG & BIT4) {
+    STATE_CHANGE(gyro,0x04);
+  }
+  return;
+}
 
 void init() {
   capybara_init();
@@ -186,7 +215,8 @@ void init() {
   // Change to different init mode
   gyro_init_fifo_tap();
   read_tap_src();
-  enable();
+  ENABLE(Port_1_ISR);
+  STATE_CHANGE(gyro,0x00);
   printf("Testing\r\n");
   #endif
 }
@@ -196,7 +226,7 @@ void task_init() {
   P1DIR |= BIT1;
   P1OUT &= ~BIT1;
   // Trigger a preburst power mode
-  disable();
+  DISABLE(Port_1_ISR);
   capybara_transition(0);
   uint8_t temp;
   LOG("task init\r\n");
@@ -215,17 +245,19 @@ void task_init() {
   iterator=0;
   // Write data into buffer
   for(int i = 0; i < BUFF_LEN; i++) {
+    // This was deffo a problem when it was for Port_2
+    ENABLE(Port_1_ISR);
     val_buffer[i].x = DATA_SRC[i*3 + 0];
     val_buffer[i].y = DATA_SRC[i*3 + 1];
     val_buffer[i].z = DATA_SRC[i*3 + 2];
     //printf("%i %i %i\r\n",DATA_SRC[i*3 + 0],DATA_SRC[i*3 + 1],DATA_SRC[i*3 +2]);
   }
-  disable();TRANSITION_TO(task_val_compare);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_val_compare);
 }
 
 
 void task_val_compare() {
-  capybara_transition(1);enable();
+  capybara_transition(1);ENABLE(Port_1_ISR);
   P1OUT |= BIT1;
   P1DIR |= BIT1;
   P1OUT &= ~BIT1;
@@ -241,7 +273,7 @@ void task_val_compare() {
     need_cal=0;
     PRINTF("got TAP!\r\n");
     //PRINTF("test_val = %u\r\n",test_val);
-    disable();TRANSITION_TO(task_cal_avgs);
+    DISABLE(Port_1_ISR);TRANSITION_TO(task_cal_avgs);
   }
 #endif
 
@@ -250,14 +282,15 @@ void task_val_compare() {
   // the gyro's machinations --> just update read index
   if(rindex + 1 == BUFF_LEN) {
     val_rindex=0;
+    DISABLE(Port_1_ISR);
     TRANSITION_TO(task_init);
   }
   val_rindex=rindex + 1;
-  disable();TRANSITION_TO(task_calc_sqrs);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_calc_sqrs);
 }
 
 void task_calc_sqrs() {
-  capybara_transition(0);enable();
+  capybara_transition(0);ENABLE(Port_1_ISR);
   LOG("tx_begin\r\n");
   uint8_t index = val_rindex;
   uint16_t x,y,z;
@@ -281,11 +314,11 @@ void task_calc_sqrs() {
   buffered_squares[1]=gy_squared;
   buffered_squares[2]=gz_squared;
 
-  disable();TRANSITION_TO(task_calc_angle);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_calc_angle);
 }
 
 void task_calc_angle() {
-  capybara_transition(0);enable();
+  capybara_transition(0);ENABLE(Port_1_ISR);
   LOG("calc_angle\r\n");
   uint32_t sum, sx, sy, sz;
   uint16_t cosAngle, sqrt, z;
@@ -297,6 +330,7 @@ void task_calc_angle() {
   sy = buffered_squares[1];
   sz = buffered_squares[2];
   sum = sx + sy + sz;
+  ENABLE(Port_1_ISR);
 
   // Write temp-sum to a shared location
   temp_sum=sum;
@@ -306,11 +340,11 @@ void task_calc_angle() {
   LOG("Sqrt= %x, z= %x, angle=%u \r\n",sqrt,z,cosAngle);
   val_cosAngle =cosAngle;
 
-  disable();TRANSITION_TO(task_summary);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_summary);
 }
 
 void task_summary() {
-  capybara_transition(0);enable();
+  capybara_transition(0);ENABLE(Port_1_ISR);
   //TODO pull this out! It's only for debugging right now
   //
   LOG2("summary\r\n");
@@ -323,6 +357,7 @@ void task_summary() {
   //glob_avg_cosAngle, index);
   // First check cosAngle > avg
   if(loc_cosAngle > glob_avg_cosAngle) {
+    ENABLE(Port_1_ISR);
     uint16_t sigma;
     sigma = cal_std_dev_angle;
     LOG2("Std dev = %u\r\n",sigma);
@@ -331,6 +366,7 @@ void task_summary() {
     }
   }
   else {
+    DISABLE(Port_1_ISR);
     uint16_t sigma;
     sigma = cal_std_dev_angle;
     if(loc_cosAngle < glob_avg_cosAngle - sigma) {
@@ -347,7 +383,7 @@ void task_summary() {
   // Update circular buffer read pointer
   //val_rindex++;
   // Transition to cal_avgs if we have enough data
-  disable();TRANSITION_TO(task_val_compare);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_val_compare);
   //disable();TRANSITION_TO(task_cal_avgs);
 }
 
@@ -355,7 +391,7 @@ void task_summary() {
 // Using tx for first two tasks in these calcs so the read/write indices don't
 // get stolen out from under us by the fifo.
 void task_cal_avgs() {
-  capybara_transition(0);enable();
+  capybara_transition(0);ENABLE(Port_1_ISR);
   LOG("tx cal begin\r\n");
   uint16_t sumx = 0, sumy = 0, sumz= 0;
   uint16_t quox = 0, quoy = 0, quoz= 0;
@@ -365,11 +401,11 @@ void task_cal_avgs() {
   uint8_t rindex = val_rindex;
   if((windex > rindex) && (windex - rindex < CAL_LEN)) {
     LOG("not enough data for cal\r\n");
-    disable();TRANSITION_TO(task_val_compare);
+    DISABLE(Port_1_ISR);TRANSITION_TO(task_val_compare);
   }
   if((rindex > windex) && (((BUFF_LEN - rindex) +  windex) < CAL_LEN)) {
     LOG("not enough data for cal\r\n");
-    disable();TRANSITION_TO(task_val_compare);
+    DISABLE(Port_1_ISR);TRANSITION_TO(task_val_compare);
   }
   // Update circular buffer read pointer
   rindex = (rindex + 2 > BUFF_LEN) ? 0 : rindex + 1;
@@ -393,11 +429,11 @@ void task_cal_avgs() {
   cal_avg.y= quoy;
   cal_avg.z= quoz;
 
-  disable();TRANSITION_TO(task_cal_std_devs);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_cal_std_devs);
 }
 
 void task_cal_std_devs() {
-  capybara_transition(0);enable();
+  capybara_transition(0);ENABLE(Port_1_ISR);
   LOG2("cal std devs\r\n");
   uint16_t diffx = 0, diffy = 0, diffz= 0;
   uint16_t quox = 0, quoy = 0, quoz= 0;
@@ -432,11 +468,11 @@ void task_cal_std_devs() {
   cal_std_dev.y= stdevy;
   cal_std_dev.z= stdevz;
 
-  disable();TRANSITION_TO(task_cal_calc_sqrs);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_cal_calc_sqrs);
 }
 
 void task_cal_calc_sqrs() {
-  capybara_transition(0);enable();
+  capybara_transition(0);ENABLE(Port_1_ISR);
   LOG2("cal calc sqrs\r\n");
   uint16_t x,y,z;
   uint8_t rindex = val_rindex;
@@ -470,7 +506,16 @@ void task_cal_calc_sqrs() {
   val_rindex=rindex;
   count = count + 5;
   LOG("tx cal end %u\r\n", val_rindex);
-  disable();TRANSITION_TO(task_cal_calc_angles);
+  // TODO remove the following lines, it's just for testing!!!!
+  if ( count > 10) {
+    STATE_CHANGE(test,0x1);
+    TRANSITION_TO(task_cal_calc_sqrs);
+  }
+  if (count > 15) {
+    STATE_CHANGE(test,0x2);
+    TRANSITION_TO(task_cal_calc_sqrs);
+  }
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_cal_calc_angles);
 }
 
 void task_cal_calc_angles() {
@@ -484,14 +529,14 @@ void task_cal_calc_angles() {
   }
   if(i < CAL_LEN) {
     iterator=i;
-    disable();TRANSITION_TO(task_cal_calc_angles);
+    DISABLE(Port_1_ISR);TRANSITION_TO(task_cal_calc_angles);
   }
   iterator=0;
-  disable();TRANSITION_TO(task_cal_angle_avg);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_cal_angle_avg);
 }
 
 void task_cal_angle_avg() {
-  capybara_transition(0);enable();
+  capybara_transition(0);ENABLE(Port_1_ISR);
   LOG2("cal angle avg\r\n");
   LOG2("sums: ");
   uint16_t sum = 0, quo = 0;
@@ -504,11 +549,11 @@ void task_cal_angle_avg() {
   LOG("Avg = %u\r\n",quo);
   cal_avg_angle=quo;
 
-  disable();TRANSITION_TO(task_cal_std_dev);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_cal_std_dev);
 }
 
 void task_cal_std_dev() {
-  capybara_transition(0);enable();
+  capybara_transition(0);ENABLE(Port_1_ISR);
   LOG2("cal std dev\r\n");
   uint16_t diffs = 0, quo = 0, temp;
   for(unsigned i = 0; i < CAL_LEN; i++) {
@@ -518,11 +563,70 @@ void task_cal_std_dev() {
   quo = div16_F16_dec2(diffs, 500);
   quo = sqrt32_bin_search((uint32_t) quo, 1);
   cal_std_dev_angle=quo;
-  disable();TRANSITION_TO(task_val_compare);
+  STATE_CHANGE(test,0x1);
+  DISABLE(Port_1_ISR);TRANSITION_TO(task_val_compare);
 }
 
 
+void task_test_pass_reach_front() {
+  int x = cal_avg_angle;
+  for (int i = 0; i < x; i++) {
+    PRINTF("i = %x\r\n",i);
+    if ( i % 2 ) {
+      PRINTF("odd\r\n");
+    }
+    else {
+      PRINTF("EVEN\r\n");
+    }
+  }
+  if (x > 20) {
+    DISABLE(Port_1_ISR);
+  }
+  uint16_t temp;
+  temp = sqrt32_bin_search((uint32_t) x, 1);
+  TRANSITION_TO(task_init);
+}
 
+void task_test_pass_multiple_blocks() {
+  int x = cal_avg_angle;
+  for (int i = 0; i < x; i++) {
+    PRINTF("i = %x\r\n",i);
+    if ( i % 2 ) {
+      PRINTF("odd\r\n");
+    }
+    else {
+      PRINTF("EVEN\r\n");
+    }
+  }
+  if (x > 20) {
+    DISABLE(Port_1_ISR);
+  }
+  uint16_t temp;
+  temp = sqrt32_bin_search((uint32_t) x, 1);
+  TRANSITION_TO(task_init);
+}
+
+void task_test_pass_multiple_ISRS() {
+  int x = cal_avg_angle;
+  ENABLE(Port_2_ISR);
+  for (int i = 0; i < x; i++) {
+    PRINTF("i = %x\r\n",i);
+    if ( i % 2 ) {
+      ENABLE(Port_1_ISR);
+      PRINTF("odd\r\n");
+    }
+    else {
+      PRINTF("EVEN\r\n");
+    }
+  }
+  if (x > 20) {
+    DISABLE(Port_1_ISR);
+    DISABLE(Port_2_ISR);
+  }
+  uint16_t temp;
+  temp = sqrt32_bin_search((uint32_t) x, 1);
+  TRANSITION_TO(task_init);
+}
 
 ENTRY_TASK(task_init)
 INIT_FUNC(init)

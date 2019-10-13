@@ -2,12 +2,12 @@ TOOLS_REL_ROOT = tools
 TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
-APPS = pacarana_test gyro_example periph_test_dir checkpt_test
+APPS = pacarana_test gyro_example periph_test_dir checkpt_test cntrl_flow
 
 export BOARD = capybara
 export BOARD_MAJOR = 2
 export BOARD_MINOR = 0
-export DEVICE = msp430fr5949
+export DEVICE = msp430fr5994
 
 SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmspuartlink:gcc \
         libapds:gcc libcapybara:gcc libfxl:gcc libmspware:gcc libmsp:gcc \
@@ -118,14 +118,14 @@ override CFLAGS += -DCONSOLE=0
 endif
 
 
-PACARANA ?=
+PACARANA ?= 1
 
 ifneq ($(PACARANA),)
 override CFLAGS += -DPACARANA
 include tools/pacarana/Makefile
 endif
 
-SHARED_DEPS += libpacarana:gcc \
+SHARED_DEPS += libpacarana:gcc
 
 export CFLAGS
 include tools/maker/Makefile
