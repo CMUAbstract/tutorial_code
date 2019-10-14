@@ -2,12 +2,13 @@ TOOLS_REL_ROOT = tools
 TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
-APPS = pacarana_test gyro_example periph_test_dir checkpt_test cntrl_flow
+APPS = pacarana_test gyro_example periph_test_dir checkpt_test cntrl_flow \
+accl_example apds_example
 
 export BOARD = capybara
 export BOARD_MAJOR = 2
 export BOARD_MINOR = 0
-export DEVICE = msp430fr5994
+export DEVICE = msp430fr5949
 
 SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmspuartlink:gcc \
         libapds:gcc libcapybara:gcc libfxl:gcc libmspware:gcc libmsp:gcc \
@@ -38,7 +39,7 @@ else ifeq ($(BOARD_MAJOR).$(BOARD_MINOR),2.0)
   export LIBCAPYBARA_PIN_VBOOST_OK = 3.6
 endif # BOARD_MAJOR.BOARD_MINOR
 
-export LIBCAPYBARA_CONT_POWER ?= 0
+export LIBCAPYBARA_CONT_POWER ?= 1
 export LIBCAPYBARA_VBANK_COMP_REF = 1.2 # V
 export LIBCAPYBARA_VBANK_COMP_SETTLE_MS = 2
 export LIBCAPYBARA_DEEP_DISCHARGE = 1.7 # V
