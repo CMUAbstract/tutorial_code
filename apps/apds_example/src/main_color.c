@@ -36,6 +36,16 @@ void init(){
 void task_measure() {
   uint16_t r,g,b,c;
   apds_read_color(&r,&g,&b,&c);
+  if (r > g && r > b) {
+    PRINTF("RED --");
+  }
+  else if (g > r && g > b) {
+    PRINTF("GREEN --");
+  }
+  else {
+    PRINTF("BLUE --");
+  }
+
   PRINTF("R: %i G: %i B: %i Z: %i\r\n", r, g, b, c);
 
   TRANSITION_TO(task_measure);
