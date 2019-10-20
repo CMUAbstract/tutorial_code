@@ -19,6 +19,9 @@
 // Functions for the accelerometer
 #include <liblsm/accl.h>
 
+// Functions for the color sensor
+#include <libapds/color.h>
+
 // Definitions supporting the alpaca language
 #include <libalpaca/alpaca.h>
 
@@ -29,6 +32,8 @@
 #define four 4
 
 void init();
+
+int colorCheck(uint16_t c);
 
 TASK(task_measure)
 TASK(task_color)
@@ -49,9 +54,88 @@ void init() {
   capybara_init();
   fxl_set(BIT_SENSE_SW);
   __delay_cycles(16000);
+	fxl_set(BIT_APDS_SW);
+	__delay_cycles(16000);
+	apds_color_init();
   lsm_reset();
   accelerometer_init();
 }
+
+int colorCheck(uint16_t c)
+{
+	if (c < 23) { // black
+			return 8;
+	}
+
+	else if (c > 23 && c < 45) {
+			return 7;
+	}
+
+	else if ((c > 45) && (c < 75)) {
+			return 6;
+	}
+
+  else if ((c > 75) && (c < 105)) {
+	      return 5;
+	}
+
+	else if ((c > 105) && (c < 135)) {
+			  return 4;
+	}
+
+	else if ((c > 135) && (c < 165)) {
+			 return 3;
+	}
+
+	else if ((c > 165) && (c < 195)){
+			 return 2;
+	}
+
+	else if ((c > 195) && (c < 225)){
+			 return 1;
+	}
+
+	else if (c > 225) { // white
+	  	return 0;
+	}
+
+	return -1;
+}
+
+
+void task_color() {
+  uint16_t r,g,b,c;
+  int color_old=-1;
+  int color_new;
+
+
+  //Throw out first 20 values
+  for (int i = 0; i < 20; i++)
+  {
+    apds_read_color(&r,&g,&b,&c);
+    color_old = colorCheck(c);
+  }
+
+  for (int i = 0; i < 20; i++)
+  {
+    apds_read_color(&r,&g,&b,&c);
+    color_new = colorCheck(c);
+
+    //if different restart
+    if(color_old != color_new)
+		{
+			TRANSITION_TO(task_color);
+		}
+	}
+
+  __delay_cycles(0xffff);
+  TS(color) = color_old;
+  TRANSITION_TO(task_sendColor);
+
+}
+
+ENTRY_TASK(task_measure)
+INIT_FUNC(init)
 
 
 // Reads from the accelerometer
@@ -86,14 +170,6 @@ void task_measure() {
   TRANSITION_TO(task_measure);
 }
 
-void task_color() {
-	PRINTF("Reading color!\r\n");
-
-	__delay_cycles(0xffff);
-  TS(color) = 1;
-	//Color sensed, send color bia bluetooth
-	TRANSITION_TO(task_sendColor);
-}
 
 void task_sendColor() {
       // Reconfigure bank
@@ -120,7 +196,7 @@ void task_sendColor() {
        // Reconfigure bank
        capybara_transition(3);
        // Send header. Our header is 0xAA1234
-      radio_buff[0] = 0xAA;
+       radio_buff[0] = 0xAA;
        radio_buff[1] = 0x12;
        radio_buff[2] = 0x34;
        PRINTF("Sending\r\n");
@@ -135,9 +211,6 @@ void task_sendColor() {
        __delay_cycles(0xffff);
        //Move finished, info sent - get ready for next move
       TRANSITION_TO(task_color);
+
 }
-
-
-ENTRY_TASK(task_measure)
-INIT_FUNC(init)
 
