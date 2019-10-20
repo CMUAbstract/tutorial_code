@@ -34,3 +34,6 @@
 [submodule "ext/libradio"]
 	path = ext/libradio
 	url = https://github.com/CMUAbstract/libradio.git
+[submodule "ext/liblsm"]
+	path = ext/liblsm
+	url = https://github.com/CMUAbstract/liblsm.git

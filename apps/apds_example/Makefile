@@ -1,4 +1,4 @@
-OBJECTS = main.o
+OBJECTS = main_color.o
 EXEC = tutorial
 
 DEPS = libmspbuiltins:gcc  \
