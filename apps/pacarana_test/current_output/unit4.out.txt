@@ -1,0 +1,4699 @@
+Running!
+disable functions are:
+Port_1_ISR_disable
+Port_2_ISR_disable
+Modifiying function task_1
+Modifiying function Port_1_ISR_disable
+Modifiying function Port_2_ISR_disable
+Modifiying function task_2
+Modifiying function llvm.dbg.declare
+Modifiying function task_3
+Modifiying function Port_1_ISR_enable
+Modifiying function task_4
+Modifiying function printf
+Modifiying function task_5
+Modifiying function task_6
+Modifiying function Port_2_ISR_enable
+Modifiying function task_7
+Modifiying function init
+Modifiying function capybara_init
+Modifiying function Port_1_ISR
+Modifiying function Port_2_ISR
+Modifiying function clear_isDirty
+Modifiying function radio_on
+Modifiying function radio_off
+Modifiying function radio_send
+Modifiying function uartlink_open_tx
+Modifiying function uartlink_send
+Modifiying function uartlink_close
+Modifiying function msp_sleep
+Modifiying function task_prologue
+Modifiying function llvm.memcpy.p0i8.p0i8.i16
+Modifiying function transition_to
+Modifiying function log_backup
+Modifiying function main
+Acquired attributes
+Analyzed globals
+Done finding exit points
+Built successor list
+Done other stuff
+Fire up the interrupts!
+Built worklist
+looking at block on : 89
+returning 0
+looking at block on : 89
+returning 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 104
+returning 0
+looking at block on : 104
+returning 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+returning 1
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 107
+Looking through 1 preds
+Going to pred on line: 106
+Running number 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 107
+Looking through 1 preds
+Going to pred on line: 106
+Running number 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+returning 1
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 107
+Looking through 1 preds
+Going to pred on line: 106
+Running number 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 107
+Looking through 1 preds
+Going to pred on line: 106
+Running number 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 111
+returning 1
+Skipping interrupt!
+looking at block on : 111
+returning 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 113
+returning 2
+looking at block on : 113
+Looking through 1 preds
+Going to pred on line: 112
+Running number 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 113
+returning 2
+looking at block on : 113
+Looking through 1 preds
+Going to pred on line: 112
+Running number 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 118
+returning 0
+looking at block on : 118
+returning 1
+Skipping interrupt!
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 123
+returning 2
+looking at block on : 123
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 132
+returning 2
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 132
+returning 2
+looking at block on : 123
+returning 2
+looking at block on : 123
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 140
+returning 0
+looking at block on : 140
+returning 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 142
+Looking through 1 preds
+Going to pred on line: 141
+Running number 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 142
+Looking through 1 preds
+Going to pred on line: 141
+Running number 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 142
+Looking through 1 preds
+Going to pred on line: 141
+Running number 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 142
+Looking through 1 preds
+Going to pred on line: 141
+Running number 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 146
+returning 1
+Skipping interrupt!
+looking at block on : 146
+returning 2
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+looking at block on : 151
+returning 2
+looking at block on : 151
+returning 1
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Skipping interrupt!
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+looking at block on : 151
+returning 2
+looking at block on : 151
+returning 1
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Skipping interrupt!
+looking at block on : 157
+returning 0
+looking at block on : 157
+returning 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 158
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 158
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 158
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 158
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 63
+returning 0
+looking at block on : 63
+returning 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 70
+Looking through 1 preds
+Going to pred on line: 69
+Running number 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 67
+Running number 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 70
+Looking through 1 preds
+Going to pred on line: 69
+Running number 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 67
+Running number 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 77
+Looking through 1 preds
+Going to pred on line: 69
+Running number 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 77
+Looking through 1 preds
+Going to pred on line: 69
+Running number 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 70
+Looking through 1 preds
+Going to pred on line: 69
+Running number 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 67
+Running number 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 70
+Looking through 1 preds
+Going to pred on line: 69
+Running number 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 67
+Running number 0
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 77
+Looking through 1 preds
+Going to pred on line: 69
+Running number 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 77
+Looking through 1 preds
+Going to pred on line: 69
+Running number 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 69
+Looking through 2 preds
+Going to pred on line: 70
+Running number 0
+looking at block on : 70
+Test is : 3
+Nothing interesting yet
+Looking through 2 preds
+Going to pred on line: 67
+Running number 1
+looking at block on : 67
+Looking through 2 preds
+Going to pred on line: 64
+Running number 0
+looking at block on : 64
+Looking through 1 preds
+Going to pred on line: 63
+Running number 0
+looking at block on : 63
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 104
+returning 0
+looking at block on : 104
+returning 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+returning 1
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 107
+Looking through 1 preds
+Going to pred on line: 106
+Running number 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 107
+Looking through 1 preds
+Going to pred on line: 106
+Running number 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 111
+returning 1
+Skipping interrupt!
+looking at block on : 111
+returning 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 113
+returning 2
+looking at block on : 113
+Looking through 1 preds
+Going to pred on line: 112
+Running number 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 118
+returning 0
+looking at block on : 118
+returning 1
+Skipping interrupt!
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 123
+returning 2
+looking at block on : 123
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 132
+returning 2
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 118
+returning 0
+looking at block on : 118
+returning 1
+Skipping interrupt!
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 123
+returning 2
+looking at block on : 123
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 132
+returning 2
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 140
+returning 0
+looking at block on : 140
+returning 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 142
+Looking through 1 preds
+Going to pred on line: 141
+Running number 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 142
+Looking through 1 preds
+Going to pred on line: 141
+Running number 0
+looking at block on : 141
+Looking through 1 preds
+Going to pred on line: 140
+Running number 0
+looking at block on : 140
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 146
+returning 1
+Skipping interrupt!
+looking at block on : 146
+returning 2
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+looking at block on : 151
+returning 2
+looking at block on : 151
+returning 1
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 150
+Running number 0
+looking at block on : 150
+Looking through 1 preds
+Going to pred on line: 149
+Running number 0
+looking at block on : 149
+Looking through 1 preds
+Going to pred on line: 146
+Running number 0
+looking at block on : 146
+returning 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Test is : 2
+	Val is 2
+Skipping interrupt!
+looking at block on : 157
+returning 0
+looking at block on : 157
+returning 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 158
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 158
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+Looking through 1 preds
+Going to pred on line: 157
+Running number 0
+looking at block on : 157
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 89
+returning 0
+looking at block on : 89
+returning 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 89
+returning 0
+looking at block on : 89
+returning 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 89
+returning 0
+looking at block on : 89
+returning 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 91
+returning 1
+Looking through 1 preds
+Going to pred on line: 90
+Running number 0
+looking at block on : 90
+Looking through 1 preds
+Going to pred on line: 89
+Running number 0
+looking at block on : 89
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 94
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 99
+Looking through 2 preds
+Going to pred on line: 97
+Running number 0
+looking at block on : 97
+Looking through 1 preds
+Going to pred on line: 91
+Running number 0
+looking at block on : 91
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Looking through 2 preds
+Going to pred on line: 94
+Running number 1
+looking at block on : 94
+Test is : 3
+Nothing interesting yet
+Skipping interrupt!
+looking at block on : 104
+returning 0
+looking at block on : 104
+returning 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+returning 1
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 107
+Looking through 1 preds
+Going to pred on line: 106
+Running number 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 107
+Looking through 1 preds
+Going to pred on line: 106
+Running number 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 105
+returning 1
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+Looking through 1 preds
+Going to pred on line: 104
+Running number 0
+looking at block on : 104
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 106
+Looking through 1 preds
+Going to pred on line: 105
+Running number 0
+looking at block on : 105
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 111
+returning 1
+Skipping interrupt!
+looking at block on : 111
+returning 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 113
+returning 2
+looking at block on : 113
+Looking through 1 preds
+Going to pred on line: 112
+Running number 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 113
+returning 2
+looking at block on : 113
+Looking through 1 preds
+Going to pred on line: 112
+Running number 0
+looking at block on : 112
+Looking through 1 preds
+Going to pred on line: 111
+Running number 0
+looking at block on : 111
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 118
+returning 0
+looking at block on : 118
+returning 1
+Skipping interrupt!
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 123
+returning 2
+looking at block on : 123
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 128
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 132
+returning 2
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+Looking through 1 preds
+Going to pred on line: 120
+Running number 0
+looking at block on : 120
+Looking through 1 preds
+Going to pred on line: 119
+Running number 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+Test is : 0
+	Val is 0
+looking at block on : 137
+Looking through 3 preds
+Going to pred on line: 132
+Running number 0
+looking at block on : 132
+returning 2
+Test is : 2
+	Val is 2
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 0
+Test is : 0
+	Val is 0
+looking at block on : 119
+Looking through 1 preds
+Going to pred on line: 118
+Running number 0
+looking at block on : 118
+returning 1
+Test is : 1
+	Val is 1
+Skipping interrupt!
+Done pass!
+Analyzing blocks
+===============================================================
+Analyzing task_1
+Looking at block on line: 89
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 150 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at block on line: 90
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at block on line: 91
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at block on line: 94
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at block on line: 97
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at block on line: 99
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+
+Analyzing task_2
+Looking at block on line: 104
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at block on line: 104
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Looking at block on line: 105
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 106
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 106 : Value :7
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 107
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 106 : Value :7
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+
+Analyzing task_3
+Looking at block on line: 111
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at block on line: 112
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 113
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+
+Analyzing task_4
+Looking at block on line: 118
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 106 : Value :7
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 119
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 120
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 123
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 128
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 132
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 137
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+
+Analyzing task_5
+Looking at block on line: 140
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 141
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 142
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+
+Analyzing task_6
+Looking at block on line: 146
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 149
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at block on line: 150
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 150
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 150 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 151
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 150 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+
+Analyzing task_7
+Looking at block on line: 157
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 157
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at block on line: 158
+	camera_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+
+Analyzing task_prologue
+Looking at block on line: 63
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 64
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 67
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 69
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 70
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at block on line: 77
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+
+Analyzing all blocks
+Looking for non-dominating typestate assignments
+********Task name: task_1********
+Periph block lines: 
+90
+Exits:
+94
+97
+********Task name: task_2********
+Periph block lines: 
+104
+106
+Exits:
+107
+********Task name: task_3********
+Periph block lines: 
+112
+Exits:
+113
+********Task name: task_4********
+Periph block lines: 
+119
+Exits:
+123
+128
+132
+********Task name: task_5********
+Periph block lines: 
+141
+Exits:
+142
+********Task name: task_6********
+Periph block lines: 
+149
+150
+Exits:
+151
+********Task name: task_7********
+Periph block lines: 
+157
+Exits:
+158
+********Task name: task_prologue********
+Periph block lines: 
+Exits:
+No state checks
+Running check extra!
+Running check on Port_1_ISR_disable
+Casting
+Starting top level check
+task_6
+Adding from task on line 146
+Casting
+Starting top level check
+task_3
+Adding from task on line 111
+Casting
+Starting top level check
+task_1
+Adding from task on line 91
+3possible users
+Port_1_ISR_disablecalled from 3sites
+Running check on Port_2_ISR_disable
+Casting
+Starting top level check
+task_2
+Adding from task on line 105
+Casting
+Starting top level check
+task_6
+Adding from task on line 151
+Casting
+Starting top level check
+task_4
+Adding from task on line 118
+Casting
+Starting top level check
+task_1
+Adding from task on line 91
+4possible users
+Port_2_ISR_disablecalled from 4sites
+Running check on Port_1_ISR_enable
+Casting
+Starting top level check
+task_6
+Adding from task on line 151
+Casting
+Starting top level check
+task_4
+Adding from task on line 123
+Casting
+Starting top level check
+task_3
+Adding from task on line 113
+3possible users
+Port_1_ISR_enablecalled from 3sites
+Running check on printf
+Casting
+Starting top level check
+radio_send
+Casting
+Starting top level check
+task_4
+Adding from task on line 120
+2possible users
+printfcalled from 1sites
+Running check on Port_2_ISR_enable
+Casting
+Starting top level check
+task_6
+Adding from task on line 146
+Casting
+Starting top level check
+task_4
+Adding from task on line 132
+2possible users
+Port_2_ISR_enablecalled from 2sites
+Running check on init
+0possible users
+initcalled from 0sites
+Running check on capybara_init
+0possible users
+capybara_initcalled from 0sites
+Running check on Port_1_ISR
+0possible users
+Port_1_ISRcalled from 0sites
+Running check on Port_2_ISR
+0possible users
+Port_2_ISRcalled from 0sites
+Running check on clear_isDirty
+Casting
+Starting top level check
+task_prologue
+Adding from task on line 64
+1possible users
+clear_isDirtycalled from 1sites
+Running check on radio_on
+Casting
+Starting top level check
+radio_send
+1possible users
+radio_oncalled from 0sites
+Running check on radio_off
+Casting
+Starting top level check
+radio_send
+1possible users
+radio_offcalled from 0sites
+Running check on radio_send
+0possible users
+radio_sendcalled from 0sites
+Running check on uartlink_open_tx
+0possible users
+uartlink_open_txcalled from 0sites
+Running check on uartlink_send
+Casting
+Starting top level check
+radio_send
+1possible users
+uartlink_sendcalled from 0sites
+Running check on uartlink_close
+0possible users
+uartlink_closecalled from 0sites
+Running check on msp_sleep
+Casting
+Starting top level check
+radio_off
+Starting top level check
+radio_send
+1possible users
+msp_sleepcalled from 0sites
+Running check on transition_to
+Casting
+Starting top level check
+task_1
+Adding from task on line 94
+Casting
+Starting top level check
+task_1
+Adding from task on line 97
+Casting
+Starting top level check
+task_3
+Adding from task on line 113
+Casting
+Starting top level check
+task_4
+Adding from task on line 123
+Casting
+Starting top level check
+task_4
+Adding from task on line 128
+Casting
+Starting top level check
+task_4
+Adding from task on line 132
+Casting
+Starting top level check
+task_7
+Adding from task on line 158
+Casting
+Starting top level check
+task_6
+Adding from task on line 151
+Casting
+Starting top level check
+task_5
+Adding from task on line 142
+Casting
+Starting top level check
+task_2
+Adding from task on line 107
+10possible users
+transition_tocalled from 10sites
+Running check on log_backup
+0possible users
+log_backupcalled from 0sites
+Running check on main
+0possible users
+maincalled from 0sites
+looking at function: Port_1_ISR_disable
+Looking at call on line 91
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at call on line 111
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at call on line 146
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+looking at function: Port_2_ISR_disable
+Looking at call on line 91
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at call on line 118
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 106 : Value :7
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at call on line 105
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at call on line 151
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 150 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+looking at function: Port_1_ISR_enable
+Looking at call on line 123
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at call on line 113
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at call on line 151
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 150 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+looking at function: printf
+Looking at call on line 120
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+looking at function: Port_2_ISR_enable
+Looking at call on line 132
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at call on line 146
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+looking at function: clear_isDirty
+Looking at call on line 64
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+looking at function: transition_to
+Looking at call on line 94
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at call on line 97
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Looking at call on line 123
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at call on line 128
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at call on line 132
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at call on line 107
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 106 : Value :7
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at call on line 113
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at call on line 142
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 141 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2
+Looking at call on line 151
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 150 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 119 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 149 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Looking at call on line 158
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 90 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 43 : Value :16
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 157 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 45 : Value :17
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 53 : Value :19
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 104 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 51 : Value :18
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit4.c: 112 : Value :2

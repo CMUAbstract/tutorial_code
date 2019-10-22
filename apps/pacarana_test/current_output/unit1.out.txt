@@ -1,0 +1,428 @@
+Running!
+disable functions are:
+Modifiying function task_1
+Modifiying function printf
+Modifiying function llvm.dbg.declare
+Modifiying function init
+Modifiying function capybara_init
+Modifiying function clear_isDirty
+Modifiying function radio_on
+Modifiying function radio_off
+Modifiying function radio_send
+Modifiying function uartlink_open_tx
+Modifiying function uartlink_send
+Modifiying function uartlink_close
+Modifiying function msp_sleep
+Modifiying function task_prologue
+Modifiying function llvm.memcpy.p0i8.p0i8.i16
+Modifiying function transition_to
+Modifiying function log_backup
+Modifiying function main
+Acquired attributes
+Analyzed globals
+Done finding exit points
+Built successor list
+Done other stuff
+Fire up the interrupts!
+Built worklist
+Done pass!
+Analyzing blocks
+===============================================================
+Analyzing task_1
+Looking at block on line: 41
+	camera_status
+1) Same value: 6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 60 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 42
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 43
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 44
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 44
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 45
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 45
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 45 : Value :7
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 46
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 45 : Value :7
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 48
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 48
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Looking at block on line: No line found
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Looking at block on line: 50
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 45 : Value :7
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 50
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 51
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 54
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 55
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 56
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 58
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 59
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 60
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 60
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 60 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 61
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 60 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+Looking at block on line: 63
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 63
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 64
+	camera_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+	gyro_status
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Looking at block on line: 67
+	camera_status
+1) Same value: 6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 60 : Value :6
+	gyro_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+	radio_status
+[WARNING] multiple reaching states at block
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
+
+Analyzing task_prologue
+Looking at block on line: 63
+Looking at block on line: 64
+Looking at block on line: 67
+Looking at block on line: 69
+Looking at block on line: 70
+Looking at block on line: 77
+
+Analyzing all blocks
+Looking for non-dominating typestate assignments
+********Task name: task_1********
+Periph block lines: 
+59
+60
+63
+42
+44
+45
+48
+50
+55
+Exits:
+67
+Last shared block starts at line: 51
+Found non-dominating assignment in block at 59
+Block does not dominate exit at 67
+Last shared block starts at line: 51
+Found non-dominating assignment in block at 60
+Block does not dominate exit at 67
+Last shared block starts at line: 51
+Found non-dominating assignment in block at 63
+Block does not dominate exit at 67
+Last shared block starts at line: 43
+Found non-dominating assignment in block at 44
+Block does not dominate exit at 67
+Last shared block starts at line: 43
+Found non-dominating assignment in block at 45
+Block does not dominate exit at 67
+Last shared block starts at line: 43
+Found non-dominating assignment in block at 48
+Block does not dominate exit at 67
+Last shared block starts at line: 51
+Found non-dominating assignment in block at 55
+Block does not dominate exit at 67
+********Task name: task_prologue********
+Periph block lines: 
+Exits:
+No state checks
+Running check extra!
+Running check on printf
+Casting
+Starting top level check
+radio_send
+Casting
+Starting top level check
+task_1
+Adding from task on line 51
+2possible users
+printfcalled from 1sites
+Running check on init
+0possible users
+initcalled from 0sites
+Running check on capybara_init
+0possible users
+capybara_initcalled from 0sites
+Running check on clear_isDirty
+Casting
+Starting top level check
+task_prologue
+Adding from task on line 64
+1possible users
+clear_isDirtycalled from 1sites
+Running check on radio_on
+Casting
+Starting top level check
+radio_send
+1possible users
+radio_oncalled from 0sites
+Running check on radio_off
+Casting
+Starting top level check
+radio_send
+1possible users
+radio_offcalled from 0sites
+Running check on radio_send
+0possible users
+radio_sendcalled from 0sites
+Running check on uartlink_open_tx
+0possible users
+uartlink_open_txcalled from 0sites
+Running check on uartlink_send
+Casting
+Starting top level check
+radio_send
+1possible users
+uartlink_sendcalled from 0sites
+Running check on uartlink_close
+0possible users
+uartlink_closecalled from 0sites
+Running check on msp_sleep
+Casting
+Starting top level check
+radio_off
+Starting top level check
+radio_send
+1possible users
+msp_sleepcalled from 0sites
+Running check on transition_to
+Casting
+Starting top level check
+task_1
+Adding from task on line 67
+1possible users
+transition_tocalled from 1sites
+Running check on log_backup
+0possible users
+log_backupcalled from 0sites
+Running check on main
+0possible users
+maincalled from 0sites
+looking at function: printf
+Looking at call on line 51
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+looking at function: clear_isDirty
+Looking at call on line 64
+looking at function: transition_to
+Looking at call on line 67
+Checking perip: camera_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 42 : Value :6
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 60 : Value :6
+Checking perip: gyro_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 63 : Value :3
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 50 : Value :4
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 55 : Value :5
+Checking perip: radio_statusLoc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 48 : Value :2
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 44 : Value :1
+Loc:	/home/reviewer/tutorial_code/apps/pacarana_test/src/main_unit1.c: 59 : Value :1
