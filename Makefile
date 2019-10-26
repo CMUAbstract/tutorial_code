@@ -3,7 +3,7 @@ TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
 APPS = pacarana_test gyro_example periph_test_dir checkpt_test cntrl_flow \
-accl_example apds_example
+accl_example apds_example radio_example
 
 export BOARD = capybara
 export BOARD_MAJOR = 2

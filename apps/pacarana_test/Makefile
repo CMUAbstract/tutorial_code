@@ -1,4 +1,4 @@
-OBJECTS = main.o
+OBJECTS ?= main_unit7.o
 EXEC = tutorial
 
 DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc \

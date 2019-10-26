@@ -52,3 +52,6 @@
 [submodule "ext/libpacarana"]
 	path = ext/libpacarana
 	url = https://github.com/CMUAbstract/libpacarana.git
+[submodule "ext/liblps"]
+	path = ext/liblps
+	url = git@github.com:CMUAbstract/liblps.git

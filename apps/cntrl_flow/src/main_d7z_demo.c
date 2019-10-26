@@ -17,7 +17,8 @@
 #include <libcapybara/board.h>
 
 #include <libradio/radio.h>
-
+#include <libhmc/magnetometer.h>
+#include <liblps/pressure.h>
 #include <libmspbuiltins/builtins.h>
 #include <libio/console.h>
 #include <libmsp/mem.h>
@@ -91,7 +92,7 @@ static bool report_ok(uint32_t last_report_time)
   // Do not send a report if it's been less than MIN_REPORT_PERIOD since the
   // last report
   if ((last_report_time/1000) < MIN_REPORT_PERIOD){
-    PRINTF("Report Skipped. (Locked for %ds)\n", 
+    LOG("Report Skipped. (Locked for %ds)\n", 
         MIN_REPORT_PERIOD -(last_report_time/1000));
     return false;
   }
@@ -107,13 +108,13 @@ uint16_t last_value, uint16_t last_report_time, uint8_t user_id) {
   {
     case REPORT_ALWAYS:
       // Send a report at each measure
-      PRINTF("Report[%d] always\r\n", user_id);
+      LOG("Report[%d] always\r\n", user_id);
       return report_ok(last_report_time);
     case REPORT_ON_DIFFERENCE:
       // Send a report when the difference between the last reported measure and
       // the current mesure is greater than max_diff
       if (abs(last_value - value) >= config->max_diff && config->max_diff) {
-        PRINTF("Report[%d] on difference (last:%d new:%d max_diff:%d)\r\n",
+        LOG("Report[%d] on difference (last:%d new:%d max_diff:%d)\r\n",
         user_id, last_value, value, config->max_diff);
         return report_ok(last_report_time);
       }
@@ -124,7 +125,7 @@ uint16_t last_value, uint16_t last_report_time, uint8_t user_id) {
           || (value <= config->threshold_low  && last_value > config->threshold_low)
           || (value < config->threshold_high  && last_value >= config->threshold_high)
           || (value > config->threshold_low   && last_value <= config->threshold_low)) {
-        PRINTF("Report[%d] on threshold (last:%d new:%d th:%d tl:%d)\r\n",
+        LOG("Report[%d] on threshold (last:%d new:%d th:%d tl:%d)\r\n",
         user_id, last_value, value, config->threshold_high,
         config->threshold_low);
         return report_ok(last_report_time);
@@ -135,7 +136,7 @@ uint16_t last_value, uint16_t last_report_time, uint8_t user_id) {
   }
   // Send a report if it's been more than max_period since the last report
   if (((last_report_time/1000) >= config->max_period) && config->max_period) {
-    PRINTF("Report[%d] on period (max_period:%d time:%d)\r\n", user_id,
+    LOG("Report[%d] on period (max_period:%d time:%d)\r\n", user_id,
     config->max_period, last_report_time);
     return report_ok(last_report_time);
   }
@@ -172,8 +173,26 @@ capybara_task_cfg_t pwr_configs[4] = {
   CFG_ROW(3, CONFIGD, MEDP,MEDP),
 };
 
+int16_t read_temp(void);
+
 void init() {
   capybara_init();
+  fxl_set(BIT_SENSE_SW);
+  __delay_cycles(80000);
+  __delay_cycles(80000);
+  /*pressure_init();
+  pressure_t temp;
+  while(1) {
+    read_pressure(&temp);
+    PRINTF("Vals: %x %x %x\r\n", temp.MSB, temp.SMSB, temp.LSB);
+  }
+  magnetometer_init();
+  PRINTF("Initialized!\r\n");
+  magnet_t temp;
+  while(1) {
+    magnetometer_read(&temp);
+    PRINTF("Vals: %x %x %x\r\n", temp.x, temp.y, temp.z);
+  }*/
 }
 
 TASK_SHARED(uint8_t,state);
@@ -206,19 +225,22 @@ void task_init() {
   STATE_CHANGE(modem, 0x3);
   STATE_CHANGE(modem, 0x4);
   STATE_CHANGE(modem, 0x5);
-  STATE_CHANGE(modem, 0x5);
   // Init lps
   STATE_CHANGE(lps,0x1);
   STATE_CHANGE(lps,0x2);
+  pressure_init(); //Set up for one shots
   // Init lsm
   STATE_CHANGE(lsm,0x1);
   STATE_CHANGE(lsm,0x2);
+  gyro_init_data_rate(0x40);
   // Init temp
   STATE_CHANGE(temp,0x1);
   STATE_CHANGE(temp,0x2);
   // Init hmc
   STATE_CHANGE(hmc,0x1);
   STATE_CHANGE(hmc,0x2);
+  magnetometer_init();
+  PRINTF("Done!\r\n");
 
   // In the mbed version we schedule all the sensor threads here
   TRANSITION_TO(task_file_modified);
@@ -263,6 +285,7 @@ void task_button() {
 
 // A proxy for the scheduler in mBed
 void task_dispatch() {
+  PRINTF("State is: %i\r\n",TS(state));
   switch(TS(state)) {
     case LPS: {
       TS(state) = LSM;
@@ -293,7 +316,11 @@ void task_dispatch() {
 
 void task_lps() {
   // Read sensor
-  uint16_t val = dummy_single_read();
+  pressure_t temp;
+  read_pressure(&temp);
+  PRINTF("Pressure: %x %x %x\r\n", temp.MSB, temp.SMSB, temp.LSB);
+  uint16_t val;
+  val = ((uint16_t)temp.MSB << 8) + temp.SMSB;
   // Check if we need another sample
   if ( report_needed(&f_sensor_config_lps,val,TS(last_val_lps),
         TS(last_report_time_lps),LPS)) {
@@ -312,7 +339,9 @@ void task_lps() {
 void task_lsm() {
   // Read sensor
   uint16_t vals[3];
-  dummy_multi_read(vals,vals + 1,vals + 2);
+  read_raw_gyro(vals, vals + 1, vals +2);
+  PRINTF("Gyro vals: %x %x %x\r\n",vals[0], vals[1], vals[2]);
+  //TODO add accelerometer
   // Check if we need another sample
   int flag = 0;
   for (int i = 0; i < 3; i++) {
@@ -338,7 +367,8 @@ void task_lsm() {
 
 void task_temp() {
   // Read sensor
-  uint16_t val = dummy_single_read();
+  uint16_t val = read_temp();
+  PRINTF("Temp = %u\r\n", val);
   // Check if we need another sample
   if ( report_needed(&f_sensor_config_temp,val,TS(last_val_temp),
         TS(last_report_time_temp),TEMP)) {
@@ -356,8 +386,13 @@ void task_temp() {
 
 void task_hmc() {
   // Read sensor
+  magnet_t temp;
   uint16_t vals[3];
-  dummy_multi_read(vals,vals + 1,vals + 2);
+  magnetometer_read(&temp);
+  PRINTF("mag vals: %x %x %x\r\n", temp.x, temp.y, temp.z);
+  vals[0] = temp.x;
+  vals[1] = temp.y;
+  vals[2] = temp.z;
   // Check if we need another sample
   int flag = 0;
   for (int i = 0; i < 3; i++) {
@@ -394,7 +429,9 @@ void task_send() {
       radio_buff[i] = 0x01;
   }
   // Send it!
+  STATE_CHANGE(modem, 0x6);
   radio_send();
+  STATE_CHANGE(modem, 0x5);
   PRINTF("Sent\r\n");
   TRANSITION_TO(task_dispatch);
 }
@@ -402,3 +439,42 @@ void task_send() {
 ENTRY_TASK(task_init)
 INIT_FUNC(init)
 
+// Table 6-62: ADC12 calibration for 1.2v reference
+#define TLV_CAL30 ((int *)(0x01A1A))
+#define TLV_CAL85 ((int *)(0x01A1C))
+
+// Returns temperature in degrees C (approx range -40deg - 85deg)
+int16_t read_temp() {
+  ADC12CTL0 &= ~ADC12ENC;           // Disable conversions
+
+  ADC12CTL3 |= ADC12TCMAP;
+  ADC12CTL1 = ADC12SHP;
+  ADC12CTL2 = ADC12RES_2;
+  ADC12MCTL0 = ADC12VRSEL_1 | BIT4 | BIT3 | BIT2 | BIT1;
+  ADC12CTL0 |= ADC12SHT03 | ADC12ON;
+
+  while( REFCTL0 & REFGENBUSY );
+
+  REFCTL0 = REFVSEL_0 | REFON;
+
+  // Wait for REF to settle
+  __delay_cycles(40000);
+
+  ADC12CTL0 |= ADC12ENC;                         // Enable conversions
+  ADC12CTL0 |= ADC12SC;                   // Start conversion
+  while (ADC12CTL1 & ADC12BUSY) ;
+
+  int sample = ADC12MEM0;
+
+  ADC12CTL0 &= ~ADC12ENC;           // Disable conversions
+  ADC12CTL0 &= ~(ADC12ON);  // Shutdown ADC12
+  REFCTL0 &= ~REFON;
+
+  int cal30 = *TLV_CAL30;
+  int cal85 = *TLV_CAL85;
+  int tempC = (sample - cal30) * 55 / (cal85 - cal30) + 30;
+
+  LOG("[temp] sample=%i => T=%i\r\n", sample, tempC);
+
+  return tempC;
+}
