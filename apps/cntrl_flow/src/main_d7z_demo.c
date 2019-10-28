@@ -29,19 +29,23 @@
 #include <libmsp/gpio.h>
 //#include <libmspmath/msp-math.h>
 #include <libpacarana/pacarana.h>
+#include <libapds/color.h>
+#include <libapds/proximity.h>
 
 #define LPS 0
 #define LSM 1
-#define TEMP 2
-#define HMC 3
-#define BUTTON 4
-
+#define LSM2 2
+#define TEMP 3
+#define HMC 4
+#define BUTTON 5
+#define LIGHT 6
 
 REGISTER(modem);
 REGISTER(lps);
 REGISTER(lsm);
 REGISTER(temp);
 REGISTER(hmc);
+REGISTER(light);
 
 TASK(task_init)
 TASK(task_file_modified)
@@ -51,6 +55,8 @@ TASK(task_lps)
 TASK(task_lsm)
 TASK(task_temp)
 TASK(task_hmc)
+TASK(task_light)
+TASK(task_accel)
 
 typedef enum report_t {
   REPORT_ON_DIFFERENCE,
@@ -69,54 +75,40 @@ typedef struct sensor_config_t_ {
 
 #include "files.h"
 
-uint16_t dummy_single_read() {
-  static uint16_t start = 16;
-  start = (start + 3) % 255;
-  return start;
-}
-
-void dummy_multi_read(uint16_t *x, uint16_t *y, uint16_t *z) {
-  static uint16_t start = 16;
-  start = (start + 3) % 255;
-  *x = start;
-  start = (start + 3) % 255;
-  *y = start;
-  start = (start + 3) % 255;
-  *z = start;
-  return;
-}
-
 #define MIN_REPORT_PERIOD 10
 static bool report_ok(uint32_t last_report_time)
 {
   // Do not send a report if it's been less than MIN_REPORT_PERIOD since the
   // last report
   if ((last_report_time/1000) < MIN_REPORT_PERIOD){
-    LOG("Report Skipped. (Locked for %ds)\n", 
+    LOG2("Report Skipped. (Locked for %ds)\n", 
         MIN_REPORT_PERIOD -(last_report_time/1000));
     return false;
   }
-
-  return true;
+  // We'll change this so that report_ok doesn't control whether we send a
+  // messag or not
+  //return true;
+  return false;
 }
 
 
 // Check parameters to see if data should be send
 static bool report_needed(sensor_config_t* config, uint16_t value,
-uint16_t last_value, uint16_t last_report_time, uint8_t user_id) {
+uint16_t last_value, uint16_t last_report_time, uint8_t user_id)
+{ bool flag;
   switch (config->report_type)
   {
     case REPORT_ALWAYS:
       // Send a report at each measure
-      LOG("Report[%d] always\r\n", user_id);
+      LOG2("Report[%d] always\r\n", user_id);
       return report_ok(last_report_time);
     case REPORT_ON_DIFFERENCE:
       // Send a report when the difference between the last reported measure and
       // the current mesure is greater than max_diff
       if (abs(last_value - value) >= config->max_diff && config->max_diff) {
-        LOG("Report[%d] on difference (last:%d new:%d max_diff:%d)\r\n",
+        LOG2("Report[%d] on difference (last:%d new:%d max_diff:%d)\r\n",
         user_id, last_value, value, config->max_diff);
-        return report_ok(last_report_time);
+        flag = report_ok(last_report_time);
       }
       break;
     case REPORT_ON_THRESHOLD:
@@ -125,10 +117,10 @@ uint16_t last_value, uint16_t last_report_time, uint8_t user_id) {
           || (value <= config->threshold_low  && last_value > config->threshold_low)
           || (value < config->threshold_high  && last_value >= config->threshold_high)
           || (value > config->threshold_low   && last_value <= config->threshold_low)) {
-        LOG("Report[%d] on threshold (last:%d new:%d th:%d tl:%d)\r\n",
+        LOG2("Report[%d] on threshold (last:%d new:%d th:%d tl:%d)\r\n",
         user_id, last_value, value, config->threshold_high,
         config->threshold_low);
-        return report_ok(last_report_time);
+        flag = report_ok(last_report_time);
       }
       break;
     default:
@@ -136,11 +128,16 @@ uint16_t last_value, uint16_t last_report_time, uint8_t user_id) {
   }
   // Send a report if it's been more than max_period since the last report
   if (((last_report_time/1000) >= config->max_period) && config->max_period) {
-    LOG("Report[%d] on period (max_period:%d time:%d)\r\n", user_id,
+    LOG2("Report[%d] on period (max_period:%d time:%d)\r\n", user_id,
     config->max_period, last_report_time);
-    return report_ok(last_report_time);
+    flag  = report_ok(last_report_time);
   }
-
+  // We add this part
+  if (last_report_time) {
+    LOG2("returning true\r\n");
+    return true;
+  }
+  LOG2("Returning false\r\n");
   return false;
 }
 
@@ -148,26 +145,30 @@ uint16_t last_value, uint16_t last_report_time, uint8_t user_id) {
 TASK_SHARED(uint8_t, button);
 
 // Stand in interrupt for button press
-void DRIVER Port_1_ISR(void) {
+//void DRIVER Port_1_ISR(void) {
+void __attribute__((interrupt(0))) Port_1_ISR(void) {
   // If button fires, transmit alarm and send file contents
+  P1IE &= ~BIT4;
+  P1IFG &= ~BIT4;
   TS(button) = 1;
-
-}
-
-void DISABLE(Port_1_ISR) {
-  P1IE &= ~BIT4; //disable interrupt bit
-  P1IE &= ~BIT5;
+  P1IE |= BIT4;
   return;
 }
 
-void ENABLE(Port_1_ISR) {
-  P1IE |= BIT4; //enable interrupt bit
-  P1IE |= BIT5;
+//void DISABLE(Port_1_ISR) {
+void disable() {
+  P1IE &= ~BIT4; //disable interrupt bit
+  return;
+}
+
+//void ENABLE(Port_1_ISR) {
+void enable() {
+  P1IE |= BIT4; //enable interrupt bi
   return;
 }
 
 capybara_task_cfg_t pwr_configs[4] = {
-  CFG_ROW(0, CONFIGD, LOWP2,LOWP2),
+  CFG_ROW(0, CONFIGD, LOWP,LOWP),
   CFG_ROW(1, PREBURST, LOWP2,MEDHIGHP),
   CFG_ROW(2, BURST, MEDHIGHP, MEDHIGHP),
   CFG_ROW(3, CONFIGD, MEDP,MEDP),
@@ -175,24 +176,53 @@ capybara_task_cfg_t pwr_configs[4] = {
 
 int16_t read_temp(void);
 
+#define PACA_SIZE 4
+
+typedef struct {
+  uint8_t fxl_byte;
+  int num_funcs;
+  void (*pointertable[PACA_SIZE])(void);
+} pacarana_cfg_t;
+
+#define PACA_CFG_ROW(fxlByte,numFuncs,...) \
+  {fxlByte,numFuncs,{__VA_ARGS__}}
+
+void static gyro_init_odr_loc() {
+  gyro_init_data_rate(0x40);
+  return;
+}
+
+pacarana_cfg_t inits[2] = {
+  PACA_CFG_ROW(BIT_SENSE_SW | BIT_APDS_SW,4,pressure_init,
+    gyro_init_odr_loc,magnetometer_init, enable_photoresistor),
+  PACA_CFG_ROW(BIT_SENSE_SW,1,pressure_init),
+  PACA_CFG_ROW(0,0,NULL)
+}; 
+
+
 void init() {
   capybara_init();
-  fxl_set(BIT_SENSE_SW);
-  __delay_cycles(80000);
-  __delay_cycles(80000);
-  /*pressure_init();
-  pressure_t temp;
-  while(1) {
-    read_pressure(&temp);
-    PRINTF("Vals: %x %x %x\r\n", temp.MSB, temp.SMSB, temp.LSB);
+  // Sanity check our number
+  if(curctx->pacaCfg > sizeof(inits)/sizeof(pacarana_cfg_t)) {
+    printf("Error! invalid pacaCfg number\n");
+    while(1);
   }
-  magnetometer_init();
-  PRINTF("Initialized!\r\n");
-  magnet_t temp;
-  while(1) {
-    magnetometer_read(&temp);
-    PRINTF("Vals: %x %x %x\r\n", temp.x, temp.y, temp.z);
-  }*/
+  // interrupt pin setup
+  P1OUT |= BIT4;
+  P1DIR &= ~BIT4;
+  P1REN &= ~BIT4;
+
+  P1IES &= ~BIT4; // Set IFG on rising edge (low --> high)
+  P1IFG &= ~BIT4; // Clear flag bit
+  // Set up the board-side stuff
+  fxl_set(inits[curctx->pacaCfg].fxl_byte);
+  // TODO figure out a solution for delay cycles
+  __delay_cycles(80000);
+  // Walk through the init functions
+  for(int i = 0; i < inits[curctx->pacaCfg].num_funcs; i++) {
+    inits[curctx->pacaCfg].pointertable[i]();
+  }
+  PRINTF("Done\r\n");
 }
 
 TASK_SHARED(uint8_t,state);
@@ -204,17 +234,23 @@ TASK_SHARED(uint16_t, last_val_temp);
 TASK_SHARED(uint16_t, last_report_time_temp);
 TASK_SHARED(uint16_t, last_val_hmc, 3);
 TASK_SHARED(uint16_t, last_report_time_hmc);
+TASK_SHARED(uint16_t, last_val_accel, 3);
+TASK_SHARED(uint16_t, last_report_time_accel);
+TASK_SHARED(uint16_t, last_val_light);
+TASK_SHARED(uint16_t, last_report_time_light);
 
 void task_init() {
   // Initialize all the active sensors here
+  //DISABLE(Port_1_ISR);
+  LOG2("task init 1\r\n");
   TS(state) = 0;
   TS(button) = 0;
-  TS(last_report_time_lps) = 0xFF;
+  TS(last_report_time_lps) = 0x0;
   TS(last_val_lps) = 0;
-  TS(last_report_time_lsm) = 0xFF;
-  TS(last_report_time_temp) = 0xFF;
+  TS(last_report_time_lsm) = 0x0;
+  TS(last_report_time_temp) = 0x0;
   TS(last_val_temp) = 0;
-  TS(last_report_time_hmc) = 0xFF;
+  TS(last_report_time_hmc) = 0x0;
   for (int i = 0; i < 3; i++) {
     TS(last_val_lsm,i) = 0;
     TS(last_val_hmc,i) = 0;
@@ -228,22 +264,23 @@ void task_init() {
   // Init lps
   STATE_CHANGE(lps,0x1);
   STATE_CHANGE(lps,0x2);
-  pressure_init(); //Set up for one shots
+  //pressure_init(); //Set up for one shots /*removed for scope3*/
   // Init lsm
   STATE_CHANGE(lsm,0x1);
   STATE_CHANGE(lsm,0x2);
-  gyro_init_data_rate(0x40);
+  //gyro_init_data_rate(0x40); /*removed for scope2*/
   // Init temp
   STATE_CHANGE(temp,0x1);
   STATE_CHANGE(temp,0x2);
   // Init hmc
   STATE_CHANGE(hmc,0x1);
   STATE_CHANGE(hmc,0x2);
-  magnetometer_init();
-  PRINTF("Done!\r\n");
+  //magnetometer_init(); /*removed for scope1*/
+  STATE_CHANGE(light,0x1);
+  STATE_CHANGE(light,0x2);
 
   // In the mbed version we schedule all the sensor threads here
-  TRANSITION_TO(task_file_modified);
+  PACA_TRANSITION_TO(task_file_modified,0);
 }
 
 void task_file_modified() {
@@ -268,48 +305,68 @@ void task_file_modified() {
     default:
       break;
   }
-  TRANSITION_TO(task_dispatch);
+  PACA_TRANSITION_TO(task_dispatch,0);
 }
 
 #define ALARM 0xEE
 
 void task_button() {
+  LOG2("task button\r\n");
   if (TS(button)) {
     radio_buff[0] = ALARM;
     TS(button) = 0;
-    TRANSITION_TO(task_send);
+    PACA_TRANSITION_TO(task_send,0);
   }
-  TRANSITION_TO(task_dispatch);
+  PACA_TRANSITION_TO(task_dispatch,0);
 }
 
 
 // A proxy for the scheduler in mBed
 void task_dispatch() {
-  PRINTF("State is: %i\r\n",TS(state));
+  LOG2("task dispatch");
+  if (TS(last_report_time_lps) &&
+      TS(last_report_time_hmc) &&
+      TS(last_report_time_lsm) &&
+      TS(last_report_time_temp)
+    ) {
+    LOG2("Mark end\r\n");
+    P1OUT |= BIT0;
+    P1DIR |= BIT0;
+    P1OUT &= ~BIT0;
+  }
   switch(TS(state)) {
     case LPS: {
       TS(state) = LSM;
-      TRANSITION_TO(task_lps);
+      PACA_TRANSITION_TO(task_lps,1);
     }
     case LSM: {
+      TS(state) = LSM2;
+      PACA_TRANSITION_TO(task_lsm,0);
+    }
+    case LSM2: {
       TS(state) = TEMP;
-      TRANSITION_TO(task_lsm);
+      //TS(state) = LSM;
+      PACA_TRANSITION_TO(task_accel,0);
     }
     case TEMP: {
       TS(state) = HMC;
-      TRANSITION_TO(task_temp);
+      PACA_TRANSITION_TO(task_temp,0);
     }
     case HMC: {
+      TS(state) = LIGHT;
+      PACA_TRANSITION_TO(task_hmc,0);
+    }
+    case LIGHT: {
       TS(state) = BUTTON;
-      TRANSITION_TO(task_hmc);
+      PACA_TRANSITION_TO(task_light,0);
     }
     case BUTTON: {
       TS(state) = LPS;
-      TRANSITION_TO(task_button);
+      PACA_TRANSITION_TO(task_button,0);
     }
     default: {
       PRINTF("Error! state is undefined\r\n");
-      TRANSITION_TO(task_dispatch);
+      PACA_TRANSITION_TO(task_dispatch,0);
     }
   }
 }
@@ -317,8 +374,9 @@ void task_dispatch() {
 void task_lps() {
   // Read sensor
   pressure_t temp;
+  LOG2("task lps\r\n");
   read_pressure(&temp);
-  PRINTF("Pressure: %x %x %x\r\n", temp.MSB, temp.SMSB, temp.LSB);
+  LOG2("Pressure: %x %x %x\r\n", temp.MSB, temp.SMSB, temp.LSB);
   uint16_t val;
   val = ((uint16_t)temp.MSB << 8) + temp.SMSB;
   // Check if we need another sample
@@ -329,19 +387,19 @@ void task_lps() {
   // Send if we do
     radio_buff[0] = val & 0xFF;
     radio_buff[1] = (val & 0xFF00) >> 8;
-    TRANSITION_TO(task_send);
+    PACA_TRANSITION_TO(task_send,0);
   }
-  TS(last_report_time_lps) = TS(last_report_time_lps) + 4;
+  TS(last_report_time_lps) = TS(last_report_time_lps) + 1;
   // Thread Sleep?
-  TRANSITION_TO(task_dispatch);
+  PACA_TRANSITION_TO(task_dispatch,0);
 }
 
 void task_lsm() {
   // Read sensor
   uint16_t vals[3];
+  LOG2("task lsm\r\n");
   read_raw_gyro(vals, vals + 1, vals +2);
-  PRINTF("Gyro vals: %x %x %x\r\n",vals[0], vals[1], vals[2]);
-  //TODO add accelerometer
+  LOG2("Gyro vals: %x %x %x\r\n",vals[0], vals[1], vals[2]);
   // Check if we need another sample
   int flag = 0;
   for (int i = 0; i < 3; i++) {
@@ -357,18 +415,48 @@ void task_lsm() {
     for (int i = 0; i < 3; i++) {
       radio_buff[(i<<2) + 0] = vals[i] & 0xFF;
       radio_buff[(i<<2) + 1] = (vals[i] & 0xFF00) >> 8;
-      TRANSITION_TO(task_send);
+      PACA_TRANSITION_TO(task_send,0);
     }
   }
-  TS(last_report_time_lsm) = TS(last_report_time_lsm) + 4;
+  TS(last_report_time_lsm) = TS(last_report_time_lsm) + 1;
   // Thread Sleep?
-  TRANSITION_TO(task_dispatch);
+  PACA_TRANSITION_TO(task_dispatch,0);
+}
+
+void task_accel() {
+  // Read sensor
+  uint16_t vals[3];
+  LOG2("task accel\r\n");
+  accelerometer_read(vals, vals + 1, vals +2);
+  LOG2("Gyro vals: %x %x %x\r\n",vals[0], vals[1], vals[2]);
+  // Check if we need another sample
+  int flag = 0;
+  for (int i = 0; i < 3; i++) {
+    if ( report_needed(&f_sensor_config_accel,vals[i],TS(last_val_accel,i),
+          TS(last_report_time_accel),LSM)) {
+      flag = 1;
+      TS(last_val_accel,i) = vals[i];
+      TS(last_report_time_accel) = 0;
+    }
+  }
+  // Send if we do
+  if (flag) {
+    for (int i = 0; i < 3; i++) {
+      radio_buff[(i<<2) + 0] = vals[i] & 0xFF;
+      radio_buff[(i<<2) + 1] = (vals[i] & 0xFF00) >> 8;
+      PACA_TRANSITION_TO(task_send,0);
+    }
+  }
+  TS(last_report_time_accel) = TS(last_report_time_accel) + 1;
+  // Thread Sleep?
+  PACA_TRANSITION_TO(task_dispatch,0);
 }
 
 void task_temp() {
   // Read sensor
+  LOG2("task_temp\r\n");
   uint16_t val = read_temp();
-  PRINTF("Temp = %u\r\n", val);
+  LOG2("Temp = %u\r\n", val);
   // Check if we need another sample
   if ( report_needed(&f_sensor_config_temp,val,TS(last_val_temp),
         TS(last_report_time_temp),TEMP)) {
@@ -377,19 +465,40 @@ void task_temp() {
   // Send if we do
     radio_buff[0] = val & 0xFF;
     radio_buff[1] = (val & 0xFF00) >> 8;
-    TRANSITION_TO(task_send);
+    PACA_TRANSITION_TO(task_send,0);
   }
-  TS(last_report_time_temp) = TS(last_report_time_temp) + 4;
+  TS(last_report_time_temp) = TS(last_report_time_temp) + 1 ;
   // Thread Sleep?
-  TRANSITION_TO(task_dispatch);
+  PACA_TRANSITION_TO(task_dispatch,0);
+}
+
+void task_light() {
+  // Read sensor
+  LOG2("task_light\r\n");
+  uint16_t val = read_photoresistor();
+  LOG2("Temp = %u\r\n", val);
+  // Check if we need another sample
+  if ( report_needed(&f_sensor_config_light,val,TS(last_val_light),
+        TS(last_report_time_light),TEMP)) {
+    TS(last_val_light) = val;
+    TS(last_report_time_light) = 0;
+  // Send if we do
+    radio_buff[0] = val & 0xFF;
+    radio_buff[1] = (val & 0xFF00) >> 8;
+    PACA_TRANSITION_TO(task_send,0);
+  }
+  TS(last_report_time_light) = TS(last_report_time_light) + 1 ;
+  // Thread Sleep?
+  PACA_TRANSITION_TO(task_dispatch,0);
 }
 
 void task_hmc() {
   // Read sensor
   magnet_t temp;
   uint16_t vals[3];
+  LOG2("task hmc\r\n");
   magnetometer_read(&temp);
-  PRINTF("mag vals: %x %x %x\r\n", temp.x, temp.y, temp.z);
+  LOG2("mag vals: %x %x %x\r\n", temp.x, temp.y, temp.z);
   vals[0] = temp.x;
   vals[1] = temp.y;
   vals[2] = temp.z;
@@ -408,22 +517,22 @@ void task_hmc() {
     for (int i = 0; i < 3; i++) {
       radio_buff[(i<<2) + 0] = vals[i] & 0xFF;
       radio_buff[(i<<2) + 1] = (vals[i] & 0xFF00) >> 8;
-      TRANSITION_TO(task_send);
+      PACA_TRANSITION_TO(task_send,0);
     }
   }
-  TS(last_report_time_hmc) = TS(last_report_time_hmc) + 4;
+  TS(last_report_time_hmc) = TS(last_report_time_hmc) + 1;
   // Thread Sleep?
-  TRANSITION_TO(task_dispatch);
+  PACA_TRANSITION_TO(task_dispatch,0);
 }
 
 void task_send() {
   // Reconfigure bank
   capybara_transition(3);
+  LOG2("task send\r\n");
   // Send header. Our header is 0xAA1234
   radio_buff[0] = 0xAA;
   radio_buff[1] = 0x12;
   radio_buff[2] = 0x34;
-  PRINTF("Sending\r\n");
   // Send data. I'll just send 0x01
   for(int i = 3; i < LIBRADIO_BUFF_LEN; i++) {
       radio_buff[i] = 0x01;
@@ -432,8 +541,7 @@ void task_send() {
   STATE_CHANGE(modem, 0x6);
   radio_send();
   STATE_CHANGE(modem, 0x5);
-  PRINTF("Sent\r\n");
-  TRANSITION_TO(task_dispatch);
+  PACA_TRANSITION_TO(task_dispatch,0);
 }
 
 ENTRY_TASK(task_init)
@@ -474,7 +582,12 @@ int16_t read_temp() {
   int cal85 = *TLV_CAL85;
   int tempC = (sample - cal30) * 55 / (cal85 - cal30) + 30;
 
-  LOG("[temp] sample=%i => T=%i\r\n", sample, tempC);
+  LOG2("[temp] sample=%i => T=%i\r\n", sample, tempC);
 
   return tempC;
 }
+
+
+__attribute__((section("__interrupt_vector_port1"),aligned(2)))
+void (*__vector_port1)(void) = Port_1_ISR;
+
