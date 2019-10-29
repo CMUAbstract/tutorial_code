@@ -1,6 +1,8 @@
 /* Sample code designed to mimic the behavior of a d7a modem (protocol used for
  * medium range IoT connectivity) from Wizzilab, outfitted with an
  * x-nucleo-iks01a2 sensor expansion board from ST
+ * Behavior is modified to be aware of the state each periph is in and to not
+ * set everything on at once.
 */
 #include <msp430.h>
 #include <stdint.h>
@@ -42,7 +44,8 @@
 
 REGISTER(modem);
 REGISTER(lps);
-REGISTER(lsm);
+REGISTER(accel);
+REGISTER(gyro);
 REGISTER(temp);
 REGISTER(hmc);
 REGISTER(light);
@@ -134,10 +137,10 @@ uint16_t last_value, uint16_t last_report_time, uint8_t user_id)
   }
   // We add this part
   if (last_report_time) {
-    LOG2("returning true\r\n");
+    LOG("returning true\r\n");
     return true;
   }
-  LOG2("Returning false\r\n");
+  LOG("Returning false\r\n");
   return false;
 }
 
@@ -145,8 +148,8 @@ uint16_t last_value, uint16_t last_report_time, uint8_t user_id)
 TASK_SHARED(uint8_t, button);
 
 // Stand in interrupt for button press
-//void DRIVER Port_1_ISR(void) {
-void __attribute__((interrupt(0))) Port_1_ISR(void) {
+void DRIVER Port_1_ISR(void) {
+//void __attribute__((interrupt(0))) Port_1_ISR(void) {
   // If button fires, transmit alarm and send file contents
   P1IE &= ~BIT4;
   P1IFG &= ~BIT4;
@@ -155,14 +158,14 @@ void __attribute__((interrupt(0))) Port_1_ISR(void) {
   return;
 }
 
-//void DISABLE(Port_1_ISR) {
-void disable() {
+void DISABLE(Port_1_ISR) {
+//void disable() {
   P1IE &= ~BIT4; //disable interrupt bit
   return;
 }
 
-//void ENABLE(Port_1_ISR) {
-void enable() {
+void ENABLE(Port_1_ISR) {
+//void enable() {
   P1IE |= BIT4; //enable interrupt bi
   return;
 }
@@ -188,21 +191,32 @@ typedef struct {
   {fxlByte,numFuncs,{__VA_ARGS__}}
 
 void static gyro_init_odr_loc() {
-  gyro_init_data_rate(0x40);
+  gyro_only_init_data_rate(0x40);
   return;
 }
 
-pacarana_cfg_t inits[2] = {
-  PACA_CFG_ROW(BIT_SENSE_SW | BIT_APDS_SW,4,pressure_init,
-    gyro_init_odr_loc,magnetometer_init, enable_photoresistor),
-  PACA_CFG_ROW(BIT_SENSE_SW,1,pressure_init),
-  PACA_CFG_ROW(0,0,NULL)
-}; 
+void static accel_init_odr_loc() {
+  accelerometer_init_data_rate(0x40);
+  return;
+}
+
+pacarana_cfg_t inits[6] = {
+  //PACA_CFG_ROW(BIT_SENSE_SW,0,NULL)
+  PACA_CFG_ROW(BIT_SENSE_SW, 1, pressure_init),
+  PACA_CFG_ROW(BIT_SENSE_SW, 1, pressure_init),
+  PACA_CFG_ROW(BIT_SENSE_SW, 1, gyro_init_odr_loc),
+  PACA_CFG_ROW(BIT_SENSE_SW, 1, accel_init_odr_loc),
+  PACA_CFG_ROW(BIT_SENSE_SW, 1, magnetometer_init),
+  PACA_CFG_ROW(BIT_SENSE_SW, 1, enable_photoresistor)
+};
 
 
 void init() {
   capybara_init();
   // Sanity check our number
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
   if(curctx->pacaCfg > sizeof(inits)/sizeof(pacarana_cfg_t)) {
     printf("Error! invalid pacaCfg number\n");
     while(1);
@@ -214,14 +228,26 @@ void init() {
 
   P1IES &= ~BIT4; // Set IFG on rising edge (low --> high)
   P1IFG &= ~BIT4; // Clear flag bit
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
   // Set up the board-side stuff
   fxl_set(inits[curctx->pacaCfg].fxl_byte);
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
   // TODO figure out a solution for delay cycles
   __delay_cycles(80000);
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
   // Walk through the init functions
   for(int i = 0; i < inits[curctx->pacaCfg].num_funcs; i++) {
     inits[curctx->pacaCfg].pointertable[i]();
   }
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
   PRINTF("Done\r\n");
 }
 
@@ -256,34 +282,11 @@ void task_init() {
     TS(last_val_lsm,i) = 0;
     TS(last_val_hmc,i) = 0;
   }
-  // Init modem
-  STATE_CHANGE(modem, 0x1);
-  STATE_CHANGE(modem, 0x2);
-  STATE_CHANGE(modem, 0x3);
-  STATE_CHANGE(modem, 0x4);
-  STATE_CHANGE(modem, 0x5);
-  // Init lps
-  STATE_CHANGE(lps,0x1);
-  STATE_CHANGE(lps,0x2);
-  //pressure_init(); //Set up for one shots /*removed for scope3*/
-  // Init lsm
-  STATE_CHANGE(lsm,0x1);
-  STATE_CHANGE(lsm,0x2);
-  //gyro_init_data_rate(0x40); /*removed for scope2*/
-  // Init temp
-  STATE_CHANGE(temp,0x1);
-  STATE_CHANGE(temp,0x2);
-  // Init hmc
-  STATE_CHANGE(hmc,0x1);
-  STATE_CHANGE(hmc,0x2);
-  //magnetometer_init(); /*removed for scope1*/
-  STATE_CHANGE(light,0x1);
-  STATE_CHANGE(light,0x2);
-
   // In the mbed version we schedule all the sensor threads here
-  PACA_TRANSITION_TO(task_file_modified,0);
+  PACA_TRANSITION_TO(task_dispatch,0);
 }
 
+#if 0
 void task_file_modified() {
   // Check if any incoming messages on modem
   // Write updates to sensor files if there are any
@@ -308,6 +311,7 @@ void task_file_modified() {
   }
   PACA_TRANSITION_TO(task_dispatch,0);
 }
+#endif
 
 #define ALARM 0xEE
 
@@ -326,12 +330,12 @@ void task_button() {
 void task_dispatch() {
   capybara_transition(3);
   LOG2("task dispatch");
-  if (TS(last_report_time_lps) &&
-      TS(last_report_time_hmc) &&
-      TS(last_report_time_lsm) &&
-      TS(last_report_time_temp) &&
-      TS(last_report_time_light) &&
-      TS(last_report_time_accel) &&
+  if (!TS(last_report_time_lps)  || 
+      !TS(last_report_time_hmc)  || 
+      !TS(last_report_time_lsm)  || 
+      !TS(last_report_time_temp) ||
+      !TS(last_report_time_light)|| 
+      !TS(last_report_time_accel)|| 
       TS(state) != BUTTON
     ) {
     LOG2("Mark end\r\n");
@@ -342,16 +346,21 @@ void task_dispatch() {
   switch(TS(state)) {
     case LPS: {
       TS(state) = LSM;
+      pressure_init();
+      STATE_CHANGE(lps, 0x1);
       PACA_TRANSITION_TO(task_lps,1);
     }
     case LSM: {
       TS(state) = LSM2;
-      PACA_TRANSITION_TO(task_lsm,0);
+      gyro_init_odr_loc();
+      STATE_CHANGE(gyro, 0x1);
+      PACA_TRANSITION_TO(task_lsm,2);
     }
     case LSM2: {
       TS(state) = TEMP;
-      //TS(state) = LSM;
-      PACA_TRANSITION_TO(task_accel,0);
+      accel_init_odr_loc();
+      STATE_CHANGE(accel, 0x1);
+      PACA_TRANSITION_TO(task_accel,3);
     }
     case TEMP: {
       TS(state) = HMC;
@@ -359,11 +368,15 @@ void task_dispatch() {
     }
     case HMC: {
       TS(state) = LIGHT;
-      PACA_TRANSITION_TO(task_hmc,0);
+      magnetometer_init();
+      STATE_CHANGE(hmc,0x1);
+      PACA_TRANSITION_TO(task_hmc,4);
     }
     case LIGHT: {
       TS(state) = BUTTON;
-      PACA_TRANSITION_TO(task_light,0);
+      enable_photoresistor();
+      STATE_CHANGE(light,0x1);
+      PACA_TRANSITION_TO(task_light,5);
     }
     case BUTTON: {
       TS(state) = LPS;
@@ -396,6 +409,8 @@ void task_lps() {
   }
   TS(last_report_time_lps) = TS(last_report_time_lps) + 1;
   // Thread Sleep?
+  pressure_disable();
+  STATE_CHANGE(lps, 0x0);
   PACA_TRANSITION_TO(task_dispatch,0);
 }
 
@@ -425,6 +440,9 @@ void task_lsm() {
   }
   TS(last_report_time_lsm) = TS(last_report_time_lsm) + 1;
   // Thread Sleep?
+  lsm_disable();
+  STATE_CHANGE(gyro, 0x0);
+  STATE_CHANGE(accel, 0x0);
   PACA_TRANSITION_TO(task_dispatch,0);
 }
 
@@ -454,6 +472,9 @@ void task_accel() {
   }
   TS(last_report_time_accel) = TS(last_report_time_accel) + 1;
   // Thread Sleep?
+  lsm_disable();
+  STATE_CHANGE(gyro, 0x0);
+  STATE_CHANGE(accel, 0x0);
   PACA_TRANSITION_TO(task_dispatch,0);
 }
 
@@ -494,6 +515,8 @@ void task_light() {
   }
   TS(last_report_time_light) = TS(last_report_time_light) + 1 ;
   // Thread Sleep?
+  disable_photoresistor();
+  STATE_CHANGE(light,0x0);
   PACA_TRANSITION_TO(task_dispatch,0);
 }
 
@@ -501,7 +524,7 @@ void task_hmc() {
   // Read sensor
   magnet_t temp;
   uint16_t vals[3];
-  LOG2("task hmc\r\n");
+  LOG("task hmc\r\n");
   magnetometer_read(&temp);
   LOG("mag vals: %x %x %x\r\n", temp.x, temp.y, temp.z);
   vals[0] = temp.x;
@@ -527,6 +550,8 @@ void task_hmc() {
   }
   TS(last_report_time_hmc) = TS(last_report_time_hmc) + 1;
   // Thread Sleep?
+  magnetometer_disable();
+  STATE_CHANGE(hmc,0x0);
   PACA_TRANSITION_TO(task_dispatch,0);
 }
 
@@ -538,21 +563,23 @@ void task_send() {
   P1OUT &= ~BIT1;
   PRINTF("task send\r\n");
   // Send header. Our header is 0xAA1234
-  radio_buff[0] = 0xAA;
+  /*radio_buff[0] = 0xAA;
   radio_buff[1] = 0x12;
   radio_buff[2] = 0x34;
-  PRINTF("Sending\r\n");
+  */
+  radio_buff[0] = 0x12;
+  radio_buff[1] = 0x34;
+  radio_buff[2] = TS(state);
   // Send data. I'll just send 0x01
   for(int i = 3; i < LIBRADIO_BUFF_LEN; i++) {
-      radio_buff[i] = 0xBB;
+      radio_buff[i] = i;
   }
   // Send it!
   STATE_CHANGE(modem, 0x6);
   radio_send();
-  for (int i = 0; i < 100; i++) {
-    __delay_cycles(80000);
+  for (int i =0; i< 30; i++) {
+    __delay_cycles(120000);
   }
-  PRINTF("Sent\r\n");
   STATE_CHANGE(modem, 0x5);
   PACA_TRANSITION_TO(task_dispatch,0);
 }
@@ -565,15 +592,15 @@ INIT_FUNC(init)
 #define TLV_CAL85 ((int *)(0x01A1C))
 
 // Returns temperature in degrees C (approx range -40deg - 85deg)
-int16_t read_temp() {
+int16_t DRIVER read_temp() {
   ADC12CTL0 &= ~ADC12ENC;           // Disable conversions
-
+  
   ADC12CTL3 |= ADC12TCMAP;
   ADC12CTL1 = ADC12SHP;
   ADC12CTL2 = ADC12RES_2;
   ADC12MCTL0 = ADC12VRSEL_1 | BIT4 | BIT3 | BIT2 | BIT1;
   ADC12CTL0 |= ADC12SHT03 | ADC12ON;
-
+  STATE_CHANGE(temp,0x1);
   while( REFCTL0 & REFGENBUSY );
 
   REFCTL0 = REFVSEL_0 | REFON;
@@ -590,6 +617,7 @@ int16_t read_temp() {
   ADC12CTL0 &= ~ADC12ENC;           // Disable conversions
   ADC12CTL0 &= ~(ADC12ON);  // Shutdown ADC12
   REFCTL0 &= ~REFON;
+  STATE_CHANGE(temp,0x0);
 
   int cal30 = *TLV_CAL30;
   int cal85 = *TLV_CAL85;
