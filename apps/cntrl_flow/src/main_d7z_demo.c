@@ -194,7 +194,7 @@ void static gyro_init_odr_loc() {
 
 pacarana_cfg_t inits[2] = {
   PACA_CFG_ROW(BIT_SENSE_SW | BIT_APDS_SW,4,pressure_init,
-    gyro_init_odr_loc,magnetometer_init, enable_photoresistor),
+    gyro_init_odr_loc,apds_color_init, enable_photoresistor),
   PACA_CFG_ROW(BIT_SENSE_SW,1,pressure_init),
   PACA_CFG_ROW(0,0,NULL)
 }; 
@@ -218,11 +218,17 @@ void init() {
   fxl_set(inits[curctx->pacaCfg].fxl_byte);
   // TODO figure out a solution for delay cycles
   __delay_cycles(80000);
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
   // Walk through the init functions
   for(int i = 0; i < inits[curctx->pacaCfg].num_funcs; i++) {
     inits[curctx->pacaCfg].pointertable[i]();
   }
-  PRINTF("Done\r\n");
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
+  //PRINTF("Done\r\n");
 }
 
 TASK_SHARED(uint8_t,state);
@@ -314,7 +320,7 @@ void task_file_modified() {
 void task_button() {
   LOG2("task button\r\n");
   if (TS(button)) {
-    radio_buff[0] = ALARM;
+    radio_buff[0 + 4] = ALARM;
     TS(button) = 0;
     PACA_TRANSITION_TO(task_send,0);
   }
@@ -326,12 +332,12 @@ void task_button() {
 void task_dispatch() {
   capybara_transition(3);
   LOG2("task dispatch");
-  if (TS(last_report_time_lps) &&
-      TS(last_report_time_hmc) &&
-      TS(last_report_time_lsm) &&
-      TS(last_report_time_temp) &&
-      TS(last_report_time_light) &&
-      TS(last_report_time_accel) &&
+  if (!TS(last_report_time_lps)   && 
+      !TS(last_report_time_hmc)   && 
+      !TS(last_report_time_lsm)   && 
+      !TS(last_report_time_temp)  &&
+      !TS(last_report_time_light) && 
+      !TS(last_report_time_accel) && 
       TS(state) != BUTTON
     ) {
     LOG2("Mark end\r\n");
@@ -390,8 +396,8 @@ void task_lps() {
     TS(last_val_lps) = val;
     TS(last_report_time_lps) = 0;
   // Send if we do
-    radio_buff[0] = val & 0xFF;
-    radio_buff[1] = (val & 0xFF00) >> 8;
+    radio_buff[0 + 4] = val & 0xFF;
+    radio_buff[1 + 4] = (val & 0xFF00) >> 8;
     PACA_TRANSITION_TO(task_send,0);
   }
   TS(last_report_time_lps) = TS(last_report_time_lps) + 1;
@@ -418,8 +424,8 @@ void task_lsm() {
   // Send if we do
   if (flag) {
     for (int i = 0; i < 3; i++) {
-      radio_buff[(i<<2) + 0] = vals[i] & 0xFF;
-      radio_buff[(i<<2) + 1] = (vals[i] & 0xFF00) >> 8;
+      radio_buff[(i<<2) + 0 + 4] = vals[i] & 0xFF;
+      radio_buff[(i<<2) + 1 + 4] = (vals[i] & 0xFF00) >> 8;
       PACA_TRANSITION_TO(task_send,0);
     }
   }
@@ -447,8 +453,8 @@ void task_accel() {
   // Send if we do
   if (flag) {
     for (int i = 0; i < 3; i++) {
-      radio_buff[(i<<2) + 0] = vals[i] & 0xFF;
-      radio_buff[(i<<2) + 1] = (vals[i] & 0xFF00) >> 8;
+      radio_buff[(i<<2) + 0 + 4] = vals[i] & 0xFF;
+      radio_buff[(i<<2) + 1 + 4] = (vals[i] & 0xFF00) >> 8;
       PACA_TRANSITION_TO(task_send,0);
     }
   }
@@ -468,8 +474,8 @@ void task_temp() {
     TS(last_val_temp) = val;
     TS(last_report_time_temp) = 0;
   // Send if we do
-    radio_buff[0] = val & 0xFF;
-    radio_buff[1] = (val & 0xFF00) >> 8;
+    radio_buff[0 + 4] = val & 0xFF;
+    radio_buff[1 + 4] = (val & 0xFF00) >> 8;
     PACA_TRANSITION_TO(task_send,0);
   }
   TS(last_report_time_temp) = TS(last_report_time_temp) + 1 ;
@@ -488,8 +494,8 @@ void task_light() {
     TS(last_val_light) = val;
     TS(last_report_time_light) = 0;
   // Send if we do
-    radio_buff[0] = val & 0xFF;
-    radio_buff[1] = (val & 0xFF00) >> 8;
+    radio_buff[0 + 4] = val & 0xFF;
+    radio_buff[1 + 4] = (val & 0xFF00) >> 8;
     PACA_TRANSITION_TO(task_send,0);
   }
   TS(last_report_time_light) = TS(last_report_time_light) + 1 ;
@@ -499,14 +505,10 @@ void task_light() {
 
 void task_hmc() {
   // Read sensor
-  magnet_t temp;
-  uint16_t vals[3];
+  uint16_t vals[4];
   LOG2("task hmc\r\n");
-  magnetometer_read(&temp);
-  LOG("mag vals: %x %x %x\r\n", temp.x, temp.y, temp.z);
-  vals[0] = temp.x;
-  vals[1] = temp.y;
-  vals[2] = temp.z;
+  apds_read_color(vals, vals + 1, vals + 2, vals + 3);
+  LOG("color vals: %x %x %x %x\r\n", vals[0], vals[1], vals[2], vals[3]);
   // Check if we need another sample
   int flag = 0;
   for (int i = 0; i < 3; i++) {
@@ -520,8 +522,8 @@ void task_hmc() {
   // Send if we do
   if (flag) {
     for (int i = 0; i < 3; i++) {
-      radio_buff[(i<<2) + 0] = vals[i] & 0xFF;
-      radio_buff[(i<<2) + 1] = (vals[i] & 0xFF00) >> 8;
+      radio_buff[(i<<2) + 0 + 4] = vals[i] & 0xFF;
+      radio_buff[(i<<2) + 1 + 4] = (vals[i] & 0xFF00) >> 8;
       PACA_TRANSITION_TO(task_send,0);
     }
   }
@@ -536,23 +538,21 @@ void task_send() {
   P1OUT |= BIT1;
   P1DIR |= BIT1;
   P1OUT &= ~BIT1;
-  PRINTF("task send\r\n");
+  LOG("task send\r\n");
   // Send header. Our header is 0xAA1234
   radio_buff[0] = 0xAA;
   radio_buff[1] = 0x12;
   radio_buff[2] = 0x34;
-  PRINTF("Sending\r\n");
+  radio_buff[3] = TS(state);
+  LOG("Sending\r\n");
   // Send data. I'll just send 0x01
-  for(int i = 3; i < LIBRADIO_BUFF_LEN; i++) {
-      radio_buff[i] = 0xBB;
-  }
   // Send it!
   STATE_CHANGE(modem, 0x6);
   radio_send();
-  for (int i = 0; i < 100; i++) {
+  /*for (int i = 0; i < 10; i++) {
     __delay_cycles(80000);
-  }
-  PRINTF("Sent\r\n");
+  }*/
+  LOG("Sent\r\n");
   STATE_CHANGE(modem, 0x5);
   PACA_TRANSITION_TO(task_dispatch,0);
 }
