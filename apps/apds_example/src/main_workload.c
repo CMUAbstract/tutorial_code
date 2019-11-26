@@ -10,36 +10,37 @@
 #include <libio/console.h>
 // Functions for the capybara board
 #include <libcapybara/board.h>
-// Functions for the accelerometer
-#include <liblsm/accl.h>
-#include <liblsm/gyro.h>
+// Functions for the apds
+#include <libapds/color.h>
+#include <libapds/gesture.h>
+#include <libapds/proximity.h>
 // Definitions supporting the alpaca language
 #include <libalpaca/alpaca.h>
 
 #include <libpacarana/pacarana.h>
 void init();
 
-#define HIGHPERF_MASK 0b10000000
-
+REGISTER(apds)
 //#define WRITE_PROFILE
 //#define READ_PROFILE
-//#define DISPROF
 TASK(task_measure)
 TASK(task_calc)
 TASK(task_end)
 TASK(task_profile)
 
-#ifndef RATE
-// Valid rate definitions are 0x80, 0x40, 0x10 (based on what we have datasheet
-// numbers for)
-#warning "RATE UNDEFINED!!!!"
-#define RATE 0x80
-#endif
+__nv uint16_t stored_r;
+__nv uint16_t stored_g;
+__nv uint16_t stored_b;
+__nv uint16_t stored_c;
+__nv unsigned count = 0;
+__nv unsigned ITER = ITER_START;
+// This function runs first on every reboot
 
-#ifndef ACCEL
-// JUst make sure either ACCEL (for accelerometer) or G_XL (gyro and
-// accelerometer) is defined so we run some functions
-#define G_XL
+#ifndef COLOR
+// Make sure either color or proximity is set
+#define PROX
+// Note, we're not supporting gesture detection-- it's way too much of a pain to
+// pin down
 #endif
 
 #ifndef ITER_START
@@ -65,48 +66,28 @@ TASK(task_profile)
 #endif
 #endif
 
-__nv int stored_x;
-__nv int stored_y;
-__nv int stored_z;
-__nv unsigned count = 0;
-__nv unsigned ITER = ITER_START;
-// This function runs first on every reboot
 void init() {
   capybara_init();
-  __delay_cycles(48000);
-    P1OUT |= BIT1;
-    P1DIR |= BIT1;
-    P1OUT &= ~BIT1;
   fxl_set(BIT_SENSE_SW);
-    P1OUT |= BIT1;
-    P1DIR |= BIT1;
-    P1OUT &= ~BIT1;
   __delay_cycles(48000);
-    P1OUT |= BIT1;
-    P1DIR |= BIT1;
-    P1OUT &= ~BIT1;
+  fxl_set(BIT_APDS_SW);
   __delay_cycles(48000);
-    P1OUT |= BIT1;
-    P1DIR |= BIT1;
-    P1OUT &= ~BIT1;
 #ifdef HPVLP
-#ifdef ACCEL
-  int temp = 1;
-  while(temp) {
-    fxl_clear(BIT_SENSE_SW);
-    __delay_cycles(48000);
-    fxl_set(BIT_SENSE_SW);
-    temp = accel_only_init_odr_hm(RATE, RATE & HIGHPERF_MASK);
-  }
+#ifdef COLOR
+  apds_color_init();
+  uint16_t r,g,b,c;
+  apds_read_color(&r,&g,&b,&c);
 #else
-  gyro_init_data_rate_hm(RATE,RATE & HIGHPERF_MASK);
+  proximity_init();
+  enableProximitySensor();
+  int16_t val = readProximity();
 #endif
 #elif defined(READ_PROFILE)
   while(1) {
     P1OUT |= BIT0;
     P1DIR |= BIT0;
     P1OUT &= ~BIT0;
-    accelerometer_read_profile();
+    apds_read_profile();
     __delay_cycles(16000);
   }
 #elif defined(WRITE_PROFILE)
@@ -114,29 +95,28 @@ void init() {
     P1OUT |= BIT0;
     P1DIR |= BIT0;
     P1OUT &= ~BIT0;
-    accelerometer_write_profile();
+    apds_write_profile();
     __delay_cycles(16000);
   }
 #endif
+  PRINTF("ON\r\n");
 }
 
 
-// Reads from the accelerometer
+// Reads from the color sensor
 void task_measure() {
-  uint16_t x,y,z;
+  uint16_t r,g,b,c;
 #ifdef REENABLE
 #ifdef DISPROF
   P1OUT |= BIT0;
   P1DIR |= BIT0;
   P1OUT &= ~BIT0;
 #endif
-#ifdef ACCEL
-  accel_odr_reenable(RATE);
+  //STATE_CHANGE(apds,1);
+#ifdef COLOR
+  apds_color_reenable();
 #else
-  lsm_odr_reenable(RATE);
-  /*for (int i = 0; i < 10 ; i++) {
-    __delay_cycles(64000);
-  }*/
+  apds_proximity_reenable();
 #endif
 #ifdef DISPROF
   P1OUT |= BIT0;
@@ -144,19 +124,24 @@ void task_measure() {
   P1OUT &= ~BIT0;
 #endif
 #endif
+#ifdef COLOR
   for (int i = 0; i < 10; i++) {
-    // We just read from the accelerometer becase G_XL mode turns on both the
-    // gyro and the accelerometer anyway
-//#ifdef ACCEL
-    dummy_accel_read( &x, &y, &z);
-#if 0
-    read_raw_gyro(&x,&y,&z);
-    PRINTF("%u %u %u\r\n",x,y,z);
+#else
+  for (int i = 0; i < 5; i++) {
 #endif
+    //STATE_CHANGE(apds,1);
+#ifdef COLOR
+    apds_dummy_read_color(&r,&g,&b,&c);
+#else
+    uint8_t val = readProximity();
+#endif
+    __delay_cycles(2400);
+    //PRINTF("Val = %u\r\n",val);
     if (i > 2) {
-      stored_x = x;
-      stored_y = y;
-      stored_z = z;
+      stored_r = r;
+      stored_g = g;
+      stored_b = b;
+      stored_c = c;
     }
     else {
       __delay_cycles(100);
@@ -168,9 +153,12 @@ void task_measure() {
   P1DIR |= BIT1;
   P1OUT &= ~BIT1;
 #endif
-  // We don't have an ifdef here because this disable is ham-handed and shuts
-  // off everything.
-    lsm_disable();
+    //STATE_CHANGE(apds,0);
+#ifdef COLOR
+    apds_color_disable();
+#else
+    apds_proximity_disable();
+#endif
 #ifdef DISPROF
   P1OUT |= BIT1;
   P1DIR |= BIT1;
@@ -191,9 +179,9 @@ void task_calc() {
       y = 0;
       z = 0;
     }
-    stored_x = x;
-    stored_y = y;
-    stored_z = z;
+    stored_r = x;
+    stored_g = y;
+    stored_b = z;
   }
   if (count < 9) {
     count++;
@@ -231,13 +219,14 @@ void task_profile() {
 #endif
 #ifdef REENABLE
   // Second phase
-#ifdef ACCEL
-  accel_odr_reenable(RATE);
+#ifdef COLOR
+  apds_color_reenable();
 #else
-  lsm_odr_reenable(RATE);
+  apds_proximity_reenable();
 #endif
   __delay_cycles(100);
-  lsm_disable();
+  // It's just the same disable for all of them, don't worry about it.
+  apds_proximity_disable();
   for (int i = 0; i <  50; i++) {
     __delay_cycles(1000);
   }
