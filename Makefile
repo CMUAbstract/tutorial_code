@@ -3,16 +3,16 @@ TOOLS = alpaca
 TOOLCHAINS = gcc clang alpaca
 
 APPS = pacarana_test gyro_example periph_test_dir checkpt_test cntrl_flow \
-accl_example apds_example radio_example
+accl_example apds_example radio_example kernels
 
 export BOARD = capybara
 export BOARD_MAJOR = 2
 export BOARD_MINOR = 0
-export DEVICE = msp430fr5949
+export DEVICE = msp430fr5994
 
 SHARED_DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc libmspuartlink:gcc \
         libapds:gcc libcapybara:gcc libfxl:gcc libmspware:gcc libmsp:gcc \
-        libradio:gcc libfxdmath:gcc
+        libradio:gcc
 
 export MAIN_CLOCK_FREQ = 8000000
 
@@ -104,7 +104,7 @@ export RADIO_CAPTURE = 0
 
 export VOLTAGE = 2400
 
-CONSOLE ?= 0
+CONSOLE ?= 1
 
 ifneq ($(CONSOLE),)
 export VERBOSE = 2
@@ -115,7 +115,7 @@ export LIBMSP_UART_PIN_TX = 2.0
 export LIBMSP_UART_BAUDRATE = 115200
 export LIBMSP_UART_CLOCK = SMCLK
 export LIBMAT_CONSOLE = 1
-override CFLAGS += -DCONSOLE=0
+override CFLAGS += -DCONSOLE=2
 endif
 
 

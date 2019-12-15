@@ -13,6 +13,14 @@ ifeq ($(PROF),1)
 LOCAL_CFLAGS += -DPROF
 endif
 
+ifneq ($(WORKLOAD_CYCLES),)
+LOCAL_CFLAGS += -DWORKLOAD_CYCLES=$(WORKLOAD_CYCLES)
+endif
+
+ifeq ($(DISABLE_ALL),1)
+LOCAL_CFLAGS += -DISABLE_ALL
+endif
+
 # Defines the HPVLP (high power vs low power) flag that will run the workload
 # task which we'll eventulaly use to compare the high power mode and low power
 # mode energy consumption.

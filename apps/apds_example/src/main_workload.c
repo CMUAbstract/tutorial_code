@@ -28,19 +28,16 @@ TASK(task_calc)
 TASK(task_end)
 TASK(task_profile)
 
-__nv uint16_t stored_r;
-__nv uint16_t stored_g;
-__nv uint16_t stored_b;
-__nv uint16_t stored_c;
-__nv unsigned count = 0;
-__nv unsigned ITER = ITER_START;
-// This function runs first on every reboot
 
 #ifndef COLOR
 // Make sure either color or proximity is set
 #define PROX
 // Note, we're not supporting gesture detection-- it's way too much of a pain to
 // pin down
+#endif
+
+#ifndef WORKLOAD_CYCLES
+#define WORKLOAD_CYCLES 100
 #endif
 
 #ifndef ITER_START
@@ -66,13 +63,24 @@ __nv unsigned ITER = ITER_START;
 #endif
 #endif
 
+__nv uint16_t stored_r;
+__nv uint16_t stored_g;
+__nv uint16_t stored_b;
+__nv uint16_t stored_c;
+__nv unsigned count = 0;
+
+#ifndef ITER_INC
+__nv unsigned ITER = ITER_START;
+#endif
+// This function runs first on every reboot
+
 void init() {
   capybara_init();
   fxl_set(BIT_SENSE_SW);
   __delay_cycles(48000);
   fxl_set(BIT_APDS_SW);
   __delay_cycles(48000);
-#ifdef HPVLP
+#if defined(HPVLP) || defined(PROF)
 #ifdef COLOR
   apds_color_init();
   uint16_t r,g,b,c;
@@ -81,6 +89,11 @@ void init() {
   proximity_init();
   enableProximitySensor();
   int16_t val = readProximity();
+#endif
+#if defined(PROF) && !defined(HPVLP)
+    // We add this in so we wind up in idle mode. That lets us actually figure
+    // out the cost of enabling and disabling
+    apds_color_disable();
 #endif
 #elif defined(READ_PROFILE)
   while(1) {
@@ -125,9 +138,9 @@ void task_measure() {
 #endif
 #endif
 #ifdef COLOR
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 3; i++) {
 #else
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 3; i++) {
 #endif
     //STATE_CHANGE(apds,1);
 #ifdef COLOR
@@ -183,7 +196,7 @@ void task_calc() {
     stored_g = y;
     stored_b = z;
   }
-  if (count < 9) {
+  if (count < WORKLOAD_CYCLES) {
     count++;
     TRANSITION_TO(task_measure);
   }

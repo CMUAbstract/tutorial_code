@@ -29,6 +29,10 @@ TASK(task_calc)
 TASK(task_end)
 TASK(task_profile)
 
+#ifndef WORKLOAD_CYCLES
+#define WORKLOAD_CYCLES 100
+#endif
+
 #ifndef RATE
 // Valid rate definitions are 0x80, 0x40, 0x10 (based on what we have datasheet
 // numbers for)
@@ -65,6 +69,14 @@ TASK(task_profile)
 #endif
 #endif
 
+#if defined(DISABLE_ALL) && defined(REENABLE)
+#error "DISABLE_ALL and REENABLE may not be defined at the same time"
+#endif
+
+#if defined(DISABLE_ALL) && !defined(PROF)
+#error "DISABLE_ALL must be defined with PROF"
+#endif
+
 __nv int stored_x;
 __nv int stored_y;
 __nv int stored_z;
@@ -89,7 +101,7 @@ void init() {
     P1OUT |= BIT1;
     P1DIR |= BIT1;
     P1OUT &= ~BIT1;
-#ifdef HPVLP
+#if (defined(HPVLP) || defined(PROF)) && !defined(DISABLE_ALL)
 #ifdef ACCEL
   int temp = 1;
   while(temp) {
@@ -100,6 +112,16 @@ void init() {
   }
 #else
   gyro_init_data_rate_hm(RATE,RATE & HIGHPERF_MASK);
+#endif
+#if defined(PROF) && !defined(HPVLP)
+    // We add this in so we wind up in sleep mode. That lets us actually figure
+    // out the cost of enabling and disabling
+  lsm_accel_disable();
+#ifndef ACCEL
+  #warning "Dissabling gyro"
+  lsm_accel_disable();
+  lsm_gyro_sleep();
+#endif
 #endif
 #elif defined(READ_PROFILE)
   while(1) {
@@ -125,15 +147,28 @@ void init() {
 void task_measure() {
   uint16_t x,y,z;
 #ifdef REENABLE
-#ifdef DISPROF
+	#ifdef DISPROF
   P1OUT |= BIT0;
   P1DIR |= BIT0;
   P1OUT &= ~BIT0;
 #endif
 #ifdef ACCEL
   accel_odr_reenable(RATE);
+  #if RATE == 0x80
+  // We need this delay to simulate throwing out the first two results
+  __delay_cycles(4800);
+  #endif
 #else
-  lsm_odr_reenable(RATE);
+  accel_odr_reenable(RATE);
+  lsm_gyro_reenable();
+  // We need this delay to simulate throwing out the first two results
+  #if RATE == 0x80
+  #warning "Rate is 80!"
+  __delay_cycles(19200);
+  #elif RATE == 0x40
+#warning "Rate is 40!"
+  __delay_cycles(153800);
+  #endif
   /*for (int i = 0; i < 10 ; i++) {
     __delay_cycles(64000);
   }*/
@@ -148,10 +183,10 @@ void task_measure() {
     // We just read from the accelerometer becase G_XL mode turns on both the
     // gyro and the accelerometer anyway
 //#ifdef ACCEL
+#ifdef ACCEL
     dummy_accel_read( &x, &y, &z);
-#if 0
+#else
     read_raw_gyro(&x,&y,&z);
-    PRINTF("%u %u %u\r\n",x,y,z);
 #endif
     if (i > 2) {
       stored_x = x;
@@ -170,7 +205,12 @@ void task_measure() {
 #endif
   // We don't have an ifdef here because this disable is ham-handed and shuts
   // off everything.
-    lsm_disable();
+#ifdef ACCEL
+  lsm_accel_disable();
+#else
+  lsm_accel_disable();
+  lsm_gyro_sleep();
+#endif
 #ifdef DISPROF
   P1OUT |= BIT1;
   P1DIR |= BIT1;
@@ -195,7 +235,7 @@ void task_calc() {
     stored_y = y;
     stored_z = z;
   }
-  if (count < 9) {
+  if (count < WORKLOAD_CYCLES) {
     count++;
     TRANSITION_TO(task_measure);
   }
@@ -228,23 +268,63 @@ void task_profile() {
   for (int i = 0; i <  50; i++) {
     __delay_cycles(1000);
   }
+#if 0
+  for (int i = 0; i < 10; i++) {
+  printf("in loop\r\n");
+  uint16_t x,y,z;
+#ifdef ACCEL
+  dummy_accel_read(&x,&y,&z);
+#else
+    read_raw_gyro(&x,&y,&z);
+#endif
+    printf("%i %i %i\r\n",x,y,z);
+  }
+#endif
 #endif
 #ifdef REENABLE
   // Second phase
 #ifdef ACCEL
   accel_odr_reenable(RATE);
+  #if RATE == 0x80
+  // We need this delay to simulate throwing out the first two results
+  __delay_cycles(4800);
+  #endif
 #else
-  lsm_odr_reenable(RATE);
+  accel_odr_reenable(RATE);
+  lsm_gyro_reenable();
+  #if RATE == 0x80
+  __delay_cycles(19200);
+  #elif RATE == 0x40
+  __delay_cycles(153800);
+  #else
+  #error "GYRO RATE IS NOT ALLOWED. CHOOSE 0x80 or 0x40"
+  #endif
 #endif
   __delay_cycles(100);
-  lsm_disable();
+#if 0
+  for (int i = 0; i < 10; i++) {
+  printf("in loop\r\n");
+  uint16_t x,y,z;
+#ifdef ACCEL
+  dummy_accel_read(&x,&y,&z);
+#else
+    read_raw_gyro(&x,&y,&z);
+#endif
+    printf("%i %i %i\r\n",x,y,z);
+  }
+#endif
+#ifdef ACCEL
+  lsm_accel_disable();
+#else
+  lsm_accel_disable();
+  lsm_gyro_sleep();
+#endif
   for (int i = 0; i <  50; i++) {
     __delay_cycles(1000);
   }
 #endif
   TRANSITION_TO(task_profile);
 }
-
 #ifndef PROF
 ENTRY_TASK(task_measure)
 #else
