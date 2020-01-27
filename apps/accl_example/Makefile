@@ -58,6 +58,19 @@ ifneq ($(ITER_END),)
 LOCAL_CFLAGS += -DITER_END=$(ITER_END)
 endif
 
+# Use the PROF_COMPUTE flag to test the power consumption while the device
+# performs adds and writes to non-volatile memory
+ifneq ($(PROF_COMPUTE),)
+LOCAL_CFLAGS += -DPROF_COMPUTE
+endif
+
+ifneq ($(TEST_NO_LIM),)
+LOCAL_CFLAGS += -DTEST_NO_LIM
+endif
+
+ifneq ($(ONLYGYRO),)
+LOCAL_CFLAGS += -DONLYGYRO
+endif
 
 CFLAGS += LOCAL_CFLAGS
 export CFLAGS

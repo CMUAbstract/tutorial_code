@@ -63,6 +63,18 @@ TASK(task_profile)
 #endif
 #endif
 
+#if defined(DISABLE_ALL) && defined(REENABLE)
+#error "DISABLE_ALL and REENABLE may not be defined at the same time"
+#endif
+
+#if defined(DISABLE_ALL) && !defined(PROF)
+#error "DISABLE_ALL must be defined with PROF"
+#endif
+
+#if defined(PROF_COMPUTE) && defined(REENABLE)
+#error "PROF_COMPUTE not allowed with reenable for now"
+#endif
+
 __nv uint16_t stored_r;
 __nv uint16_t stored_g;
 __nv uint16_t stored_b;
@@ -70,7 +82,7 @@ __nv uint16_t stored_c;
 __nv unsigned count = 0;
 
 #ifndef ITER_INC
-__nv unsigned ITER = ITER_START;
+__nv unsigned long ITER = ITER_START;
 #endif
 // This function runs first on every reboot
 
@@ -80,7 +92,7 @@ void init() {
   __delay_cycles(48000);
   fxl_set(BIT_APDS_SW);
   __delay_cycles(48000);
-#if defined(HPVLP) || defined(PROF)
+#if (defined(HPVLP) || defined(PROF)) && !defined(DISABLE_ALL)
 #ifdef COLOR
   apds_color_init();
   uint16_t r,g,b,c;
@@ -137,6 +149,9 @@ void task_measure() {
   P1OUT &= ~BIT0;
 #endif
 #endif
+  P1OUT |= BIT1;
+  P1DIR |= BIT1;
+  P1OUT &= ~BIT1;
 #ifdef COLOR
   for (int i = 0; i < 3; i++) {
 #else
@@ -160,6 +175,11 @@ void task_measure() {
       __delay_cycles(100);
     }
   }
+	// Adding a 2ms delay to force a settle
+	for (int i = 0; i < 800; i++) {}
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
 #ifdef REENABLE
 #ifdef DISPROF
   P1OUT |= BIT1;
@@ -183,7 +203,7 @@ void task_measure() {
 
 void task_calc() {
   uint16_t x,y,z;
-  for (int j = 0; j < ITER; j++) {
+  for (unsigned long j = 0; j < ITER; j++) {
     x++;
     y++;
     z++;
@@ -226,11 +246,27 @@ void task_profile() {
   P1DIR |= BIT0;
   P1OUT &= ~BIT0;
 #ifndef REENABLE
+#ifndef PROF_COMPUTE
   for (int i = 0; i <  50; i++) {
     __delay_cycles(1000);
   }
+#else
+  uint16_t x,y,z;
+  for (int j = 0; j < ITER; j++) {
+    x++;
+    y++;
+    z++;
+    if (x > 50000) {
+      x = 0;
+      y = 0;
+      z = 0;
+    }
+    stored_r = x;
+    stored_g = y;
+    stored_b = z;
+  }
 #endif
-#ifdef REENABLE
+#else
   // Second phase
 #ifdef COLOR
   apds_color_reenable();

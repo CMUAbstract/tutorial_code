@@ -36,6 +36,7 @@ INIT_FUNC(init);
 
 void init(){
 	capybara_init();
+  PRINTF("Here!\r\n");
 }
 
 void task_init() {

@@ -14,6 +14,10 @@ ifeq ($(PROF),1)
 LOCAL_CFLAGS += -DPROF
 endif
 
+ifneq ($(WORKLOAD_CYCLES),)
+LOCAL_CFLAGS += -DWORKLOAD_CYCLES=$(WORKLOAD_CYCLES)
+endif
+
 # Defines the HPVLP (high power vs low power) flag that will run the workload
 # task which we'll eventulaly use to compare the high power mode and low power
 # mode energy consumption.
@@ -45,6 +49,12 @@ endif
 
 ifneq ($(ITER_END),)
 LOCAL_CFLAGS += -DITER_END=$(ITER_END)
+endif
+
+# Use the PROF_COMPUTE flag to test the power consumption while the device
+# performs adds and writes to non-volatile memory
+ifneq ($(PROF_COMPUTE),)
+LOCAL_CFLAGS += -DPROF_COMPUTE
 endif
 
 CFLAGS += LOCAL_CFLAGS

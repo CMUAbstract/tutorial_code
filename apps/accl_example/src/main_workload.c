@@ -77,11 +77,19 @@ TASK(task_profile)
 #error "DISABLE_ALL must be defined with PROF"
 #endif
 
+#if defined(PROF_COMPUTE) && !defined(PROF)
+#warning "PROF_COMPUTE will not be activated because PROF is not defined"
+#endif
+
+#if defined(PROF_COMPUTE) && defined(REENABLE)
+#error "PROF_COMPUTE not allowed with reenable for now"
+#endif
+
 __nv int stored_x;
 __nv int stored_y;
 __nv int stored_z;
 __nv unsigned count = 0;
-__nv unsigned ITER = ITER_START;
+__nv unsigned long ITER = ITER_START;
 // This function runs first on every reboot
 void init() {
   capybara_init();
@@ -111,16 +119,24 @@ void init() {
     temp = accel_only_init_odr_hm(RATE, RATE & HIGHPERF_MASK);
   }
 #else
+#ifndef ONLYGYRO
   gyro_init_data_rate_hm(RATE,RATE & HIGHPERF_MASK);
+#else
+  gyro_only_init_odr_hm(RATE,RATE & HIGHPERF_MASK);
+#endif
 #endif
 #if defined(PROF) && !defined(HPVLP)
     // We add this in so we wind up in sleep mode. That lets us actually figure
     // out the cost of enabling and disabling
   lsm_accel_disable();
+#ifdef TEST_NO_LIM
+	accelerometer_disable();
+#else
 #ifndef ACCEL
-  #warning "Dissabling gyro"
-  lsm_accel_disable();
-  lsm_gyro_sleep();
+#warning "Dissabling gyro"
+	lsm_accel_disable();
+	lsm_gyro_sleep();
+#endif
 #endif
 #endif
 #elif defined(READ_PROFILE)
@@ -179,6 +195,9 @@ void task_measure() {
   P1OUT &= ~BIT0;
 #endif
 #endif
+  P1OUT |= BIT1;
+  P1DIR |= BIT1;
+  P1OUT &= ~BIT1;
   for (int i = 0; i < 10; i++) {
     // We just read from the accelerometer becase G_XL mode turns on both the
     // gyro and the accelerometer anyway
@@ -197,6 +216,11 @@ void task_measure() {
       __delay_cycles(100);
     }
   }
+	// Adding a 2ms delay to force a settle
+	for (int i = 0; i < 800; i++) {}
+  P1OUT |= BIT2;
+  P1DIR |= BIT2;
+  P1OUT &= ~BIT2;
 #ifdef REENABLE
 #ifdef DISPROF
   P1OUT |= BIT1;
@@ -222,7 +246,7 @@ void task_measure() {
 
 void task_calc() {
   uint16_t x,y,z;
-  for (int j = 0; j < ITER; j++) {
+  for (unsigned long j = 0; j < ITER; j++) {
     x++;
     y++;
     z++;
@@ -265,23 +289,27 @@ void task_profile() {
   P1DIR |= BIT0;
   P1OUT &= ~BIT0;
 #ifndef REENABLE
+#ifndef PROF_COMPUTE
   for (int i = 0; i <  50; i++) {
     __delay_cycles(1000);
   }
-#if 0
-  for (int i = 0; i < 10; i++) {
-  printf("in loop\r\n");
-  uint16_t x,y,z;
-#ifdef ACCEL
-  dummy_accel_read(&x,&y,&z);
 #else
-    read_raw_gyro(&x,&y,&z);
-#endif
-    printf("%i %i %i\r\n",x,y,z);
+  uint16_t x,y,z;
+  for (int j = 0; j < ITER; j++) {
+    x++;
+    y++;
+    z++;
+    if (x > 50000) {
+      x = 0;
+      y = 0;
+      z = 0;
+    }
+    stored_x = x;
+    stored_y = y;
+    stored_z = z;
   }
 #endif
-#endif
-#ifdef REENABLE
+#else
   // Second phase
 #ifdef ACCEL
   accel_odr_reenable(RATE);
