@@ -12,6 +12,10 @@ LOCAL_CFLAGS += -DBLOCK_SIZE=$(BLOCK_SIZE) \
                 -DINPUT_SIZE=$(INPUT_SIZE)
 
 
+ifneq ($(WORKLOAD_CYCLES),)
+LOCAL_CFLAGS += -DWORKLOAD_CYCLES=$(WORKLOAD_CYCLES)
+endif
+
 # Defines the HPVLP (high power vs low power) flag that will run the workload in
 # an actual test. Without it we get print statements
 ifeq ($(HPVLP),1)

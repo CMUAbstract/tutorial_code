@@ -90,9 +90,9 @@ void task_compute() {
       }
     }
   }
-	P1OUT |= BIT0;
-	P1DIR |= BIT0;
-	P1OUT &= ~BIT0;
+	P1OUT |= BIT1;
+	P1DIR |= BIT1;
+	P1OUT &= ~BIT1;
 
 	TRANSITION_TO(task_exit);
 }

@@ -97,6 +97,10 @@ void init() {
     P1OUT |= BIT1;
     P1DIR |= BIT1;
     P1OUT &= ~BIT1;
+#if (defined(HPVLP) || defined(PROF)) && !defined(DISABLE_ALL)
+    P1OUT |= BIT1;
+    P1DIR |= BIT1;
+    P1OUT &= ~BIT1;
   fxl_set(BIT_SENSE_SW);
     P1OUT |= BIT1;
     P1DIR |= BIT1;
@@ -109,7 +113,6 @@ void init() {
     P1OUT |= BIT1;
     P1DIR |= BIT1;
     P1OUT &= ~BIT1;
-#if (defined(HPVLP) || defined(PROF)) && !defined(DISABLE_ALL)
 #ifdef ACCEL
   int temp = 1;
   while(temp) {

@@ -75,14 +75,31 @@ void task_compute() {
 	uint16_t cols = block_cols * BLOCK_SIZE;
 	uint16_t block_offset = 0;
 	uint16_t offset = 0;
+#if 1
+fixed *dest_ptr = dest->data;
+for(uint16_t i = 0; i < rows; i++) {
+	fixed w = 0;
+	uint16_t j = filter->sparse.sizes[i];
+	for(; j < filter->sparse.sizes[i + 1]; j++) {
+		fixed *src_ptr = src->data + filter->sparse.offsets[j];
+		w = F_ADD(w, F_MUL(filter->data[j], *src_ptr));
+		if(i == 0) 
+			printf("%i %i %d\n", *src_ptr, filter->data[j], j);
+	}
+	*dest_ptr++ = w;
+}
+#else
 	for(uint16_t i = 0; i < rows; i += BLOCK_SIZE) {
-		PRINTF("Alive\r\n");
+		PRINTF("Alive i/rows: %i/%i\r\n",i,rows);
 		for(uint16_t j = 0; j < cols; j += BLOCK_SIZE) {
+			PRINTF("Alive j/cols: %i/%i\r\n",j,cols);
 			fixed *dest_ptr = dest->data + i;
-			for(uint16_t k = block_offset; k < block_offset + BLOCK_SIZE; k++) {
+			for(uint16_t k = block_offset; k < block_offset + BLOCK_SIZE; ++k) {
+				PRINTF("Alive k/blkoffset: %i/%i\r\n",k,block_offset + BLOCK_SIZE);
 				fixed w = 0;
 				uint16_t l = bfilter->sparse.sizes[k] + offset;
-				for(; l < bfilter->sparse.sizes[k + 1] + offset; l++) {
+				for(; l < bfilter->sparse.sizes[k + 1] + offset; ++l) {
+					PRINTF("Alive l/k sizes: %i/%i\r\n",l, bfilter->sparse.sizes[k+1]);
 					fixed *src_ptr = src->data + bfilter->sparse.offsets[l];
 					w = F_ADD(w, F_MUL(bfilter->data[l], *src_ptr));
 				}
@@ -92,7 +109,7 @@ void task_compute() {
 			block_offset += BLOCK_SIZE + 1;
 		}
 	}
-
+#endif
 	TRANSITION_TO(task_exit);
 }
 

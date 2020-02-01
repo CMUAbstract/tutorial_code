@@ -88,11 +88,18 @@ __nv unsigned long ITER = ITER_START;
 
 void init() {
   capybara_init();
+  __delay_cycles(48000);
+    P1OUT |= BIT1;
+    P1DIR |= BIT1;
+    P1OUT &= ~BIT1;
+#if (defined(HPVLP) || defined(PROF)) && !defined(DISABLE_ALL)
+    P1OUT |= BIT1;
+    P1DIR |= BIT1;
+    P1OUT &= ~BIT1;
   fxl_set(BIT_SENSE_SW);
   __delay_cycles(48000);
   fxl_set(BIT_APDS_SW);
   __delay_cycles(48000);
-#if (defined(HPVLP) || defined(PROF)) && !defined(DISABLE_ALL)
 #ifdef COLOR
   apds_color_init();
   uint16_t r,g,b,c;

@@ -89,7 +89,7 @@ void task_sort() {
 
 
 	uint16_t count = MAT_GET_DIM(dest, 0);
-	PRINTF("count = %i, mat_size = %i\r\n",count,MAT_SIZE);
+	//PRINTF("count = %i, mat_size = %i\r\n",count,MAT_SIZE);
 	fixed *src_ptr = src->data;
 	fixed *dest_ptr = dest->data;
 	for(uint16_t i = 0; i < count; i++)

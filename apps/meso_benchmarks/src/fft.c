@@ -28,6 +28,9 @@
 // Library for handling gyroscope
 #include <liblsm/gyro.h>
 
+#ifndef WORKLOAD_CYCLES
+#define WORKLOAD_CYCLES 2
+#endif
 
 
 #ifndef RATE
@@ -61,9 +64,7 @@ void init() {
 	PRINTF("Init'd\r\n");
 	// Initialize gyro
 	BIT_FLIP(1,1);
-#ifdef HPVLP
 	gyro_init_data_rate_hm(RATE, RATE & HIGHPERF_MASK);
-#endif
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -75,6 +76,7 @@ void init() {
 // TODO make the size here configurable at compile time
 __nv int16_t sensor_input[16][16];
 
+__nv uint32_t  count_ = 0;
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////Implementation///////////////////////////////////
@@ -83,6 +85,7 @@ __nv int16_t sensor_input[16][16];
 
 // TODO: make this safe for intermittent execution
 void task_sense() {
+	printf("Sensing!\r\n");
 	for (int i = 0; i < 16; i++) {
 		for (int j = 0; j < 16; j++) {
 			int16_t x,y,z;
@@ -111,7 +114,7 @@ void task_init() {
 	for(uint16_t i = 0; i < MAT_SIZE; i++) {
 		for(uint16_t j = 0; j < MAT_SIZE; j++) {
 			// Transform into fixed
-			float raw_val = sensor_input[i][j]*8.75;
+			float raw_val = sensor_input[i][j]/250;
 			fixed scaled_val = F_LIT(raw_val);
 			// Write into matrix
 			MAT_SET(b1, scaled_val, i, j);
@@ -119,7 +122,7 @@ void task_init() {
 		} // And more apologies for doing it again
 	}
 #else
-			printf("%i ",scaled_val);
+			printf("%i ",scaled_val/32);
 		}
 		printf("\r\n");
 	}
@@ -189,7 +192,13 @@ void task_compute() {
 		j_glob++;
 		TRANSITION_TO(task_fft1d);
 	}
-	BIT_FLIP(1,0);
+	if(count_ > WORKLOAD_CYCLES) {
+		BIT_FLIP(1,0);
+		count_ = 0;
+	}
+	else {
+		count_++;
+	}
 	TRANSITION_TO(task_exit);
 }
 

@@ -18,7 +18,7 @@ LOCAL_CFLAGS += -DWORKLOAD_CYCLES=$(WORKLOAD_CYCLES)
 endif
 
 ifeq ($(DISABLE_ALL),1)
-LOCAL_CFLAGS += -DISABLE_ALL
+LOCAL_CFLAGS += -DDISABLE_ALL
 endif
 
 # Defines the HPVLP (high power vs low power) flag that will run the workload
