@@ -29,7 +29,7 @@
 #include <liblsm/gyro.h>
 
 #ifndef WORKLOAD_CYCLES
-#define WORKLOAD_CYCLES 2
+#define WORKLOAD_CYCLES 1
 #endif
 
 
@@ -53,7 +53,7 @@ TASK(task_compute);
 TASK(task_exit);
 TASK(task_sense);
 
-ENTRY_TASK(task_sense)
+ENTRY_TASK(task_init)
 INIT_FUNC(init)
 
 void init() {
@@ -74,7 +74,7 @@ void init() {
 
 // Mat for holding sensor data
 // TODO make the size here configurable at compile time
-__nv int16_t sensor_input[16][16];
+//__nv int16_t sensor_input[MAT_SIZE][MAT_SIZE];
 
 __nv uint32_t  count_ = 0;
 
@@ -85,14 +85,17 @@ __nv uint32_t  count_ = 0;
 
 // TODO: make this safe for intermittent execution
 void task_sense() {
-	printf("Sensing!\r\n");
-	for (int i = 0; i < 16; i++) {
-		for (int j = 0; j < 16; j++) {
+	BIT_FLIP(1,0)
+	for (int i = 0; i < MAT_SIZE; i++) {
+		for (int j = 0; j < MAT_SIZE; j++) {
 			int16_t x,y,z;
 			// Read output when available
 			gyroscope_read( &x, &y, &z );
 			// Only use x for now
-			sensor_input[i][j] = x;
+			float raw_val = x/250;
+			fixed scaled_val = F_LIT(raw_val);
+			// Write into matrix
+			MAT_SET(b1, scaled_val, i, j);
 #ifndef HPVLP
 			printf("%i ",x);
 		}
@@ -101,7 +104,14 @@ void task_sense() {
 		}// apologies for putting a paren in an ifdef block...
 #endif
 	}
-	TRANSITION_TO(task_init);
+
+	BIT_FLIP(1,1)
+#ifdef REENABLE
+  lsm_accel_disable();
+  lsm_gyro_sleep();
+#endif
+	BIT_FLIP(1,2)
+	TRANSITION_TO(task_compute);
 }
 
 void task_init() {
@@ -111,32 +121,7 @@ void task_init() {
 	MAT_RESHAPE(b4, MAT_SIZE, MAT_SIZE);
 	MAT_RESHAPE(b5, MAT_SIZE, MAT_SIZE);
 	MAT_RESHAPE(b6, MAT_SIZE, MAT_SIZE);
-	for(uint16_t i = 0; i < MAT_SIZE; i++) {
-		for(uint16_t j = 0; j < MAT_SIZE; j++) {
-			// Transform into fixed
-			float raw_val = sensor_input[i][j]/250;
-			fixed scaled_val = F_LIT(raw_val);
-			// Write into matrix
-			MAT_SET(b1, scaled_val, i, j);
-#ifdef HPVLP
-		} // And more apologies for doing it again
-	}
-#else
-			printf("%i ",scaled_val/32);
-		}
-		printf("\r\n");
-	}
-	printf("Mat b1 start\r\n");
-	MAT_DUMP(b1,0);
-#endif
-	// Adding a 2ms delay to force a settle
-	for (int i = 0; i < 800; i++) {}
-	BIT_FLIP(1,2)
-#ifdef REENABLE
-  lsm_accel_disable();
-  lsm_gyro_sleep();
-#endif
-	TRANSITION_TO(task_compute);
+	TRANSITION_TO(task_sense);
 }
 
 __nv uint16_t row_idx = 0;
@@ -192,13 +177,7 @@ void task_compute() {
 		j_glob++;
 		TRANSITION_TO(task_fft1d);
 	}
-	if(count_ > WORKLOAD_CYCLES) {
-		BIT_FLIP(1,0);
-		count_ = 0;
-	}
-	else {
-		count_++;
-	}
+	BIT_FLIP(1,4);
 	TRANSITION_TO(task_exit);
 }
 
@@ -224,7 +203,6 @@ void task_exit() {
   __delay_cycles(153800);
   #endif
 #endif
-	BIT_FLIP(1,1);
 	i_glob = 0;
 	j_glob = 0;
 	row_idx = 0;

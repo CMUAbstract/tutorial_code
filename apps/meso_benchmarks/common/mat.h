@@ -1,4 +1,8 @@
-#if INPUT_SIZE == 1
+#if INPUT_SIZE == 0
+#pragma message "Extra Small"
+#define MAT_SIZE 4
+#define MAT_BLOCK_SIZE 4
+#elif INPUT_SIZE == 1
 #pragma message "Small"
 #include "small/a_dense.h"
 #include "small/b_dense.h"
@@ -42,6 +46,7 @@
 #define MAT_BLOCK_COLS MAT_SIZE / BLOCK_SIZE
 #endif
 
+#if INPUT_SIZE != 0
 __nv mat_t mat_a_dense = {
 		.dims = {MAT_SIZE, MAT_SIZE}, .strides = {MAT_SIZE, 1}, .len_dims = 2, .data = a_dense,
 };
@@ -102,6 +107,7 @@ __nv mat_t mat_c_sparse = {.dims = {C_SPARSE_LEN},
 											 .sizes = c_sparse_sizes,
 											 .offsets = c_sparse_offsets}};
 
+#endif
 __nv fixed buf[6 * MAT_SIZE * MAT_SIZE];
 __nv mat_t buf1 = {.data = buf};
 __nv mat_t buf2 = {.data = buf + MAT_SIZE * MAT_SIZE};
