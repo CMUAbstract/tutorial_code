@@ -76,6 +76,11 @@ void init() {
 void task_delay() {
   #ifdef PACARANA
   STATE_CHANGE(radio, 0x1);
+  int i = 0;
+  i++;
+  STATE_CHANGE(radio,0x2);
+  STATE_CHANGE(radio,0x3);
+  i += 7;
   test_func(10);
   #endif
   TRANSITION_TO(task_send);
@@ -91,10 +96,13 @@ void task_send() {
   PRINTF("Sending\r\n");
   // Send data. I'll just send 0x01
   for(int i = 3; i < LIBRADIO_BUFF_LEN; i++) {
-      radio_buff[i] = 0x01;
+      radio_buff[i] = i;
   }
   // Send it!
   radio_send();
+  for (int i = 0; i < 100; i++) {
+    __delay_cycles(80000);
+  }
   PRINTF("Sent\r\n");
   TRANSITION_TO(task_delay);
 }

@@ -28,6 +28,8 @@ TASK(task_calc)
 TASK(task_end)
 TASK(task_profile)
 
+SLEEP(apds,apds_color_disable)
+RESTORE(apds,apds_color_reenable)
 
 #ifndef COLOR
 // Make sure either color or proximity is set

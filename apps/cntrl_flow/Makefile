@@ -1,4 +1,4 @@
-OBJECTS = main_d7z_demo.o
+OBJECTS = main_d7z_paca.o
 EXEC = tutorial
 
 DEPS = libmspbuiltins:gcc libio:gcc libfixed:gcc \
